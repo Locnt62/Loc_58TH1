@@ -1,0 +1,213 @@
+<div *ngIf="!seg">
+    <div class="header-tongquan">
+        <span style="font-size: 17px;color: #25549d;font-weight: 600;">Quản lý vốn</span><br>
+        <span style="color:#acacac; font-size: 14px;">Trang chủ > <a>Quản lý vốn</a></span>
+        <div class="row optionselect">
+            <div class="col-lg-5">
+                <input class="search-text" name="keysearch" type="text" placeholder="Nhập tên dự án, mã dự án..."
+                    style="width: calc(100% - 120px)">
+            </div>
+            <div class="col-lg-3">
+                <ng-select [items]="listProvine" [(ngModel)]="selectProvince" (ngModelChange)="SelectTinh()"
+                    bindLabel="text" bindValue="text" placeholder="Loại vốn">
+                </ng-select>
+            </div>
+            <div class="col-lg-3">
+                <ng-select [items]="chudautu" [(ngModel)]="selectChudautu" (ngModelChange)="SelectCDT()"
+                    bindLabel="name" bindValue="name" placeholder="Trạng thái" style="width: calc(100% - 49px)">
+                </ng-select>
+            </div>
+        </div>
+        <div class="button-option">
+            <div class="row">
+                <div class="col-lg-7"></div>
+                <div class="col-lg-4" style="text-align: end;">
+                    <ul>
+                        <li><button class="btn" style="background-color: #25549d;width: 100px;color: white;">Tìm
+                                kiếm</button></li>
+                        <li><button class="btn" style="background-color: #289b28;width: 100px;color: white;"
+                                (click)="ThemVon()">Thêm mới
+                            </button></li>
+                        <li><button class="btn" style="background-color: red;width: 100px;color: white;">Xuất
+                                Excel</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body-tongquan">
+        <!-- <span>hello</span> -->
+        <div class="table-price">
+            <table>
+                <thead>
+                    <tr class="header_table">
+                        <td style="padding-left: 20px;">STT</td>
+                        <td style="padding-left: 20px;">Tên vốn</td>
+                        <td style="padding-left: 20px;">Tên dự án</td>
+                        <td style="padding-left: 20px;">Tiểu dự án</td>
+                        <td style="padding-left: 20px;">Giai đoạn</td>
+                        <td style="padding-left: 20px;">Gía trị tiền</td>
+                        <td style="padding-left: 20px;">Loại vốn</td>
+                        <td style="padding-left: 20px;">Lần điều chỉnh</td>
+                        <td style="padding-left: 20px;">Xóa</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of listVon | paginate: { itemsPerPage: 6, currentPage: p }">
+                        <td style="padding-left: 20px;">{{i}}</td>
+                        <td style="padding-left: 20px;color: #be5e26;">
+                            <div (click)="direct(item)" style="cursor: pointer;">{{item.name}}</div>
+                        </td>
+                        <td style="padding-left: 20px;">
+                            <div>{{item.tenduan}}</div>
+                        </td>
+                        <td style="padding-left: 20px;">{{item.giaidoan}}</td>
+                        <td style="padding-left: 20px">{{item.giatritien}}</td>
+                        <td style="padding-left: 20px;">{{item.loaivon}}</td>
+                        <td style="padding-left: 20px;">{{item.landieuchinh}}</td>
+                        <td style="padding-left: 20px;">{{item.trangthao}}</td>
+                        <td style="padding-left: 20px;"><span style="cursor: pointer;"><i
+                                    class="fa fa-trash"></i></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel="">
+                </pagination-controls>
+            </div><br>
+        </div>
+    </div>
+    <div class="footer"></div>
+</div>
+<div *ngIf="seg">
+    <div class="header-tongquan">
+        <span style="font-size: 17px;color: #25549d;font-weight: 600;">Chi tiết vốn</span><br>
+        <span style="color:#acacac; font-size: 14px;">Trang chủ > <a>Vốn</a> > <a>Chi tiết vốn</a></span>
+    </div>
+    <div class="body-tongquan" style="padding-right: 70px;">
+        <div class="table-duan">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-lg-3">
+                            Tên vốn
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="search-text" name="keysearch" type="text"
+                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-lg-3">
+                            Tên dự án
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="search-text" name="keysearch" type="text"
+                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-lg-3">
+                            Tiểu dự án
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="search-text" name="keysearch" type="text"
+                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-lg-3">
+                            Giai đoạn
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="search-text" name="keysearch" type="text"
+                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-lg-3">
+                            Gía trị tiền
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="search-text" name="keysearch" type="text"
+                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-lg-3">
+                            Loại vốn
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="search-text" name="keysearch" type="text"
+                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-lg-3">
+                                Lần điểu chỉnh
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="search-text" name="keysearch" type="text"
+                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-lg-3">
+                            Trạng thái
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="search-text" name="keysearch" type="text"
+                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-lg-3">
+                            Người tạo
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="search-text" name="keysearch" type="text"
+                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-lg-3">
+                           Ngày tạo 
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="search-text" name="keysearch" type="text"
+                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-lg-3">
+                           Người sửa
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="search-text" name="keysearch" type="text"
+                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer" style="height: 150px;">
+        <div class="row" style="padding-top: 30px;padding-right: 170px;">
+            <div class="col-lg-6">
+
+            </div>
+            <div class="col-lg-3">
+
+            </div>
+            <div class="col-lg-3" style="display: flex;justify-content: space-evenly;">
+                <button class="btn" style="background-color: red;color: white;width: 90px;"
+                    (click)="redirect()">Hủy</button>
+                <button class="btn" style="background-color: green;color: white;width: 90px;">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>

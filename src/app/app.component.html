@@ -1,0 +1,220 @@
+<ng-sidebar-container style="height: 100vh; background: #F1F1F1" *ngIf="!isCheckRouter() === false">
+    <ng-sidebar [(opened)]="_opened" position="left" mode="push" dockedSize=60px dock=true id="sidebar">
+        <div [hidden]="!this._opened"  style="width:200px;">
+            <div class="sidebar-heading text-white" style="margin-top: -20px;">
+                <div style="text-align: center;"><i class="fa fa-user"></i></div>
+                <p style="text-align: center;">Xin chào admin !</p>
+            </div>
+            <div class="wrapper list-group list-group-flush">
+                <ul class="navbar-nav" style="margin-left: -20px;">
+                    <!-- <li class="nav-item list-group-item list-group-item-action d-flex align-items-center"
+                        style="background-color:#3C3C3C !important">
+                        <i class="fa fa-home"></i>
+                        <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/Landing']"
+                            routerLinkActive="router-link-active">Home</a>
+                    </li> -->
+                    <li class="nav-item list-group-item list-group-item-action d-flex align-items-center"
+                        style="background-color:#3C3C3C !important">
+                        <i class="fa fa-align-left"></i>
+                        <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/home']"
+                            routerLinkActive="router-link-active">Tổng quan</a>
+                    </li>
+                    <li class="nav-item list-group-item list-group-item-action d-flex align-items-center"
+                        style="background-color:#3C3C3C !important">
+                        <i class="fa fa-align-left"></i>
+                        <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/QuanlyDuan']"
+                            routerLinkActive="router-link-active">Quản lý dự án</a>
+                    </li>
+
+                    <!-- dropdowwn -->
+                    <!-- <div class="d-flex align-items-center" (click)="changeStatus()" style="cursor: pointer">
+                        <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                            style="background-color:#3C3C3C !important">
+                            <i class="fa fa-align-left"></i>
+                            <a style="margin-left: 20px" class="nav-link text-white">Menu</a>
+                        </li>
+                        <i *ngIf="this.status" class="fa fa-chevron-left" style="font-size: 15px !important"></i>
+                        <i *ngIf="!this.status" class="fa fa-chevron-down" style="font-size: 15px !important"></i>
+                    </div> -->
+                    <!-- <div class="dropdown-icon" [hidden]="this.status">
+                        <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                            style="background-color:#3C3C3C !important">
+                            <i class="fa fa-adjust"></i>
+                            <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/pricing']"
+                                routerLinkActive="router-link-active">Pricing</a>
+                        </li>
+                        <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                            style="background-color:#3C3C3C !important">
+                            <i class="fa fa-anchor"></i>
+                            <a style="margin-left: 20px;" class="nav-link text-white " [routerLink]="['/carousel']"
+                                routerLinkActive="router-link-active">Carousel</a>
+                        </li>
+                        <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                            style="background-color:#3C3C3C !important">
+                            <i class="fa fa-check-circle"></i>
+                            <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/jumbotron']"
+                                routerLinkActive="router-link-active">Jumbotron</a>
+                        </li>
+                    </div> -->
+
+
+                    <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                        style="background-color:#3C3C3C !important">
+                        <i class="fa fa-bolt"></i>
+                        <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/QuanlyChuDauTu']"
+                            routerLinkActive="router-link-active">Quản lý chủ đầu tư</a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                        style="background-color:#3C3C3C !important">
+                        <i class="fa fa-th-list"></i>
+                        <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/QuanlyVon']"
+                            routerLinkActive="router-link-active">Quản lý vốn</a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                        style="background-color:#3C3C3C!important">
+                        <i class="fa fa-home"></i>
+                        <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/QlyTongMucDauTuComponent']"
+                            routerLinkActive="router-link-active">Quản lý tổng mức đầu tư</a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                        style="background-color:#3C3C3C !important">
+                        <i class="fa fa-home"></i>
+                        <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/QuanlyGiaingan']"
+                            routerLinkActive="router-link-active">Quản lý thực hiện giải ngân</a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                        style="background-color:#3C3C3C!important">
+                        <i class="fa fa-home"></i>
+                        <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/sidebar']"
+                            routerLinkActive="router-link-active">Quản lý đấu thầu</a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                        style="background-color:#3C3C3C!important">
+                        <i class="fa fa-home"></i>
+                        <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/sidebar']"
+                            routerLinkActive="router-link-active">Quản lý văn bản</a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                        style="background-color:#3C3C3C!important">
+                        <i class="fa fa-home"></i>
+                        <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/sidebar']"
+                            routerLinkActive="router-link-active">Quản lý hợp đồng</a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                        style="background-color:#3C3C3C!important">
+                        <i class="fa fa-home"></i>
+                        <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/sidebar']"
+                            routerLinkActive="router-link-active">Quản lý hạng mục</a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                        style="background-color:#3C3C3C!important">
+                        <i class="fa fa-home"></i>
+                        <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/sidebar']"
+                            routerLinkActive="router-link-active">Quản lý cơ cấu tổ chức chủ đầu tư</a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                        style="background-color:#3C3C3C!important">
+                        <i class="fa fa-home"></i>
+                        <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/sidebar']"
+                            routerLinkActive="router-link-active">Quản lý thực hiện giải ngân</a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                        style="background-color:#3C3C3C!important">
+                        <i class="fa fa-home"></i>
+                        <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/sidebar']"
+                            routerLinkActive="router-link-active">Thống kê</a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                        style="background-color:#3C3C3C!important">
+                        <i class="fa fa-home"></i>
+                        <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/sidebar']"
+                            routerLinkActive="router-link-active">Quản lý người dùng</a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center list-group-item list-group-item-action"
+                        style="background-color:#3C3C3C!important">
+                        <i class="fa fa-home"></i>
+                        <a style="margin-left: 20px" class="nav-link text-white" [routerLink]="['/sidebar']"
+                            routerLinkActive="router-link-active">Tài khoản</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="navSide-icon" [hidden]="this._opened" style="margin-top: 50px">
+            <ul class="navbar-nav">
+                <!-- <li class="nav-item" [routerLink]="['/Landing']">
+                    <i class="fa fa-home"></i>
+                </li> -->
+                <hr>
+                <li class="nav-item" [routerLink]="['/home']">
+                    <i class="fa fa-align-left"></i>
+                </li>
+                <hr>
+                <li class="nav-item" [routerLink]="['/QuanlyDuan']">
+                    <i class="fa fa-adjust"></i>
+                </li>
+                <hr>
+                <li class="nav-item" [routerLink]="['/QuanlyChuDauTu']">
+                    <i class="fa fa-anchor"></i>
+                </li>
+                <hr>
+                <li class="nav-item" [routerLink]="['/QuanlyVon']">
+                    <i class="fa fa-check-circle"></i>
+                </li>
+                <hr>
+                <li class="nav-item" [routerLink]="['/QlyTongMucDauTuComponent']">
+                    <i class="fa fa-bolt"></i>
+                </li>
+                <hr>
+                <li class="nav-item" [routerLink]="['/QuanlyGiaingan']">
+                    <i class="fa fa-th-list"></i>
+                </li>
+                <hr>
+                <li class="nav-item" [routerLink]="['/sidebar']">
+                    <i class="fa fa-home"></i>
+                </li>
+                
+            </ul>
+        </div>
+    </ng-sidebar>
+
+
+
+    <div ng-sidebar-content>
+        <header class="demo-header header-button row">
+
+            <div class="col-lg-6">
+                <button (click)="_toggleSidebar()" class="demo-header__toggle">Toggle sidebar</button>
+                <span> BỘ NÔNG NGHIỆP VÀ PHÁT TRIỂN NÔNG THÔN</span>
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-4">
+                <button type="button" class="btn" (click)="check()" style="color: white;"><i class="fa fa-bell"></i>
+                    Thông báo</button>
+                <button type="button" class="btn" (click)="check()" style="color: white;"><i class="fa fa-key"></i> Đổi
+                    mật khẩu</button>
+                <button type="button" class="btn" (click)="Logout()" style="color: white;"><i class="fa fa-sign-out-alt"></i> Đăng xuất</button>
+            </div>
+
+            <!-- <div>
+                <button type="button" class="btn" (click)="check()" style="color: white;">Login</button>
+            </div> -->
+        </header>
+        <div class="panel-body">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</ng-sidebar-container>
+
+<div *ngIf="!isCheckRouter() === true">
+    <app-header-navbar></app-header-navbar>
+    <router-outlet></router-outlet>
+    <app-footer-nav></app-footer-nav>
+</div>
+
+
+<!-- <div>
+    <app-header-navbar></app-header-navbar>
+    <router-outlet></router-outlet>
+    <app-footer-nav></app-footer-nav>
+</div> -->

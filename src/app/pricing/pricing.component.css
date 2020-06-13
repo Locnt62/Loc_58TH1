@@ -1,0 +1,26 @@
+.header-pricing {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.wrapper-fee {
+    border: 1px solid #dfdfdf;
+    padding-bottom: 40px;
+    padding-top: 40px;
+    box-shadow: 0 1px 1px 0 gray, 0 1px 1px 0 gray;
+}
+
+.wrapper-fee-1 h3 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.wrapper-fee-1 {
+    border: 1px solid #dfdfdf;
+    background-color: #f7f7f7;
+    box-shadow: 0 1px 1px 0 gray, 0 1px 1px 0 grey;
+}
+
+hr {
+    margin-top: 50px;
+}

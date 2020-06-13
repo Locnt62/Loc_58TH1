@@ -1,0 +1,46 @@
+.footer{
+    position: relative;
+    height: 40px;
+    border-top: 1px solid rgba(0, 0, 0,0.1);
+}
+.footer :before{
+   position: relative;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    overflow: hidden;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 8px 0 -3px #f6f6f6 , 0 9px 1px -3px rgba(0, 0, 0, 0.2),
+    0 16px 0 -6px #f6f6f6, 0 17px 2px -6px rgba(0, 0, 0, 0.2);
+   
+}
+.footer .filter-btn{
+    padding: 5px;
+    border-radius: 0.25rem;
+    outline: none;
+    cursor: pointer;
+    margin-right: 5px;
+    background: white;
+    border: 1px solid white;
+   
+}
+.footer .filter-btn:hover{
+    background-color:rgba(0, 0, 0, 0.6);
+    color: white;
+}
+.footer .filter-btn:focus{
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+}
+.footer .clear-completed-btn{
+    visibility: visible;
+}
+.footer .clear-completed-btn .visible{
+    visibility: visible;
+}
+.footer .item-count{
+    padding-left: 10px;
+}
+button :focus{
+    background-color: green;
+}

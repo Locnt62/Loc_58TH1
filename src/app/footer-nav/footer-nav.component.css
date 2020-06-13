@@ -1,0 +1,28 @@
+.footer-content{
+    background-color: #050e7ce8;
+    color: white;
+}
+
+.footer-custom{
+    padding: 32px 140px;
+    padding-top: 50px;
+    padding-bottom: 6px;
+}
+
+.name-quanly{
+    border-bottom: 1px solid white;
+    /* padding: 2px; */
+    padding-bottom: 10px;
+    width: 610px;
+}
+
+.content{
+    margin-top: 20px;
+}
+
+.copyright{
+    margin-top: 31px;
+    /* margin-bottom: 5px; */
+    font-size: 17px;
+    text-align: center;
+}

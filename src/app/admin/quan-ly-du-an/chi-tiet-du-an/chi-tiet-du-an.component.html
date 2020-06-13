@@ -1,0 +1,270 @@
+<div class="header-tongquan">
+    <span style="font-size: 17px;color: #25549d;font-weight: 600;">Tổng quan</span><br>
+    <span style="color:#acacac; font-size: 14px;">Trang chủ > <a>Dự án</a> > <a>Thêm mới dự án</a></span>
+</div>
+<div class="body-tongquan" style="padding-right: 70px;">
+    <div class="table-duan">
+        <div class="header-duan">
+            Thông tin dự án
+        </div>
+        <div class="body-duan">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="row line-duan">
+                        <div class="col-lg-4" style="font-weight: 500;">
+                            Tên dự án
+                        </div>
+                        <div class="col-lg-8">
+                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="tenduan"
+                                (ngModelChange)="TextTenDA()" style="width: calc(100% - 60px)">
+                        </div>
+                    </div>
+                    <div class="row line-duan">
+                        <div class="col-lg-4" style="font-weight: 500;">
+                            Mã dự án
+                        </div>
+                        <div class="col-lg-8">
+                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="maduan"
+                                (ngModelChange)="TextmaDA()" style="width: calc(100% - 60px)">
+                        </div>
+                    </div>
+                    <div class="row line-duan">
+                        <div class="col-lg-4" style="font-weight: 500;">
+                            QD duyệt chủ trương đầu tư
+                        </div>
+                        <div class="col-lg-8">
+                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="QDDT"
+                                (ngModelChange)="TextQDDT()" style="width: calc(100% - 60px)">
+                        </div>
+                    </div>
+                    <div class="row line-duan">
+                        <div class="col-lg-4" style="font-weight: 500;">
+                            Ngày phê duyệt
+                        </div>
+                        <div class="col-lg-8">
+                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="Ngaypheduyet"
+                                (ngModelChange)="TextNPD()" style="width: calc(100% - 60px)">
+                        </div>
+                    </div>
+                    <div class="row line-duan">
+                        <div class="col-lg-4" style="font-weight: 500;">
+                            Địa điểm kho bạc
+                        </div>
+                        <div class="col-lg-8">
+                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="Khobac"
+                                (ngModelChange)="TextKhobac()" style="width: calc(100% - 60px)">
+                        </div>
+                    </div>
+                    <div class="row line-duan">
+                        <div class="col-lg-4" style="font-weight: 500;">
+                            Địa điểm thực hiện
+                        </div>
+                        <div class="col-lg-8">
+                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="NNoithuchien"
+                                (ngModelChange)="TextNTH()" style="width: calc(100% - 60px)">
+                        </div>
+                    </div>
+                    <div class="row line-duan">
+                        <div class="col-lg-4" style="font-weight: 500;">
+                            Chủ đầu tư
+                        </div>
+                        <div class="col-lg-8">
+                            <!-- <input class="search-text" name="keysearch" type="text" [(ngModel)]="QDBD"
+                                (ngModelChange)="TextQDBD()" style="width: calc(100% - 60px)"> -->
+                                <ng-select [items]="list_chudautu" [(ngModel)]="QDBD"
+                                (ngModelChange)="TextQDBD()" bindLabel="Tenchudautu" bindValue="Id"
+                                style="width: calc(100% - 60px)">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row line-duan">
+                        <div class="col-lg-4" style="font-weight: 500;">
+                            Tỉnh
+                        </div>
+                        <div class="col-lg-8">
+                            <!-- <input class="search-text" name="keysearch" type="text" [(ngModel)]="QDBD"
+                                (ngModelChange)="TextQDBD()" style="width: calc(100% - 60px)"> -->
+                                <ng-select [items]="listProvine" [(ngModel)]="Tinh"
+                                (ngModelChange)="SelectTinh()" bindLabel="TenTinh" bindValue="Id"
+                                style="width: calc(100% - 60px)">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <!-- <div class="row line-duan">
+                        <div class="col-lg-4">
+                            Tải ảnh lên
+                        </div>
+                        <div class="col-lg-8">
+                            <i class="fa fa-upload" style="font-size: 20px;"></i>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="col-lg-6">
+                    <div class="row line-duan">
+                        <div class="col-lg-4" style="font-weight: 500;">
+                            Tổng mức đầu tư(triệu đồng)
+                        </div>
+                        <div class="col-lg-8">
+                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="TMDT"
+                                (ngModelChange)="TextTMDT()" style="width: calc(100% - 60px)">
+                        </div>
+                    </div>
+                    <div class="row line-duan">
+                        <div class="col-lg-4" style="font-weight: 500;">
+                            Link ảnh
+                        </div>
+                        <div class="col-lg-8">
+                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="Image"
+                                (ngModelChange)="TextImage()" style="width: calc(100% - 60px)">
+                        </div>
+                    </div>
+                    <div class="row line-duan">
+                        <div class="col-lg-4" style="font-weight: 500;">
+                            Thời gian thi công
+                        </div>
+                        <div class="col-lg-8">
+                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="TGTC"
+                                (ngModelChange)="TextTGTC()" style="width: calc(100% - 60px)">
+                        </div>
+                    </div>
+                    <div class="row line-duan">
+                        <div class="col-lg-4" style="font-weight: 500;">
+                            Thời gian hoàn thành
+                        </div>
+                        <div class="col-lg-8">
+                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="TGHT"
+                                (ngModelChange)="TextTGHT()" style="width: calc(100% - 60px)">
+                        </div>
+                    </div>
+                    <div class="row line-duan">
+                        <div class="col-lg-4" style="font-weight: 500;">
+                            Hình thức quản lý dự án
+                        </div>
+                        <div class="col-lg-8">
+                            <ng-select [items]="list_quanly" [(ngModel)]="htql" (ngModelChange)="SelectQuanly()"
+                                bindLabel="Value" bindValue="Id" style="width: calc(100% - 60px)">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row line-duan">
+                        <div class="col-lg-4" style="font-weight: 500;">
+                            Loại nguồn vốn
+                        </div>
+                        <div class="col-lg-8">
+                            <ng-select [items]="list_loaivon" [(ngModel)]="loainguonvon"
+                                (ngModelChange)="SelectVon()" bindLabel="Value" bindValue="Id"
+                                style="width: calc(100% - 60px)">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row line-duan">
+                        <div class="col-lg-4" style="font-weight: 500;">
+                            Mô tả dự án
+                        </div>
+                        <div class="col-lg-8">
+                            <textarea class="search-text" name="keysearch" type="text" [(ngModel)]="Mota"
+                            (ngModelChange)="AddMota()"
+                                style="width: calc(100% - 60px);min-height: 100px;"></textarea>
+                        </div>
+                    </div>
+                    <!-- <div class="row line-duan">
+                        <div class="col-lg-4">
+                        </div>
+                        <div class="col-lg-4">
+                        </div>
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-1">
+                            <button class="btn"
+                                style="background-color: green;width: 80px;color: white;">Lưu</button>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="tieuduan" style="background-color: white;margin-top: 50px;">
+        <div class="nav-link-tab">
+            <tabset #staticTabs>
+                <tab heading="Tiểu dự án">
+                    <div class="header-title1" style="font-weight: 500;font-size: 17px;">
+                        Thêm mới tiểu dự án
+                    </div>
+                    <div class="body-tieuduan">
+                        <div class="button-select">
+                            <div class="row">
+                                <div class="col-lg-1">
+                                    Tiểu dự án
+                                </div>
+                                <div class="col-lg-3">
+                                    <input class="search-text" name="keysearch" type="text"
+                                        style="width: calc(100% - 60px)">
+                                </div>
+                                <div class="col-lg-1">
+                                    Chủ đầu tư
+                                </div>
+                                <div class="col-lg-3">
+                                    <input class="search-text" name="keysearch" type="text"
+                                        style="width: calc(100% - 60px)">
+                                </div>
+                                <div class="col-lg-1">
+                                    Mô tả
+                                </div>
+                                <div class="col-lg-3">
+                                    <textarea class="search-text" name="keysearch" type="text"
+                                        style="width: calc(100% - 10px);min-height: 100px;"></textarea>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-lg-11"></div>
+                                <div class="col-gl-1">
+                                    <button class="btn"
+                                        style="background-color: green;color: white;width: 90px;">Thêm</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-price">
+                            <table>
+                                <thead>
+                                    <tr class="header_table">
+                                        <td style="padding-left: 20px;">STT</td>
+                                        <td style="padding-left: 20px;">Tên tiểu dự án</td>
+                                        <td style="padding-left: 20px;">Tên chủ đầu tư</td>
+                                        <td style="padding-left: 20px;">Mô tả</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                         <td style="padding-left: 20px;">1</td>
+                                        <td style="padding-left: 20px;color: #be5e26;">Hợp phần kênh cấp I và GPMB
+                                        </td>
+                                        <td style="padding-left: 20px;">Ban QLDA tỉnh Ninh Thuận</td>
+                                        <td style="padding-left: 20px;">Công trình đầu mối hồ Bản Lải. Các kênh tưới
+                                            chính và công trình trên kênh xây dựng kế hoạch quản lý lũ khu vực sông
+                                            Kỳ Cùng
+                                         </td>
+                                        <td>Không có dữ liệu!</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div> --> 
+</div>
+<div class="footer">
+    <div class="row" style="padding-top: 30px;padding-right: 15px;">
+        <div class="col-lg-6">
+
+        </div>
+        <div class="col-lg-3">
+
+        </div>
+        <div class="col-lg-3" style="display: flex;justify-content: space-evenly;">
+            <button class="btn" style="background-color: red;color: white;width: 90px;"
+                (click)="redirect()">Hủy</button>
+            <button class="btn" style="background-color: green;color: white;width: 90px;" (click)="ThemMoi()">Lưu</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,800 @@
+<div *ngIf="!seg">
+    <div class="header-tongquan">
+        <span style="font-size: 17px;color: #25549d;font-weight: 600;">Quản lý dự án</span><br>
+        <span style="color:#acacac; font-size: 14px;">Trang chủ > <a>Thêm mới dự án</a></span>
+        <div class="row optionselect">
+            <div class="col-lg-5">
+                <input class="search-text" name="keysearch" type="text" placeholder="Nhập tên dự án.."
+                    [(ngModel)]="Addtext" (ngModelChange)="SearMADA()" style="width: calc(100% - 120px)">
+            </div>
+            <div class="col-lg-3">
+                <ng-select [items]="listProvine" [(ngModel)]="selectProvince" (ngModelChange)="SelectTinh()"
+                    bindLabel="TenTinh" bindValue="Id" placeholder="Tỉnh">
+                </ng-select>
+            </div>
+            <div class="col-lg-3">
+                <ng-select [items]="chudautu" [(ngModel)]="selectChudautu" (ngModelChange)="SelectCDT()"
+                    bindLabel="Tenchudautu" bindValue="Id" placeholder="Chủ đầu tư" style="width: calc(100% - 49px)">
+                </ng-select>
+            </div>
+        </div>
+        <div class="button-option">
+            <div class="row">
+                <div class="col-lg-7"></div>
+                <div class="col-lg-4" style="text-align: end;">
+                    <ul>
+                        <li><button class="btn" style="background-color: #25549d;width: 100px;color: white;">Tìm
+                                kiếm</button></li>
+                        <li><button class="btn" style="background-color: #289b28;width: 100px;color: white;"
+                                (click)="ThemDA()">Thêm mới
+                            </button></li>
+                        <li><button class="btn" style="background-color: red;width: 100px;color: white;">Xuất
+                                Excel</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body-tongquan">
+        <!-- <span>hello</span> -->
+        <div class="table-price">
+            <table>
+                <thead>
+                    <tr class="header_table">
+                        <td style="padding-left: 20px;">STT</td>
+                        <td style="padding-left: 20px;">Mã dự án</td>
+                        <td style="padding-left: 20px;">Tên dự án/Tiểu dự án</td>
+                        <td style="padding-left: 20px;">Chủ đầu tư</td>
+                        <td style="padding-left: 20px;">Địa điểm thi công</td>
+                        <td style="padding-left: 20px;">Ngày phê duyệt</td>
+                        <td style="padding-left: 20px;">Ngày hoàn thành</td>
+                        <td style="padding-left: 20px;">Tổng mức đầu tư</td>
+                        <td style="padding-left: 20px;">Xóa</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of list_da | paginate: { itemsPerPage: 6, currentPage: p }">
+                        <td style="padding-left: 20px;">{{i}}</td>
+                        <td style="padding-left: 20px;">{{item.Maduan}}</td>
+                        <td style="padding-left: 20px;color: #be5e26;">
+                            <div (click)="direct(item)" style="cursor: pointer;">{{item.TenDa}}</div>
+                        </td>
+                        <td style="padding-left: 20px;">{{item.Chudautu}}</td>
+                        <td style="padding-left: 20px">{{item.DiaDiem}}</td>
+                        <td style="padding-left: 20px;">{{item.NgayPheDuyet}}</td>
+                        <td style="padding-left: 20px;">{{item.DateComplete}}</td>
+                        <td style="padding-left: 20px;">{{item.Tongdautu}}</td>
+                        <td style="padding-left: 20px;"><span style="cursor: pointer;">
+                                <div (click)="Delete(item)">
+                                    <i class="fa fa-trash"></i>
+                                </div>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr *ngIf="!list_da || list_da.length === 0">
+                        <td style="padding-left: 12px;">Không có dữ liệu!</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel="">
+                </pagination-controls>
+            </div><br>
+        </div>
+    </div>
+    <div class="footer"></div>
+</div>
+<div *ngIf="seg">
+    <div class="header-tongquan">
+        <span style="font-size: 17px;color: #25549d;font-weight: 600;">Quản lý dự án</span><br>
+        <span style="color:#acacac; font-size: 14px;">Trang chủ > <a>Dự án</a> > <a>Chi tiết dự án</a></span>
+    </div>
+    <div class="body-tongquan" style="padding-right: 70px;">
+        <div class="table-duan">
+            <div class="header-duan">
+                Thông tin dự án
+            </div>
+            <div class="body-duan">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="row line-duan">
+                            <div class="col-lg-4" style="font-weight: 500;">
+                                Tên dự án
+                            </div>
+                            <div class="col-lg-8">
+                                <input class="search-text" name="keysearch" type="text" [(ngModel)]="tenduan"
+                                    (ngModelChange)="TextTenDA()" style="width: calc(100% - 60px)">
+                            </div>
+                        </div>
+                        <div class="row line-duan">
+                            <div class="col-lg-4" style="font-weight: 500;">
+                                Mã dự án
+                            </div>
+                            <div class="col-lg-8">
+                                <input class="search-text" name="keysearch" type="text" [(ngModel)]="maduan"
+                                    [disabled]="dynamicVariable" (ngModelChange)="TextmaDA()"
+                                    style="width: calc(100% - 60px)">
+                            </div>
+                        </div>
+                        <div class="row line-duan">
+                            <div class="col-lg-4" style="font-weight: 500;">
+                                QD duyệt chủ trương đầu tư
+                            </div>
+                            <div class="col-lg-8">
+                                <input class="search-text" name="keysearch" type="text" [(ngModel)]="QDDT"
+                                    (ngModelChange)="TextQDDT()" style="width: calc(100% - 60px)">
+                            </div>
+                        </div>
+                        <div class="row line-duan">
+                            <div class="col-lg-4" style="font-weight: 500;">
+                                Ngày phê duyệt
+                            </div>
+                            <div class="col-lg-8">
+                                <input class="search-text" name="keysearch" type="text" [(ngModel)]="Ngaypheduyet"
+                                    (ngModelChange)="TextNPD()" style="width: calc(100% - 60px)">
+                            </div>
+                        </div>
+                        <div class="row line-duan">
+                            <div class="col-lg-4" style="font-weight: 500;">
+                                Địa điểm kho bạc
+                            </div>
+                            <div class="col-lg-8">
+                                <input class="search-text" name="keysearch" type="text" [(ngModel)]="Khobac"
+                                    (ngModelChange)="TextKhobac()" style="width: calc(100% - 60px)">
+                            </div>
+                        </div>
+                        <div class="row line-duan">
+                            <div class="col-lg-4" style="font-weight: 500;">
+                                Địa điểm thực hiện
+                            </div>
+                            <div class="col-lg-8">
+                                <input class="search-text" name="keysearch" type="text" [(ngModel)]="NNoithuchien"
+                                    (ngModelChange)="TextNTH()" style="width: calc(100% - 60px)">
+                            </div>
+                        </div>
+                        <div class="row line-duan">
+                            <div class="col-lg-4" style="font-weight: 500;">
+                                Chủ đầu tư
+                            </div>
+                            <div class="col-lg-8">
+                                <!-- <input class="search-text" name="keysearch" type="text" [(ngModel)]="QDBD"
+                                (ngModelChange)="TextQDBD()" style="width: calc(100% - 60px)"> -->
+                                <ng-select [items]="chudautu" [(ngModel)]="QDBD" (ngModelChange)="TextQDBD()"
+                                    bindLabel="Tenchudautu" bindValue="Id" style="width: calc(100% - 60px)">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="row line-duan">
+                            <div class="col-lg-4" style="font-weight: 500;">
+                                Tỉnh
+                            </div>
+                            <div class="col-lg-8">
+                                <!-- <input class="search-text" name="keysearch" type="text" [(ngModel)]="QDBD"
+                                    (ngModelChange)="TextQDBD()" style="width: calc(100% - 60px)"> -->
+                                <ng-select [items]="listProvine" [(ngModel)]="Tinh" (ngModelChange)="ChonTinh()"
+                                    bindLabel="TenTinh" bindValue="Id" style="width: calc(100% - 60px)">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <!-- <div class="row line-duan">
+                            <div class="col-lg-4">
+                                Tải ảnh lên
+                            </div>
+                            <div class="col-lg-8">
+                                <i class="fa fa-upload" style="font-size: 20px;"></i>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row line-duan">
+                            <div class="col-lg-4" style="font-weight: 500;">
+                                Tổng mức đầu tư(triệu đồng)
+                            </div>
+                            <div class="col-lg-8">
+                                <input class="search-text" name="keysearch" type="text" [(ngModel)]="TMDT"
+                                    (ngModelChange)="TextTMDT()" style="width: calc(100% - 60px)">
+                            </div>
+                        </div>
+                        <div class="row line-duan">
+                            <div class="col-lg-4" style="font-weight: 500;">
+                                Link ảnh
+                            </div>
+                            <div class="col-lg-8">
+                                <input class="search-text" name="keysearch" type="text" [(ngModel)]="Image"
+                                    (ngModelChange)="TextImage()" style="width: calc(100% - 60px)">
+                            </div>
+                        </div>
+                        <div class="row line-duan">
+                            <div class="col-lg-4" style="font-weight: 500;">
+                                Thời gian thi công
+                            </div>
+                            <div class="col-lg-8">
+                                <input class="search-text" name="keysearch" type="text" [(ngModel)]="TGTC"
+                                    (ngModelChange)="TextTGTC()" style="width: calc(100% - 60px)">
+                            </div>
+                        </div>
+                        <div class="row line-duan">
+                            <div class="col-lg-4" style="font-weight: 500;">
+                                Thời gian hoàn thành
+                            </div>
+                            <div class="col-lg-8">
+                                <input class="search-text" name="keysearch" type="text" [(ngModel)]="TGHT"
+                                    (ngModelChange)="TextTGHT()" style="width: calc(100% - 60px)">
+                            </div>
+                        </div>
+                        <div class="row line-duan">
+                            <div class="col-lg-4" style="font-weight: 500;">
+                                Hình thức quản lý dự án
+                            </div>
+                            <div class="col-lg-8">
+                                <ng-select [items]="list_quanly" [(ngModel)]="htql" (ngModelChange)="SelectQuanly()"
+                                    bindLabel="Value" bindValue="Id" style="width: calc(100% - 60px)">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="row line-duan">
+                            <div class="col-lg-4" style="font-weight: 500;">
+                                Loại nguồn vốn
+                            </div>
+                            <div class="col-lg-8">
+                                <ng-select [items]="list_loaivon" [(ngModel)]="loainguonvon"
+                                    (ngModelChange)="SelectVon()" bindLabel="Value" bindValue="Id"
+                                    style="width: calc(100% - 60px)">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="row line-duan">
+                            <div class="col-lg-4" style="font-weight: 500;">
+                                Mô tả dự án
+                            </div>
+                            <div class="col-lg-8">
+                                <textarea class="search-text" name="keysearch" type="text" [(ngModel)]="Mota"
+                                    (ngModelChange)="AddMota()"
+                                    style="width: calc(100% - 60px);min-height: 100px;"></textarea>
+                            </div>
+                        </div>
+                        <div class="row line-duan">
+                            <div class="col-lg-4">
+                            </div>
+                            <div class="col-lg-4">
+                            </div>
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-1">
+                                <button class="btn" style="background-color: green;width: 80px;color: white;"
+                                    (click)="ThemMoi()">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tieuduan" style="background-color: white;margin-top: 50px;">
+            <div class="nav-link-tab">
+                <tabset #staticTabs>
+                    <tab heading="Tiểu dự án">
+                        <div class="header-title1" style="font-weight: 500;font-size: 17px;">
+                            Danh sách các tiểu dự án
+                        </div>
+                        <div class="body-tieuduan">
+                            <div class="button-select">
+                                <div class="row">
+                                    <div class="col-lg-1">
+                                        Tiểu dự án
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <ng-select placeholder="Nhập tên tiểu dự án">
+                                        </ng-select>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        Chủ đầu tư
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <ng-select placeholder="Nhập tên chủ đầu tư">
+                                        </ng-select>
+                                    </div>
+                                    <div class="col-lg-1">
+
+                                    </div>
+                                    <div class="col-lg-3" style="display: flex;justify-content: space-around;">
+                                        <button class="btn searchbtn">Tìm kiếm</button>
+                                        <!-- </div>
+                                    <div class="col-lg-2"> -->
+                                        <button class="btn addbtn" (click)="open(content)">Thêm mới</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-price">
+                                <table>
+                                    <thead>
+                                        <tr class="header_table">
+                                            <td style="padding-left: 20px;">STT</td>
+                                            <td style="padding-left: 20px;">Tên tiểu dự án</td>
+                                            <td style="padding-left: 20px;">Tên chủ đầu tư</td>
+                                            <td style="padding-left: 20px;">Mô tả</td>
+                                            <td style="padding-left: 20px;">Sửa</td>
+                                            <td style="padding-left: 20px;">Xóa</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of list_tieuduan; index as i">
+                                            <td style="padding-left: 20px;">{{i + 1}}</td>
+                                            <td style="padding-left: 20px;color: #be5e26;">{{item.Tentieuda}}
+                                            </td>
+                                            <td style="padding-left: 20px;">{{item.Chudautu}}</td>
+                                            <td style="padding-left: 20px;">{{item.Mota}}
+                                            </td>
+                                            <td style="padding-left: 20px;">
+                                                <div (click)="open(content1)" style="cursor: pointer;"><i class="fa fa-edit"></i></div>
+                                            </td>
+                                            <td style="padding-left: 20px;">
+                                                <div>
+                                                    <span style="cursor: pointer;"><i class="fa fa-trash"></i></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="!list_tieuduan || list_tieuduan.length === 0">
+                                            <td style="padding-left: 20px;">Không có dữ liệu !</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab heading="Quản lý vốn">
+                        <div class="row" style="padding:15px;">
+                            <div class="col-lg-4">
+                                <div class="thongtinnguonvon" style="border: 1px solid #c2c2c2;">
+                                    <div class="header-nguonvon"
+                                        style="background-color: #25549d;color: white;padding: 5px;">
+                                        Thông tin nguồn vốn dự án
+                                    </div>
+                                    <div class="body-nguonvon" style="padding: 10px;">
+                                        <div class="row" style="padding-bottom: 10px;">
+                                            <div class="col-lg-4">Dự án</div>
+                                            <div class="col-lg-8">
+                                                <input class="search-text" name="keysearch" type="text"
+                                                    style="width: calc(100% - 60px)">
+                                            </div>
+                                        </div>
+                                        <div class="row" style="padding-bottom: 10px;">
+                                            <div class="col-lg-4">Tổng vốn năm</div>
+                                            <div class="col-lg-8">
+                                                <input class="search-text" name="keysearch" type="text"
+                                                    style="width: calc(100% - 60px)">
+                                            </div>
+                                        </div>
+                                        <div class="row" style="padding-bottom: 10px;">
+                                            <div class="col-lg-4">Tổng vốn trung hạn</div>
+                                            <div class="col-lg-8">
+                                                <input class="search-text" name="keysearch" type="text"
+                                                    style="width: calc(100% - 60px)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="dsnguonvon" style="border: 1px solid #c2c2c2;">
+                                    <div class="header-nguonvon"
+                                        style="background-color: #25549d;color: white;padding: 5px;">
+                                        Danh sách nguồn vốn dự án
+                                    </div>
+                                    <div class="body-nguonvon" style="padding: 10px;">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="row" style="padding-bottom: 10px;">
+                                                    <div class="col-lg-3">
+                                                        Loại vốn
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <ng-select style="width: calc(100% - 60px)">
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding-bottom:10px ;">
+                                                    <div class="col-lg-3">
+                                                        Giai đoạn
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <ng-select style="width: calc(100% - 60px)">
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="row" style="padding-bottom: 10px;">
+                                                    <div class="col-lg-3">
+                                                        Tiểu dự án
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <ng-select style="width: calc(100% - 60px)">
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding-bottom:10px ;">
+                                                    <div class="col-lg-6">
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <button class="btn"
+                                                            style="background-color: white;border: 1px solid #25549d;color: #25549d;">Tìm
+                                                            kiếm</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="table-price" style="margin-top: 20p;">
+                                            <table>
+                                                <thead>
+                                                    <tr class="header_table">
+                                                        <td style="padding-left: 12px;">STT</td>
+                                                        <td style="padding-left: 12px;">Tên tiểu dự án</td>
+                                                        <td style="padding-left: 12px;">Loại vốn</td>
+                                                        <td style="padding-left: 12px;">Thời đoạn</td>
+                                                        <td style="padding-left: 12px;">Lần điều chỉnh</td>
+                                                        <td style="padding-left: 12px;">Gía trị(triệu đồng)</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="padding-left: 12px;">1</td>
+                                                        <td style="color: #be5e26;padding-left: 12px;">Hợp phần kênh cấp
+                                                            I và GPMB
+                                                        </td>
+                                                        <td style="padding-left: 12px;">Vốn năm</td>
+                                                        <td style="padding-left: 12px;">2000
+                                                        </td>
+                                                        <td style="padding-left: 12px;">1
+                                                        </td>
+                                                        <td style="padding-left: 12px;">250.000.000
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="padding-left: 12px;">1</td>
+                                                        <td style="color: #be5e26;padding-left: 12px;">Hợp phần kênh cấp
+                                                            I và GPMB
+                                                        </td>
+                                                        <td style="padding-left: 12px;">Vốn năm</td>
+                                                        <td style="padding-left: 12px;">2000
+                                                        </td>
+                                                        <td style="padding-left: 12px;">1
+                                                        </td>
+                                                        <td style="padding-left: 12px;">250.000.000
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab heading="Tổng mức đầu tư">
+                        <div class="header-title1" style="font-weight: 500;font-size: 17px;">
+                            Tổng mức đầu tư dự án
+                        </div>
+                        <div class="body-tieuduan">
+                            <div class="table-price">
+                                <table>
+                                    <thead>
+                                        <tr class="header_table">
+                                            <td style="padding-left: 20px;">STT</td>
+                                            <td style="padding-left: 20px;">Dự án</td>
+                                            <td style="padding-left: 20px;">Nguồn vốn</td>
+                                            <td style="padding-left: 20px;">Lần điều chỉnh</td>
+                                            <td style="padding-left: 20px;">Tổng cộng</td>
+                                            <td style="padding-left: 20px;">Xây lắp</td>
+                                            <td style="padding-left: 20px;">Thiết bị</td>
+                                            <td style="padding-left: 20px;">Tư vấn</td>
+                                            <td style="padding-left: 20px;">Quản lý dự án</td>
+                                            <td style="padding-left: 20px;">Khác </td>
+                                            <td style="padding-left: 20px;">Dự phòng</td>
+                                            <td style="padding-left: 20px;">Đền bù GPMB</td>
+                                            <td style="padding-left: 20px;">Mô tả chi tiết</td>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding-left: 20px;">1</td>
+                                            <td style="padding-left: 20px;">Hồ Bản Lải</td>
+                                            <td style="padding-left: 20px;">TPCP</td>
+                                            <td style="padding-left: 20px;">Tổng mức đầu tư gốc</td>
+                                            <td style="padding-left: 20px;">2.999.867</td>
+                                            <td style="padding-left: 20px;">1.948.345</td>
+                                            <td style="padding-left: 20px;">166.765</td>
+                                            <td style="padding-left: 20px;">120.559</td>
+                                            <td style="padding-left: 20px;">125.292</td>
+                                            <td style="padding-left: 20px;">0 </td>
+                                            <td style="padding-left: 20px;">810.000</td>
+                                            <td style="padding-left: 20px;">280.392t</td>
+                                            <td style="padding-left: 20px;">Chi tiết</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="header-title1" style="font-weight: 500;font-size: 17px;">
+                            Tổng mức đầu tư tiểu dự án
+                        </div>
+                        <div class="body-tieuduan">
+                            <div class="table-price">
+                                <table>
+                                    <thead>
+                                        <tr class="header_table">
+                                            <td style="padding-left: 20px;">STT</td>
+                                            <td style="padding-left: 20px;">Dự án</td>
+                                            <td style="padding-left: 20px;">Nguồn vốn</td>
+                                            <td style="padding-left: 20px;">Lần điều chỉnh</td>
+                                            <td style="padding-left: 20px;">Tổng cộng</td>
+                                            <td style="padding-left: 20px;">Xây lắp</td>
+                                            <td style="padding-left: 20px;">Thiết bị</td>
+                                            <td style="padding-left: 20px;">Tư vấn</td>
+                                            <td style="padding-left: 20px;">Quản lý dự án</td>
+                                            <td style="padding-left: 20px;">Khác </td>
+                                            <td style="padding-left: 20px;">Dự phòng</td>
+                                            <td style="padding-left: 20px;">Đền bù GPMB</td>
+                                            <td style="padding-left: 20px;">Mô tả chi tiết</td>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding-left: 20px;">1</td>
+                                            <td style="padding-left: 20px;">Hồ Bản Lải</td>
+                                            <td style="padding-left: 20px;">TPCP</td>
+                                            <td style="padding-left: 20px;">Tổng mức đầu tư gốc</td>
+                                            <td style="padding-left: 20px;">2.999.867</td>
+                                            <td style="padding-left: 20px;">1.948.345</td>
+                                            <td style="padding-left: 20px;">166.765</td>
+                                            <td style="padding-left: 20px;">120.559</td>
+                                            <td style="padding-left: 20px;">125.292</td>
+                                            <td style="padding-left: 20px;">0 </td>
+                                            <td style="padding-left: 20px;">810.000</td>
+                                            <td style="padding-left: 20px;">280.392t</td>
+                                            <td style="padding-left: 20px;">Chi tiết</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab heading="Giam sát đánh giá">
+                        <div class="header-title1" style="font-weight: 500;font-size: 17px;">
+                            KQ thực hiện, giải ngân tháng
+                        </div>
+                        <div class="body-tieuduan">
+                            <div class="row">
+                                <div class="col-lg-1">Tiểu dự án</div>
+                                <div class="col-lg-2">
+                                    <ng-select placeholder="Nhập tên tiểu dự án">
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-1">Tháng</div>
+                                <div class="col-lg-2">
+                                    <ng-select placeholder="Nhập tên tiểu dự án">
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-1">Năm</div>
+                                <div class="col-lg-2">
+                                    <ng-select placeholder="Nhập tên tiểu dự án">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="table-price" style="padding-top: 20px;">
+                                <table>
+                                    <thead>
+                                        <tr class="header_table">
+                                            <td style="padding-left: 20px;">STT</td>
+                                            <td style="padding-left: 20px;">Chủ đầu tư</td>
+                                            <td style="padding-left: 20px;">Tiểu dự án</td>
+                                            <td style="padding-left: 20px;">Tháng</td>
+                                            <td style="padding-left: 20px;">Năm</td>
+                                            <td style="padding-left: 20px;">File</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding-left: 20px;color: #be5e26;">1</td>
+                                            <td style="padding-left: 20px;">Hợp phần kênh cấp I và GPMB</td>
+                                            <td style="padding-left: 20px;">Ban QLDA tỉnh Ninh Thuận</td>
+                                        </tr>
+                                        <span>Chưa có thông tin</span>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab heading="Thực hiện giải ngân">
+                        <div class="header-title1" style="font-weight: 500;font-size: 17px;">
+                            Qúa trình thực hiên giải ngân
+                        </div>
+                        <div class="body-tieuduan">
+                            <div class="row">
+                                <div class="col-lg-1">Tiểu dự án</div>
+                                <div class="col-lg-2">
+                                    <ng-select placeholder="Nhập tên tiểu dự án">
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-1">Tháng</div>
+                                <div class="col-lg-2">
+                                    <ng-select placeholder="Nhập tên tiểu dự án">
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-1">Năm</div>
+                                <div class="col-lg-2">
+                                    <ng-select placeholder="Nhập tên tiểu dự án">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="table-price" style="padding-top: 20px;">
+                                <table>
+                                    <thead>
+                                        <tr class="header_table">
+                                            <td style="padding-left: 20px;">STT</td>
+                                            <td style="padding-left: 20px;">Tiểu dự án</td>
+                                            <td style="padding-left: 20px;">Chủ đầu tư</td>
+                                            <td style="padding-left: 20px;">Chi tiết giải ngân</td>
+                                            <td style="padding-left: 20px;">Tháng</td>
+                                            <td style="padding-left: 20px;">Năm</td>
+                                            <td style="padding-left: 20px;">Nội dung công việc</td>
+                                            <td style="padding-left: 20px;">Khó khăn đề nghị</td>
+                                            <td style="padding-left: 20px;">File</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding-left: 20px">1</td>
+                                            <td style="padding-left: 20px;color: #be5e26;">Hợp phần kênh cấp I và GPMB
+                                            </td>
+                                            <td style="padding-left: 20px;">Ban QLDA tỉnh Ninh Thuận</td>
+                                            <td style="padding-left: 20px">Chi tiết</td>
+                                            <td style="padding-left: 20px">6</td>
+                                            <td style="padding-left: 20px;">2019</td>
+                                            <td style="padding-left: 20px;">Nội dung</td>
+                                            <td style="padding-left: 20px">Khó khăn</td>
+                                            <td style="padding-left: 20px">File doc</td>
+                                            <!-- <td style="padding-left: 20px;">Ban QLDA tỉnh Ninh Thuận</td> -->
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="row" style="padding-top: 30px;padding-right: 15px;">
+            <div class="col-lg-6">
+
+            </div>
+            <div class="col-lg-3">
+
+            </div>
+            <div class="col-lg-3" style="display: flex;justify-content: space-evenly;">
+                <button class="btn" style="background-color: red;color: white;width: 90px;"
+                    (click)="redirect()">Hủy</button>
+                <button class="btn" style="background-color: green;color: white;width: 90px;">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #content>
+    <div class="header-popup">
+        <div>
+            <span> Thêm tiểu dự án</span>
+        </div>
+        <div>
+            <span (click)="close()" style="cursor: pointer;font-size: 19px;"><i class="fa fa-times"></i></span>
+        </div>
+    </div>
+    <div class="body-popup">
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-6">
+                Tên tiểu dự án
+            </div>
+            <div class="col-lg-6">
+                <input class="search-text" name="keysearch" type="text" style="width: calc(100% - 10px)">
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-6">
+                Tên chủ đầu tư
+            </div>
+            <div class="col-lg-6">
+                <input class="search-text" name="keysearch" type="text" style="width: calc(100% - 10px)">
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-6">
+                Mô tả
+            </div>
+            <div class="col-lg-6">
+                <textarea class="search-text" name="keysearch" type="text"
+                    style="width: calc(100% - 10px);min-height: 100px;"></textarea>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-6">
+
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn" style="background-color: red;color: white;width: 90px;"
+                            (click)="close()">Hủy</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn" style="background-color: green;color: white;width: 90px;"
+                            (click)="close()">Lưu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #content1>
+    <div class="header-popup">
+        <div>
+            <span>Sửa tiểu dự án</span>
+        </div>
+        <div>
+            <span (click)="close()" style="cursor: pointer;font-size: 19px;"><i class="fa fa-times"></i></span>
+        </div>
+    </div>
+    <div class="body-popup">
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-6">
+                Tên tiểu dự án
+            </div>
+            <div class="col-lg-6">
+                <input class="search-text" name="keysearch" type="text" style="width: calc(100% - 10px)">
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-6">
+                Tên chủ đầu tư
+            </div>
+            <div class="col-lg-6">
+                <input class="search-text" name="keysearch" type="text" style="width: calc(100% - 10px)">
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-6">
+                Mô tả
+            </div>
+            <div class="col-lg-6">
+                <textarea class="search-text" name="keysearch" type="text"
+                    style="width: calc(100% - 10px);min-height: 100px;"></textarea>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-6">
+
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn" style="background-color: red;color: white;width: 90px;"
+                            (click)="close()">Hủy</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn" style="background-color: green;color: white;width: 90px;"
+                            (click)="close()">Lưu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

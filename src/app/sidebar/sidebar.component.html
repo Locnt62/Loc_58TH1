@@ -1,0 +1,37 @@
+<div class="container-fluid " style="align-items: center;">
+    <div class="row pt-5">
+        <div class="col-md-4 pt-2 mt-5">
+            <div class=" d-flex Banner-wrapper">
+                <span class="text-position">ToDay<br>Sale</span>
+                <span class="text-number" style="background: #6366c2">45</span>
+            </div>
+            <div class="mt-5 chart-style" style="display: block">
+                <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+                </canvas>
+            </div>
+        </div>
+        <div class="col-md-4 pt-2 mt-5">
+            <div class="d-flex Banner-wrapper" style="background: #585858 !important">
+                <span class="text-position text-white">ToDay<br>Sale</span>
+                <span class="text-number text-white" style="background: #6b6b6b !important">45</span>
+            </div>
+            <div class="mt-5 chart-style" style="display: block">
+                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+                </canvas>
+            </div>
+        </div>
+        <div class="col-md-4 pt-2 mt-5">
+            <div class="d-flex Banner-wrapper" style="background: #E94E01 !important">
+                <span class="text-position">ToDay<br>Sale</span>
+                <span class="text-number" style="background: #E96838">45</span>
+            </div>
+            <div class="mt-5 chart-style" style="display: block">
+                <canvas baseChart [datasets]="radarChartData" [options]="radarChartOptions" [labels]="radarChartLabels" [chartType]="radarChartType" [plugins]='radarChartPlugins' [legend]="radarChartLegend">
+                </canvas>
+            </div>
+        </div>
+    </div>
+    <div *ngFor="let data of chartsData" class="chart row pt-5">
+        <canvas #pr_chart></canvas>
+    </div>
+</div>

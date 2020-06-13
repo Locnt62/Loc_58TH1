@@ -1,0 +1,109 @@
+<div class="container-fluid h-100">
+    <div class="d-none d-sm-block">
+        <div class="row justify-content-center h-70-vh background-image position-relative">
+            <!-- <img src="../../assets/images/bg2.jpg"> -->
+            <div class="background-image-color">
+                <div class="container">
+                    <div class="row justify-content-center pd-146 margin-text-cen-landing">
+                        <div class="col-lg-12 text-center">
+                            <span class="text-landing">CỔNG THÔNG TIN TÌM KIẾM DỰ ÁN CỦA BỘ NÔNG NGHIỆP VÀ PHÁT TRIỂN
+                                NÔNG THÔN</span>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center" style="margin-top: -8px;">
+                        <div class="col-lg-12 text-center ">
+                            <span class="text-sub-landing">Quản lý dự án với hệ thống dữ liệu linh hoạt,
+                                chính xác và đầy đủ nhất Việt Nam bằng ứng dụng công nghệ 4.0</span>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center tab-panel">
+                        <div class="col-lg-12 text-center">
+                            <div class="dropdown-type">
+                                <ul>
+                                    <li *ngFor="let item of listSearch; index as i;">
+                                        <span [ngClass]="{'button_sub': optionlabelindex == i}"
+                                            (click)="getOptionLabel(i)">{{item.name}}</span>
+                                    </li>
+                                    <!-- <li>
+                                        <span>Tất cả</span>
+                                    </li>
+                                    <li>
+                                        <span>Dự án</span>
+                                    </li>
+                                    <li>
+                                        <span>Chủ đầu tư</span>
+                                    </li> -->
+                                </ul>
+                            </div>
+                            <div class="pc-search">
+                                <div>
+                                    <input class="search-text" name="keysearch" type="text"
+                                        placeholder="Tìm kiếm dự án chủ đầu tư..." style="width: calc(100% - 200px)">
+                                </div>
+                                <div>
+                                    <button class="btn search-btn"><i class="fa fa-search"></i> Tìm kiếm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="body-content">
+    <div class="container-fluid h-100">
+        <div class="d-none d-sm-block body-custom">
+            <div class="row">
+                <div class="col-lg-2">
+                    <span class="title">Dự án nổi bật tại</span>
+                </div>
+                <div class="col-lg-2" style=" position: relative;">
+                    <ng-select [items]="dsTinh" [(ngModel)]="selectProvince" (ngModelChange)="SelectTinh()"
+                        bindLabel="TenTinh" bindValue="Id">
+                    </ng-select>
+                </div>
+            </div>
+            <div>
+                <div class="body-item" *ngFor="let item of listItem">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <!-- <img src="../../assets/images/duan1.jpg" width="250" height="200px"> -->
+                            <img src="{{item.UrlImage}}" width="250" height="200px">
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="content-items">
+                                <div class="name-project">
+                                    <span (click)="Redirect(item)" style="cursor: pointer;">{{item.TenDa}}</span>
+                                </div>
+                                <div class="price">
+                                    <span><i class="fas fa-dollar-sign"></i> {{item.Tongdautu}} triệu đồng</span>
+                                </div>
+                            </div>
+                            <div class="address">
+                                <span>{{item.DiaDiem}}</span>
+                            </div>
+                            <hr>
+                            <div class="infor-item">
+                                <div class="name-company">
+                                    <span> <i class="fa fa-briefcase"></i> {{item.Chudautu}}</span>
+                                </div>
+                                <!-- <div class="square">
+                                <i class="fa fa-vector-square"></i> {{item.square}}
+                            </div> -->
+                            </div>
+                            <div class="footer-item">
+                                <div class="status">
+                                    <span>{{item.Tongdautu}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!listItem || listItem.length == 0">
+                <span>Không có dữ liệu!</span>
+            </div>
+        </div>
+    </div>
+</div>

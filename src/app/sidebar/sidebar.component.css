@@ -1,0 +1,34 @@
+p {
+    font-family: Lato;
+}
+
+.Banner-wrapper {
+    justify-content: space-around;
+    height: 100px;
+    align-items: center;
+    background-color: #4f52ba;
+    box-shadow: 5px 10px 8px #888888;
+    color: white
+}
+
+.chart-style {
+    border: 1px solid #888888;
+    padding: 10px;
+    box-shadow: 5px 10px 8px #888888;
+    background: white
+}
+
+.text-position {
+    width: 70%;
+    text-align: center;
+}
+
+.text-number {
+    width: 30%;
+    text-align: center;
+    width: 30%;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    background: cornflowerblue;
+}

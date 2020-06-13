@@ -1,0 +1,108 @@
+<div class="navbar fixed-top-custom d-lg-flex navbar-box-shadow-none" style="height: 65px !important;"
+  [ngClass]="{'navbar-box-shadow-none-1': (!isCheckRouter() && scrollDown) === true}">
+  <div class="container-fluid wrapper-navbar">
+    <a itemprop="url" routerLink="/Landing" routerLinkActive="active" style="margin-top: -9px;"><img
+        src="../../assets/images/logo.png" width="150px" height="90px"></a>
+    <div class="navbar-collapse navbar-custom">
+      <!-- <div> -->
+      <ul itemscope class="navbarr">
+        <li class="nav-link1">
+          <a class="nav-text1" itemprop="url" routerLinkActive="active" routerLink="/ListProjectCustomer">
+            <span class="menu">Dự án</span>
+          </a>
+        </li>
+        <li>
+          <a itemprop="url" routerLinkActive="active" routerLink="/ListInvesterCustomer">
+            <span class="menu">Nhà thầu</span>
+          </a>
+        </li>
+        <!-- <li>
+          <a itemprop="url" routerLink="/home" routerLinkActive="active">
+            <span class="menu">Admin</span>
+          </a>
+        </li> -->
+        <!-- <li>
+                <a itemprop="url" routerLinkActive="active"  routerLink="/home">
+                  <span class="menu">Home</span>
+                </a>
+              </li> -->
+        <li>
+          <button type="button" class="btn btn-login" (click)="open(content)">Đăng nhập</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<ng-template #content>
+  <div class="header-popup">
+    <div style="font-size: 18px; font-weight: 500;">
+      <span>Đăng nhập</span>
+    </div>
+    <div>
+      <span (click)="close()" style="cursor: pointer;font-size: 19px;"><i class="fa fa-times"></i></span>
+    </div>
+  </div>
+  <div class="body-popup">
+    <div class="title">
+      <h2 style="font-size: 18px;">Đăng nhập vào tài khoản của bạn</h2>
+      <p style="font-size: 14px;">Để việc tìm kiếm và lưu trữ dự án một cách hiệu quả nhất !</p>
+    </div>
+
+    <!-- <div style="text-align: center;">
+      <p style="font-size: 14px;">Đăng nhập bằng</p>
+    </div>
+    <div class="login-local">
+      <div class="item-login">
+        <a title="Đăng nhập bằng Facebook" scope="public_profile,email" class="facebook"><i
+            class="icon icon-facebook"></i>Facebook</a>
+      </div>
+      <div class="item-login">
+        <a title="Đăng nhập bằng Facebook" scope="public_profile,email" class="google"><i
+            class="icon icon-facebook"></i>Google</a>
+      </div>
+      <div class="item-login">
+        <a title="Đăng nhập bằng Facebook" scope="public_profile,email" class="sdt"><i class="icon icon-facebook"></i>Số
+          điện thoại</a>
+      </div>
+    </div> -->
+    <div class="form-login">
+      <!-- <span class="other-login">Hoặc</span> -->
+      <form name="form" #form="ngForm" (ngSubmit)="onSubmitForm(form)">
+        <div class="form-group" id="tenKhachHang">
+          <label for="">Tên đăng nhập :</label>
+          <input type=" text" class="form-control" [(ngModel)]="form.tenKhachHang" name="name" #name="ngModel" required
+            placeholder="Điền tên của bạn " id="input-tenKhachHang">
+          <!-- <div class="text-input">
+            <span>{{form.tenKhachHang}}</span>
+          </div> -->
+          <small class="text text-danger" *ngIf="name.invalid && (name.dirty || name.touched)">Họ Tên bắt buộc phải
+            có</small>
+        </div>
+        <div class="form-group">
+          <label>Mật khẩu:</label>
+          <input type="password" class="form-control" [(ngModel)]="form.soDienThoai" name="soDienThoai"
+            #soDienThoai="ngModel" pattern="[0-9]{3}" placeholder="Điền mật khẩu" required>
+          <small class="text text-danger" *ngIf="soDienThoai.invalid && (soDienThoai.dirty || soDienThoai.touched)">Mật
+            khẩu bắt buộc phải có 3 số</small>
+          <!-- <div class="text-input">
+            <span>{{form.soDienThoai}}</span>
+          </div> -->
+        </div>
+        <div class="remember">
+          <div>
+            <span>Ghi nhớ</span>
+          </div>
+          <div>
+            <span style="color: #4b59ff;">Quên mật khẩu ?</span>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-submit" [disabled]="form.invalid"
+          style="background-color: #4b59ff;color: white;width: 100%;">Đăng nhập</button>
+        <div class="overlay" *ngIf="!check" id="overlay">
+          <i class="fa fa-spinner fa-spin spin-big" style="font: 20px;"></i>
+          <span style="color: black; font-size: 30px">Loading</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>

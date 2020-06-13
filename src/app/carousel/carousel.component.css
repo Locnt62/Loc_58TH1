@@ -1,0 +1,41 @@
+body {
+    margin-bottom: 50px;
+}
+
+.text-left {
+    margin-bottom: 50px;
+    font-size: 20px
+}
+
+.text-center {
+    margin-bottom: 50px;
+    font-size: 20px
+}
+
+.text-right {
+    margin-bottom: 50px;
+    font-size: 20px
+}
+
+.text-heading {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.text-heading h4 {
+    margin-top: 20px;
+}
+
+hr {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+footer {
+    justify-content: space-between;
+    display: flex;
+}
+.img-slide{
+    height: 60vh;
+}
