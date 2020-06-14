@@ -15,6 +15,17 @@
                         (ngModelChange)="TextTenCDT()" style="width: calc(100% - 60px)"></div>
                 </div>
                 <div class="row" style="padding-bottom: 20px;">
+                    <div class="col-lg-6" style="font-weight: 500;">Mã chủ đầu tư</div>
+                    <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="MaCDT"
+                        (ngModelChange)="TextMaCDT()" style="width: calc(100% - 60px)"></div>
+                </div>
+                <div class="row" style="padding-bottom: 20px;">
+                    <div class="col-lg-6" style="font-weight: 500;">Loại chủ đầu tư</div>
+                    <div class="col-lg-6" >  <ng-select [items]="listtypeCDT" [(ngModel)]="TypeCDT" (ngModelChange)="SelectTypeCDT()"
+                        bindLabel="Value" bindValue="Id" style="width: calc(100% - 60px)">
+                    </ng-select></div>
+                </div>
+                <div class="row" style="padding-bottom: 20px;">
                     <div class="col-lg-6" style="font-weight: 500;">Địa chỉ</div>
                     <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="DiaChi"
                         (ngModelChange)="TextDiaChi()" style="width: calc(100% - 60px)"></div>
@@ -55,17 +66,17 @@
             <div class="body-title" style="line-height: 30px;">
                 <div class="row" style="padding-bottom: 20px;">
                     <div class="col-lg-6" style="font-weight: 500;">Họ và tên</div>
-                    <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="Tennguoinhap"
+                    <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="Tennguoinhap" [disabled]="dynamicVariable"
                         (ngModelChange)="TextTenNN()" style="width: calc(100% - 60px)"></div>
                 </div>
                 <div class="row" style="padding-bottom: 20px;">
                     <div class="col-lg-6" style="font-weight: 500;">Số điện thoại</div>
-                    <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="SDTNguoinhap"
+                    <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="SDTNguoinhap" [disabled]="dynamicVariable"
                         (ngModelChange)="TextSDTNN()" style="width: calc(100% - 60px)"></div>
                 </div>
                 <div class="row" style="padding-bottom: 20px;">
                     <div class="col-lg-6" style="font-weight: 500;">Email</div>
-                    <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="EmailNN"
+                    <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="EmailNN" [disabled]="dynamicVariable"
                         (ngModelChange)="TextEmailNN()" style="width: calc(100% - 60px)"></div>
                 </div>
                 <!-- <div class="row" style="padding-bottom: 20px;">
@@ -290,7 +301,7 @@
         <div class="col-lg-3" style="display: flex;justify-content: space-evenly;">
             <button class="btn" style="background-color: red;color: white;width: 90px;"
                 (click)="redirect()">Hủy</button>
-            <button class="btn" style="background-color: green;color: white;width: 90px;">Lưu</button>
+            <button class="btn" style="background-color: green;color: white;width: 90px;" (click)="Save()">Lưu</button>
         </div>
     </div>
 </div>

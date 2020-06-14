@@ -1,0 +1,272 @@
+<div class="header-tongquan">
+    <span style="font-size: 17px;color: #25549d;font-weight: 600;">Tổng quan</span><br>
+    <span style="color:#acacac; font-size: 14px;">Trang chủ > <a>Quản lý người dùng</a></span>
+    <div class="row optionselect">
+        <div class="col-lg-5">
+            <input class="search-text" name="keysearch" type="text" placeholder="Nhập tên người đùng.."
+                [(ngModel)]="SearchTen" (ngModelChange)="TextSearchTen()" style="width: calc(100% - 10px)">
+        </div>
+        <div class="col-lg-5">
+            <ng-select [items]="listtypeCDT" [(ngModel)]="TypeCDT" (ngModelChange)="SelectTypeCDT()" bindLabel="Value"
+                bindValue="Id" style="width: calc(100% - 30px)" placeholder="Nhóm người dùng">
+            </ng-select>
+        </div>
+        <!-- <div class="col-lg-2">
+            <button class="btn" style="background-color: #289b28;width: 100px;color: white;height: 38px;"
+                (click)="Themmoi()">Thêm mới
+            </button>
+        </div> -->
+    </div>
+    <div class="row" style="padding-top: 20px;">
+        <div class="col-lg-9">
+        </div>
+        <div class="col-lg-2">
+            <!-- <div *ngIf="!Checkrole() === true"> -->
+                <button class="btn" style="background-color: #289b28;width: 100px;color: white;height: 38px;"
+                    (click)="open(content)">Thêm mới
+                </button>
+            <!-- </div> -->
+        </div>
+    </div>
+</div>
+<div class="body-tongquan">
+    <div class="table-price">
+        <table>
+            <thead>
+                <tr class="header_table">
+                    <td style="padding-left: 20px;">STT</td>
+                    <td style="padding-left: 20px;">Tên người dùng</td>
+                    <!-- <td style="padding-left: 20px;">Số điện thoại</td> -->
+                    <td style="padding-left: 20px;">Phân quyền</td>
+                    <td style="padding-left: 20px;">Email</td>
+                    <td style="padding-left: 20px;">Sửa</td>
+                    <td style="padding-left: 20px;">Xóa</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listuser | paginate: { itemsPerPage: 6, currentPage: p }">
+                    <td style="padding-left: 20px;">
+                    </td>
+                    <td style="padding-left: 20px;color: #be5e26;">
+                        <div (click)="Redirect(item)" style="cursor: pointer;">{{item.Username}}</div>
+                    </td>
+                    <!-- <td style="padding-left: 20px;">{{item.Diachi}}</td> -->
+                    <td style="padding-left: 20px;">{{item.RoleName}}</td>
+                    <td style="padding-left: 20px;">{{item.Mail}}</td>
+                    <td style="padding-left: 20px;">
+                        <div (click)="open(content1); Sua(item)" style="cursor: pointer;"><i class="fa fa-edit"></i>
+                        </div>
+                    </td>
+                    <td style="padding-left: 20px;">
+                        <div (click)="Xoa(item)">
+                            <span style="cursor: pointer;"><i class="fa fa-trash"></i></span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pagination">
+            <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel="">
+            </pagination-controls>
+        </div><br>
+
+    </div>
+</div>
+<!-- <div *ngIf="!Checkrole() === true">Hello</div> -->
+<div class="footer"></div>
+
+
+<ng-template #content>
+    <div class="header-popup">
+        <div>
+            <span> Thêm mới tài khoản</span>
+        </div>
+        <div>
+            <span (click)="close()" style="cursor: pointer;font-size: 19px;"><i class="fa fa-times"></i></span>
+        </div>
+    </div>
+    <div class="body-popup">
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4" style="font-weight: 500;">
+                Firstname
+            </div>
+            <div class="col-lg-8">
+                <input class="search-text" name="keysearch" type="text" [(ngModel)]="ThemFName"
+                    (ngModelChange)="TextThemFName()" style="width: calc(100% - 40px)">
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4" style="font-weight: 500;">
+                Lastname
+            </div>
+            <div class="col-lg-8">
+                <input class="search-text" name="keysearch" type="text" [(ngModel)]="ThemLName"
+                    (ngModelChange)="TextThemLName()" style="width: calc(100% - 40px)">
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4" style="font-weight: 500;">
+                Tên tài khoản
+            </div>
+            <div class="col-lg-8">
+                <input class="search-text" name="keysearch" type="text" [(ngModel)]="ThemTK"
+                    (ngModelChange)="TextThemTK()" style="width: calc(100% - 40px)">
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4" style="font-weight: 500;">
+                Quyền hạn
+            </div>
+            <div class="col-lg-8">
+                <ng-select [items]="listquyen" [(ngModel)]="ThemQuyen" (ngModelChange)="SelectThemQuyen()"
+                    bindLabel="Value" bindValue="Id" style="width: calc(100% - 40px)">
+                </ng-select>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4" style="font-weight: 500;">
+                Chủ đầu tư
+            </div>
+            <div class="col-lg-8">
+                <ng-select [items]="listInvest" [(ngModel)]="ThemCDT" (ngModelChange)="SelectThemCDT()"
+                    bindLabel="Tenchudautu" bindValue="Id" style="width: calc(100% - 40px)">
+                </ng-select>
+            </div>
+        </div>
+
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4" style="font-weight: 500;">
+                Email
+            </div>
+            <div class="col-lg-8">
+                <input class="search-text" name="keysearch" type="text" [(ngModel)]="ThemEmail"
+                    (ngModelChange)="TextThemEmail()" style="width: calc(100% - 40px)">
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4" style="font-weight: 500;">
+                Mật khẩu
+            </div>
+            <div class="col-lg-8">
+                <input class="search-text" name="keysearch" type="text" [(ngModel)]="ThemMK"
+                    (ngModelChange)="TextThemMK()" style="width: calc(100% - 40px)">
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-5">
+
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn" style="background-color: red;color: white;width: 90px;"
+                            (click)="close()">Hủy</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn" style="background-color: green;color: white;width: 90px;"
+                            (click)="Them()">Lưu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ng-template>
+
+
+<ng-template #content1>
+    <div class="header-popup">
+        <div>
+            <span>Sửa mới tài khoản</span>
+        </div>
+        <div>
+            <span (click)="close()" style="cursor: pointer;font-size: 19px;"><i class="fa fa-times"></i></span>
+        </div>
+    </div>
+    <div class="body-popup">
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4" style="font-weight: 500;">
+                Firstname
+            </div>
+            <div class="col-lg-8">
+                <input class="search-text" name="keysearch" type="text" [(ngModel)]="SuaFName"
+                    (ngModelChange)="TextSuaFName()" style="width: calc(100% - 40px)">
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4" style="font-weight: 500;">
+                Lastname
+            </div>
+            <div class="col-lg-8">
+                <input class="search-text" name="keysearch" type="text" [(ngModel)]="SuaLName"
+                    (ngModelChange)="TextSuaLName()" style="width: calc(100% - 40px)">
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4" style="font-weight: 500;">
+                Tên tài khoản
+            </div>
+            <div class="col-lg-8">
+                <input class="search-text" name="keysearch" type="text" [(ngModel)]="SuaTK"
+                    (ngModelChange)="TextSuaTK()" style="width: calc(100% - 40px)">
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4" style="font-weight: 500;">
+                Quyền hạn
+            </div>
+            <div class="col-lg-8">
+                <ng-select [items]="listquyen" [(ngModel)]="SuaQuyen" (ngModelChange)="SelectSuaQuyen()"
+                    bindLabel="Value" bindValue="Id" style="width: calc(100% - 40px)">
+                </ng-select>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4" style="font-weight: 500;">
+                Chủ đầu tư
+            </div>
+            <div class="col-lg-8">
+                <ng-select [items]="listInvest" [(ngModel)]="SuaCDT" (ngModelChange)="SelectSuaCDT()"
+                    bindLabel="Tenchudautu" bindValue="Id" style="width: calc(100% - 40px)">
+                </ng-select>
+            </div>
+        </div>
+
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4" style="font-weight: 500;">
+                Email
+            </div>
+            <div class="col-lg-8">
+                <input class="search-text" name="keysearch" type="text" [(ngModel)]="SuaEmail"
+                    (ngModelChange)="TextSuaEmail()" style="width: calc(100% - 40px)">
+            </div>
+        </div>
+        <!-- <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4" style="font-weight: 500;">
+                Mật khẩu
+            </div>
+            <div class="col-lg-8">
+                <input class="search-text" name="keysearch" type="text" [(ngModel)]="SuaMK"
+                    (ngModelChange)="TextSuaMK()" style="width: calc(100% - 40px)">
+            </div>
+        </div> -->
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-5">
+
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn" style="background-color: red;color: white;width: 90px;"
+                            (click)="close()">Hủy</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn" style="background-color: green;color: white;width: 90px;"
+                            (click)="Edit()">Lưu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ng-template>

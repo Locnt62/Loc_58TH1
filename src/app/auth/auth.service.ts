@@ -23,6 +23,16 @@ export class AuthService {
   getToken() {
     return localStorage.getItem('currentUser');
   }
+
+  getId(){
+    return localStorage.getItem('idUser');
+  }
+  getRole(){
+    return localStorage.getItem('Role');
+  }
+  getIdCDT(){
+    return localStorage.getItem('IdCDT');
+  }
   check(): boolean {
     return localStorage.getItem('currentUser') ? true : false;
   }
@@ -62,6 +72,9 @@ export class AuthService {
         if (user['token']) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', user['token']);
+          localStorage.setItem('idUser', user['UserId']);
+          localStorage.setItem('Role', user['Role']);
+          localStorage.setItem('IdCDT', user['IdCDT']);
           // localStorage.removeItem('currentUser');
           console.log(user['token'])
         }
@@ -91,6 +104,9 @@ export class AuthService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('idUser');
+    localStorage.removeItem('Role');
+    localStorage.removeItem('IdCDT');
   }
 }
 

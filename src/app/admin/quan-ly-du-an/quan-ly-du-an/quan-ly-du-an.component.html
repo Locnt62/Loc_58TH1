@@ -1,7 +1,7 @@
 <div *ngIf="!seg">
     <div class="header-tongquan">
         <span style="font-size: 17px;color: #25549d;font-weight: 600;">Quản lý dự án</span><br>
-        <span style="color:#acacac; font-size: 14px;">Trang chủ > <a>Thêm mới dự án</a></span>
+        <span style="color:#acacac; font-size: 14px;">Trang chủ > <a>Quản lý dự án</a></span>
         <div class="row optionselect">
             <div class="col-lg-5">
                 <input class="search-text" name="keysearch" type="text" placeholder="Nhập tên dự án.."
@@ -325,10 +325,14 @@
                                             <td style="padding-left: 20px;">{{item.Mota}}
                                             </td>
                                             <td style="padding-left: 20px;">
-                                                <div (click)="open(content1)" style="cursor: pointer;"><i class="fa fa-edit"></i></div>
+                                                <div (click)="open(content1); Sua(item)" style="cursor: pointer;"><i
+                                                        class="fa fa-edit"></i></div>
+
+                                                <!-- <div (click)="variable == true ? open(content1) : " style="cursor: pointer;"><i
+                                                        class="fa fa-edit"></i></div> -->
                                             </td>
                                             <td style="padding-left: 20px;">
-                                                <div>
+                                                <div (click)="Xoa(item)">
                                                     <span style="cursor: pointer;"><i class="fa fa-trash"></i></span>
                                                 </div>
                                             </td>
@@ -703,7 +707,17 @@
                 Tên tiểu dự án
             </div>
             <div class="col-lg-6">
-                <input class="search-text" name="keysearch" type="text" style="width: calc(100% - 10px)">
+                <input class="search-text" name="keysearch" type="text" style="width: calc(100% - 10px)"
+                    [(ngModel)]="TenTDA" (ngModelChange)="TextTDA()">
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-6">
+                Mã tiểu dự án
+            </div>
+            <div class="col-lg-6">
+                <input class="search-text" name="keysearch" type="text" style="width: calc(100% - 10px)"
+                    [(ngModel)]="MaTDA" (ngModelChange)="TextMaTDA()">
             </div>
         </div>
         <div class="row" style="padding-bottom: 20px;">
@@ -711,7 +725,18 @@
                 Tên chủ đầu tư
             </div>
             <div class="col-lg-6">
-                <input class="search-text" name="keysearch" type="text" style="width: calc(100% - 10px)">
+                <ng-select [items]="chudautu" [(ngModel)]="CDT" (ngModelChange)="ChonCDT()" bindLabel="Tenchudautu"
+                    bindValue="Id" style="width: calc(100% - 10px)">
+                </ng-select>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-6">
+                Địa điểm kho bạc
+            </div>
+            <div class="col-lg-6">
+                <input class="search-text" name="keysearch" type="text" style="width: calc(100% - 10px)"
+                    [(ngModel)]="Diadiemkhobac" (ngModelChange)="TextDDKB()">
             </div>
         </div>
         <div class="row" style="padding-bottom: 20px;">
@@ -719,7 +744,7 @@
                 Mô tả
             </div>
             <div class="col-lg-6">
-                <textarea class="search-text" name="keysearch" type="text"
+                <textarea class="search-text" name="keysearch" type="text" [(ngModel)]="MT" (ngModelChange)="TextMT()"
                     style="width: calc(100% - 10px);min-height: 100px;"></textarea>
             </div>
         </div>
@@ -735,7 +760,7 @@
                     </div>
                     <div class="col-md-6">
                         <button class="btn" style="background-color: green;color: white;width: 90px;"
-                            (click)="close()">Lưu</button>
+                            (click)="ThemTDA()">Lưu</button>
                     </div>
                 </div>
             </div>
@@ -759,7 +784,17 @@
                 Tên tiểu dự án
             </div>
             <div class="col-lg-6">
-                <input class="search-text" name="keysearch" type="text" style="width: calc(100% - 10px)">
+                <input class="search-text" name="keysearch" type="text" style="width: calc(100% - 10px)"
+                    [(ngModel)]="SuaTenTDA" (ngModelChange)="TextSuaTenTDA()">
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-6">
+                Mã tiểu dự án
+            </div>
+            <div class="col-lg-6">
+                <input class="search-text" name="keysearch" type="text" style="width: calc(100% - 10px)"  [disabled]="dynamicVariable"
+                    [(ngModel)]="SuaMaTDA" (ngModelChange)="TextSuaMaTDA()">
             </div>
         </div>
         <div class="row" style="padding-bottom: 20px;">
@@ -767,7 +802,18 @@
                 Tên chủ đầu tư
             </div>
             <div class="col-lg-6">
-                <input class="search-text" name="keysearch" type="text" style="width: calc(100% - 10px)">
+                <ng-select [items]="chudautu" [(ngModel)]="SuaCDT" (ngModelChange)="TextSuaCDT()"
+                    bindLabel="Tenchudautu" bindValue="Id" style="width: calc(100% - 10px)">
+                </ng-select>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-6">
+                Địa điểm kho bạc
+            </div>
+            <div class="col-lg-6">
+                <input class="search-text" name="keysearch" type="text" style="width: calc(100% - 10px)"
+                    [(ngModel)]="SuaDiadiemkhobac" (ngModelChange)="TextSuaDDKB()">
             </div>
         </div>
         <div class="row" style="padding-bottom: 20px;">
@@ -775,8 +821,8 @@
                 Mô tả
             </div>
             <div class="col-lg-6">
-                <textarea class="search-text" name="keysearch" type="text"
-                    style="width: calc(100% - 10px);min-height: 100px;"></textarea>
+                <textarea class="search-text" name="keysearch" type="text" [(ngModel)]="SuaMT"
+                    (ngModelChange)="TextSuaMT()" style="width: calc(100% - 10px);min-height: 100px;"></textarea>
             </div>
         </div>
         <div class="row" style="padding-bottom: 20px;">
@@ -791,7 +837,7 @@
                     </div>
                     <div class="col-md-6">
                         <button class="btn" style="background-color: green;color: white;width: 90px;"
-                            (click)="close()">Lưu</button>
+                            (click)="LuuSua()">Lưu</button>
                     </div>
                 </div>
             </div>

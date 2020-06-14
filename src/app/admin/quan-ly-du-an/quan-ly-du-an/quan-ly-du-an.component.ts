@@ -41,9 +41,27 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
   Mota: any;
   listInvest: any;
   maduan: any;
-  Tinh:any;
+  Tinh: any;
 
   dynamicVariable: boolean
+
+  //tieu du an
+  TenTDA: any;
+  MaTDA: any;
+  Diadiemkhobac: any;
+  MT: any;
+  idduan: any;
+  CDT: any;
+  //sua tieu du an
+  SuaTenTDA: any;
+  SuaMaTDA: any;
+  SuaCDT: any;
+  SuaDiadiemkhobac: any;
+  SuaMT: any;
+
+  variable: boolean
+
+
 
 
   constructor(private activeRoute: ActivatedRoute, private modalService: NgbModal, private router: Router, private searchHttpService: SearchHttpService,) {
@@ -60,6 +78,7 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
+    this.variable = true;
     this.activeRoute.queryParams.subscribe(params => {
       console.log('params');
       // console.log(params.name);
@@ -108,6 +127,7 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
       keyboard: false,
       backdrop: 'static'
     });
+    this.variable = false
   }
   close() {
     this.modalRef.close();
@@ -147,7 +167,7 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
       this.NNoithuchien = this.detailDA.DiaDiem;
       this.QDBD = this.detailDA.Chudautu;
       this.TMDT = this.detailDA.Tongdautu;
-      this.Image = this.detailDA.Urlmap;
+      this.Image = this.detailDA.Urlfile;
       this.TGTC = this.detailDA.Thoigianthicong;
       this.TGHT = this.detailDA.DateComplete;
       this.htql = this.detailDA.Idhinhthucquanli
@@ -157,7 +177,7 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
       this.QDBD = this.detailDA.Idchudautu
       this.loainguonvon = this.detailDA.Idloainguonvon
       this.Tinh = this.detailDA.idtinh
-
+      this.idduan = this.detailDA.Id;
 
     })
   }
@@ -223,7 +243,7 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
     console.log(this.loainguonvon)
   }
 
-  ChonTinh(){
+  ChonTinh() {
     console.log(this.Tinh)
   }
 
@@ -279,7 +299,9 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
   TextmaDA() {
     console.log(this.maduan)
   }
-
+  ChonCDT() {
+    console.log(this.CDT)
+  }
 
   //sửa
   // Sửa() {
@@ -299,8 +321,8 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
 
   // }
 
-  ThemMoi(){
-       this.searchHttpService.SuaDA(this.maduan, this.Khobac, this.QDBD, this.tenduan, this.htql, this.loainguonvon, this.NNoithuchien, this.QDDT, this.Ngaypheduyet, this.TMDT, this.Mota, this.TGTC, this.TGHT, this.Image, this.Tinh).subscribe(dt => {
+  ThemMoi() {
+    this.searchHttpService.SuaDA(this.maduan, this.Khobac, this.QDBD, this.tenduan, this.htql, this.loainguonvon, this.NNoithuchien, this.QDDT, this.Ngaypheduyet, this.TMDT, this.Mota, this.TGTC, this.TGHT, this.Image, this.Tinh).subscribe(dt => {
       console.log('ket qua sau khi sửa');
       console.log(dt)
       console.log(dt.Status)
@@ -313,6 +335,89 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
       }
     })
 
+  }
+
+
+  //tieu du an
+  TextTDA() {
+    console.log(this.TenTDA)
+  }
+  TextMaTDA() {
+    console.log(this.MaTDA)
+  }
+  TextDDKB() {
+    console.log(this.Diadiemkhobac)
+  }
+  TextMT() {
+    console.log(this.MT)
+  }
+
+  ThemTDA() {
+    this.searchHttpService.ThemTDA(this.idduan, this.CDT, this.MaTDA, this.TenTDA, this.Diadiemkhobac, this.MT).subscribe(dt => {
+      console.log(dt)
+      if (dt.Status === 1) {
+        this.close()
+        alert(dt.Messege)
+        this.ChitietDA(this.seg)
+      } else if (dt.Status === 0) {
+        alert(dt.Messege)
+      }
+    })
+  }
+  //sua
+  TextSuaTenTDA() {
+    console.log(this.SuaTenTDA)
+  }
+  TextSuaMaTDA() {
+    console.log(this.SuaMaTDA)
+  }
+  TextSuaCDT() {
+    console.log(this.SuaCDT)
+  }
+  TextSuaDDKB() {
+    console.log(this.SuaDiadiemkhobac)
+  }
+  TextSuaMT() {
+    console.log(this.SuaMT)
+  }
+  Sua(item) {
+    console.log('item sua');
+    console.log(item)
+
+    // this.SuaMaTDA = item.
+    this.searchHttpService.DetailTDA(item.Id).subscribe(dt =>{
+      console.log('chi tiế');
+      console.log(dt)
+      this.SuaTenTDA = dt.Tentieuduan;
+
+      this.SuaMaTDA = dt.Matieuduan;
+      this.SuaCDT = dt.MaCDT;
+      this.SuaDiadiemkhobac = dt.Diadiemkhobac;
+      this.SuaMT = dt.Mota;
+    })
+  }
+
+  LuuSua(){
+    this.searchHttpService.SưaTDA(this.idduan, this.SuaCDT, this.SuaMaTDA, this.SuaTenTDA, this.SuaDiadiemkhobac, this.SuaMT).subscribe(dt =>{
+      console.log(dt);
+      if (dt.Status === 1) {
+        this.close()
+        alert(dt.Messege)
+        this.ChitietDA(this.seg)
+      } else if (dt.Status === 0) {
+        alert(dt.Messege)
+      }
+    })
+  }
+  Xoa(item) {
+    this.searchHttpService.XoaTDA(item.Id).subscribe(dt => {
+      if (dt.Status === 1) {
+        alert(dt.Messege)
+        this.ChitietDA(this.seg)
+      } else if (dt.Status === 0) {
+        alert(dt.Messege)
+      }
+    })
   }
 
 

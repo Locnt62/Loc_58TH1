@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchHttpService } from 'src/app/http/test-api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chi-tiet-chu-dau-tu',
@@ -7,48 +8,81 @@ import { SearchHttpService } from 'src/app/http/test-api';
   styleUrls: ['./chi-tiet-chu-dau-tu.component.css']
 })
 export class ChiTietChuDauTuComponent implements OnInit {
-  TenCDT:any;
+  TenCDT: any;
   DiaChi: any;
   website: any;
   SDT: any;
-  Email:any;
-  Fax:any
-  Tennguoinhap:any;
-  SDTNguoinhap:any;
-  EmailNN:any;
+  Email: any;
+  Fax: any
+  Tennguoinhap: any;
+  SDTNguoinhap: any;
+  EmailNN: any;
+  listtypeCDT: any;
+  MaCDT: any
+  TypeCDT:any
 
-  constructor(private searchHttpService: SearchHttpService,) { }
+  dynamicVariable: boolean
+  constructor(private searchHttpService: SearchHttpService,private router: Router,) { }
 
   ngOnInit() {
-    
+    this.searchHttpService.LoaiCDT().subscribe(dt => {
+      console.log('loai chu dau tu');
+      console.log(dt)
+      this.listtypeCDT = dt
+    })
+    this.dynamicVariable = true
+
   }
 
-  TextTenCDT(){
+  TextTenCDT() {
     console.log(this.TenCDT)
   }
-  TextDiaChi(){
+  TextDiaChi() {
     console.log(this.DiaChi)
   }
-  Textwebsite(){
+  Textwebsite() {
     console.log(this.website)
   }
-  TextSDT(){
+  TextSDT() {
     console.log(this.SDT)
   }
-  TextFax(){
+  TextFax() {
     console.log(this.Fax)
   }
-  TextEmail(){
+  TextEmail() {
     console.log(this.Email)
   }
-  TextTenNN(){
+  TextTenNN() {
     console.log(this.Tennguoinhap)
   }
-  TextSDTNN(){
+  TextSDTNN() {
     console.log(this.SDTNguoinhap)
   }
-  TextEmailNN(){
+  TextEmailNN() {
     console.log(this.EmailNN)
+  }
+  TextMaCDT() {
+    console.log(this.MaCDT)
+
+  }
+
+  SelectTypeCDT(){
+    console.log(this.TypeCDT)
+  }
+
+  redirect(){
+    this.router.navigate(['/QuanlyChuDauTu']);
+  }
+  Save(){
+    this.searchHttpService.ThemCDT(this.MaCDT, this.TenCDT,'',this.DiaChi, this.website, this.SDT, this.Fax, this.Email,'', this.TypeCDT).subscribe(dt =>{
+      console.log(dt)
+      if(dt.Status === 1){
+        alert(dt.Messege)
+        this.router.navigate(['/QuanlyChuDauTu'])
+      }else if(dt.Status === 0){
+        alert(dt.Messege)
+      }
+    })
   }
 
 

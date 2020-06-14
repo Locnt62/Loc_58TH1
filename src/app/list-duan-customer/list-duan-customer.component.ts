@@ -166,14 +166,40 @@ export class ListDuanCustomerComponent implements OnInit, AfterViewInit {
   }
 
   getChitiet(id) {
-    this.searchHttpService.detDuanDetail(id).subscribe(ite => {
+    // this.searchHttpService.detDuanDetail(id).subscribe(ite => {
+    //   console.log(' this.chitietduan');
+    //   // console.log(ite)
+    //   this.chitietduan = ite
+    //   console.log(this.chitietduan)
+    //   //lay du lieu
+    //   if (this.chitietduan) {
+    //     this.maDA = this.chitietduan.Maduan;
+    //     console.log(this.maDA)
+    //     this.DateComplete = this.chitietduan.DateComplete;
+    //     this.DiaDiem = this.chitietduan.DiaDiem;
+    //     this.Diadiemkhobac = this.chitietduan.Diadiemkhobac;
+    //     this.Hinhthucquanli = this.chitietduan.Hinhthucquanli
+    //     this.Loaivon = this.chitietduan.Loaivon;
+    //     this.NgayPheDuyet = this.chitietduan.NgayPheDuyet;
+    //     this.QuyetDinh = this.chitietduan.QuyetDinh;
+    //     this.TenDa = this.chitietduan.TenDa;
+    //     this.Thoigianthicong = this.chitietduan.Thoigianthicong;
+    //     this.Tongdautu = this.chitietduan.Tongdautu;
+    //     this.UrlImage = this.chitietduan.UrlImage;
+    //     this.listtieuduan = this.chitietduan.listtieuduan;
+    //     console.log('this.listtieuduan')
+    //     console.log(this.listtieuduan)
+    //   }
+    // })
+
+    this.searchHttpService.getListDAadminDetail(id).subscribe(ite =>  {
       console.log(' this.chitietduan');
       // console.log(ite)
-      this.chitietduan = ite
+      this.chitietduan = ite[0]
       console.log(this.chitietduan)
       //lay du lieu
       if (this.chitietduan) {
-        this.maDA = this.chitietduan.Code;
+        this.maDA = this.chitietduan.Maduan;
         console.log(this.maDA)
         this.DateComplete = this.chitietduan.DateComplete;
         this.DiaDiem = this.chitietduan.DiaDiem;
@@ -185,7 +211,7 @@ export class ListDuanCustomerComponent implements OnInit, AfterViewInit {
         this.TenDa = this.chitietduan.TenDa;
         this.Thoigianthicong = this.chitietduan.Thoigianthicong;
         this.Tongdautu = this.chitietduan.Tongdautu;
-        this.UrlImage = this.chitietduan.UrlImage;
+        this.UrlImage = this.chitietduan.Urlfile;
         this.listtieuduan = this.chitietduan.listtieuduan;
         console.log('this.listtieuduan')
         console.log(this.listtieuduan)

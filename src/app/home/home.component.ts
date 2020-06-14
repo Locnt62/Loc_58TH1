@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { SearchHttpService } from '../http/test-api';
 // import { ApexAxisChartSeries, ApexChart, ApexXAxis, ApexTitleSubtitle, ChartComponent } from 'ng-apexcharts';
 declare var ApexCharts: any;
 
@@ -18,7 +19,11 @@ export class HomeComponent implements OnInit {
   chart4: any;
   chart1: any;
   chart_1: any;
-  constructor() { }
+  countda: any;
+  countcdt: any;
+  counttda: any;
+  countuser: any;
+  constructor( private searchHttpService: SearchHttpService, ) { }
 
   ngOnInit() {
     this.chartOptions = {
@@ -41,6 +46,10 @@ export class HomeComponent implements OnInit {
     };
     // this.route.fragment.subscribe(fragment => { this.fragment = fragment; });
     this.Initchart()
+    this.Countda()
+    this.CountTDA()
+    this.CountUser()
+ this.CountCDT()
   }
 
 
@@ -198,6 +207,38 @@ export class HomeComponent implements OnInit {
     this.chart_1 = new ApexCharts(document.querySelector("#chartTuongTac"), this.chart1);
     this.chart_1.render();
   }
+
+  
+  Countda(){
+    this.searchHttpService.Count(1).subscribe(dt =>{
+      console.log('count dự án');
+      this.countda = dt
+      console.log(this.countda)
+    })
+  }
+
+  CountCDT(){
+    this.searchHttpService.Count(2).subscribe(dt =>{
+      console.log('count chu dau tu');
+      this.countcdt = dt
+      console.log(this.countcdt)
+    })
+  }
+  CountTDA(){
+    this.searchHttpService.Count(3).subscribe(dt =>{
+      console.log('count tieu du an');
+      this.counttda = dt
+      console.log(this.counttda)
+    })
+  }
+  CountUser(){
+    this.searchHttpService.Count(4).subscribe(dt =>{
+      console.log('count user');
+      this.countuser = dt
+      console.log(this.countuser)
+    })
+  }
+
   ngAfterViewChecked(): void {
     try {
       if (this.fragment) {

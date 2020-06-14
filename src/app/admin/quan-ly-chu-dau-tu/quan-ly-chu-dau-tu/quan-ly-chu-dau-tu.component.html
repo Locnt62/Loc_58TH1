@@ -5,11 +5,13 @@
         <span style="color:#acacac; font-size: 14px;">Trang chủ > <a>Chủ đầu tư</a></span>
         <div class="row optionselect">
             <div class="col-lg-5">
-                <input class="search-text" name="keysearch" type="text" placeholder="Nhập tên dự án, mã dự án..."
-                    style="width: calc(100% - 10px)">
+                <input class="search-text" name="keysearch" type="text"
+                    placeholder="Nhập tên chủ đầu tư, số điện thoại.." [(ngModel)]="SearchCDT"
+                    (ngModelChange)="TextSearchCDT()" style="width: calc(100% - 10px)">
             </div>
             <div class="col-lg-2">
-                <button class="btn" style="background-color: #289b28;width: 100px;color: white;height: 38px;" (click)="Themmoi()">Thêm mới
+                <button class="btn" style="background-color: #289b28;width: 100px;color: white;height: 38px;"
+                    (click)="Themmoi()">Thêm mới
                 </button>
             </div>
         </div>
@@ -24,18 +26,25 @@
                         <td style="padding-left: 20px;">Địa chỉ</td>
                         <td style="padding-left: 20px;">Email</td>
                         <td style="padding-left: 20px;">Số điện thoại</td>
+                        <td style="padding-left: 20px;">Xóa</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of listInvest | paginate: { itemsPerPage: 6, currentPage: p }">
-                        <td style="padding-left: 20px;color: #be5e26;">
-                        </td>
                         <td style="padding-left: 20px;">
-                            <div (click)="Redirect(item)" style="cursor: pointer;">{{item.name}}</div>
                         </td>
-                        <td style="padding-left: 20px;">{{item.address}}</td>
-                        <td style="padding-left: 20px;">{{item.email}}</td>
-                        <td style="padding-left: 20px;">{{item.sdt}}</td>
+                        <td style="padding-left: 20px;color: #be5e26;">
+                            <div (click)="Redirect(item)" style="cursor: pointer;">{{item.Tenchudautu}}</div>
+                        </td>
+                        <td style="padding-left: 20px;">{{item.Diachi}}</td>
+                        <td style="padding-left: 20px;">{{item.Email}}</td>
+                        <td style="padding-left: 20px;">{{item.Phone}}</td>
+                        <td style="padding-left: 20px;"><span style="cursor: pointer;">
+                                <div (click)="Delete(item)">
+                                    <i class="fa fa-trash"></i>
+                                </div>
+                            </span>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -62,38 +71,53 @@
                 <div class="body-title" style="line-height: 30px;">
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-lg-6" style="font-weight: 500;">Tên chủ đầu tư</div>
-                        <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="TenCDT"
-                            (ngModelChange)="TextTenCDT()" style="width: calc(100% - 60px)"></div>
+                        <div class="col-lg-6"><input class="search-text" name="keysearch" type="text"
+                                [(ngModel)]="TenCDT" (ngModelChange)="TextTenCDT()" style="width: calc(100% - 60px)">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-lg-6" style="font-weight: 500;">Mã chủ đầu tư</div>
+                        <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="MaCDT"  [disabled]="dynamicVariable"
+                            (ngModelChange)="TextMaCDT()" style="width: calc(100% - 60px)"></div>
+                    </div>
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-lg-6" style="font-weight: 500;">Loại chủ đầu tư</div>
+                        <div class="col-lg-6" >  <ng-select [items]="listtypeCDT" [(ngModel)]="TypeCDT" (ngModelChange)="SelectTypeCDT()"
+                            bindLabel="Value" bindValue="Id" style="width: calc(100% - 60px)">
+                        </ng-select></div>
                     </div>
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-lg-6" style="font-weight: 500;">Địa chỉ</div>
-                        <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="DiaChi"
-                            (ngModelChange)="TextDiaChi()" style="width: calc(100% - 60px)"></div>
+                        <div class="col-lg-6"><input class="search-text" name="keysearch" type="text"
+                                [(ngModel)]="DiaChi" (ngModelChange)="TextDiaChi()" style="width: calc(100% - 60px)">
+                        </div>
                     </div>
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-lg-6" style="font-weight: 500;">Website</div>
-                        <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="website"
-                            (ngModelChange)="Textwebsite()" style="width: calc(100% - 60px)"></div>
+                        <div class="col-lg-6"><input class="search-text" name="keysearch" type="text"
+                                [(ngModel)]="website" (ngModelChange)="Textwebsite()" style="width: calc(100% - 60px)">
+                        </div>
                     </div>
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-lg-6" style="font-weight: 500;">Số điện thoại</div>
-                        <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="SDT"
-                            (ngModelChange)="TextSDT()" style="width: calc(100% - 60px)"></div>
+                        <div class="col-lg-6"><input class="search-text" name="keysearch" type="text" [(ngModel)]="SDT"
+                                (ngModelChange)="TextSDT()" style="width: calc(100% - 60px)"></div>
                     </div>
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-lg-6" style="font-weight: 500;">Fax</div>
                         <div class="col-lg-6"><input class="search-text" name="keysearch" type="text" [(ngModel)]="Fax"
-                            (ngModelChange)="TextFax()" style="width: calc(100% - 60px)"></div>
+                                (ngModelChange)="TextFax()" style="width: calc(100% - 60px)"></div>
                     </div>
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-lg-6" style="font-weight: 500;">Email</div>
-                        <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="Email"
-                            (ngModelChange)="TextEmail()" style="width: calc(100% - 60px)"></div>
+                        <div class="col-lg-6"><input class="search-text" name="keysearch" type="text"
+                                [(ngModel)]="Email" (ngModelChange)="TextEmail()" style="width: calc(100% - 60px)">
+                        </div>
                     </div>
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-lg-9"></div>
-                        <div class="col-lg-2" >
-                            <button class="btn" style="background-color: green;color: white;width: 80px;">Lưu</button>
+                        <div class="col-lg-2">
+                            <button class="btn" style="background-color: green;color: white;width: 80px;" (click)="Sua()">Lưu</button>
                         </div>
                     </div>
                 </div>
@@ -106,25 +130,28 @@
                 <div class="body-title" style="line-height: 30px;">
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-lg-6" style="font-weight: 500;">Họ và tên</div>
-                        <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="Tennguoinhap"
-                            (ngModelChange)="TextTenNN()" style="width: calc(100% - 60px)"></div>
+                        <div class="col-lg-6"><input class="search-text" name="keysearch" type="text"  [disabled]="dynamicVariable"
+                                [(ngModel)]="Tennguoinhap" (ngModelChange)="TextTenNN()"
+                                style="width: calc(100% - 60px)"></div>
                     </div>
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-lg-6" style="font-weight: 500;">Số điện thoại</div>
-                        <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="SDTNguoinhap"
-                            (ngModelChange)="TextSDTNN()" style="width: calc(100% - 60px)"></div>
+                        <div class="col-lg-6"><input class="search-text" name="keysearch" type="text"  [disabled]="dynamicVariable"
+                                [(ngModel)]="SDTNguoinhap" (ngModelChange)="TextSDTNN()"
+                                style="width: calc(100% - 60px)"></div>
                     </div>
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-lg-6" style="font-weight: 500;">Email</div>
-                        <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="EmailNN"
-                            (ngModelChange)="TextEmailNN()" style="width: calc(100% - 60px)"></div>
-                    </div>
-                    <div class="row" style="padding-bottom: 20px;">
-                        <div class="col-lg-8"></div>
-                        <div class="col-lg-4" >
-                            <button class="btn" style="background-color: green;color: white;">Lưu</button>
+                        <div class="col-lg-6"><input class="search-text" name="keysearch" type="text"  [disabled]="dynamicVariable"
+                                [(ngModel)]="EmailNN" (ngModelChange)="TextEmailNN()" style="width: calc(100% - 60px)">
                         </div>
                     </div>
+                    <!-- <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-lg-8"></div>
+                        <div class="col-lg-4">
+                            <button class="btn" style="background-color: green;color: white;">Lưu</button>
+                        </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -136,64 +163,66 @@
                             Lựa chọn dự án/ tiểu dự án báo cáo thực hiện, giải ngân của chủ đầu tư
                         </div>
                         <div class="body-tieuduan">
-                           <div class="row">
-                            <div class="col-lg-6">
-                                <div class="header-title">
-                                    <span>Danh sách dự án</span>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="header-title">
+                                        <span>Danh sách dự án</span>
+                                    </div>
+                                    <div class="body-title1">
+                                        <div class="table-price">
+                                            <table>
+                                                <thead>
+                                                    <tr class="header_table">
+                                                        <td style="padding-left: 20px;">STT</td>
+                                                        <td style="padding-left: 20px;">Tên dự án</td>
+                                                        <td style="padding-left: 20px;">Mã dự án</td>
+                                                        <td style="padding-left: 20px;">Địa điểm thực hiện</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="padding-left: 20px;">1</td>
+                                                        <td style="padding-left: 20px;color: #be5e26;">Hợp phần kênh cấp
+                                                            I và GPMB
+                                                        </td>
+                                                        <td style="padding-left: 20px;">726</td>
+                                                        <td style="padding-left: 20px;">Bắc Ninh
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="body-title1">
-                                    <div class="table-price">
-                                        <table>
-                                            <thead>
-                                                <tr class="header_table">
-                                                    <td style="padding-left: 20px;">STT</td>
-                                                    <td style="padding-left: 20px;">Tên dự án</td>
-                                                    <td style="padding-left: 20px;">Mã dự án</td>
-                                                    <td style="padding-left: 20px;">Địa điểm thực hiện</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td style="padding-left: 20px;">1</td>
-                                                    <td style="padding-left: 20px;color: #be5e26;">Hợp phần kênh cấp I và GPMB
-                                                    </td>
-                                                    <td style="padding-left: 20px;">726</td>
-                                                    <td style="padding-left: 20px;">Bắc Ninh
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                <div class="col-lg-6">
+                                    <div class="header-title">
+                                        <span>Danh sách tiểu dự án, hợp phần đầu tư</span>
+                                    </div>
+                                    <div class="body-title1">
+                                        <div class="table-price">
+                                            <table>
+                                                <thead>
+                                                    <tr class="header_table">
+                                                        <td style="padding-left: 20px;">STT</td>
+                                                        <td style="padding-left: 20px;">Tên dự án</td>
+                                                        <td style="padding-left: 20px;">Mã hợp phần dự án</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="padding-left: 20px;">1</td>
+                                                        <td style="padding-left: 20px;color: #be5e26;">Hợp phần kênh cấp
+                                                            I và GPMB
+                                                        </td>
+                                                        <td style="padding-left: 20px;">726</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="header-title">
-                                    <span>Danh sách tiểu dự án, hợp phần đầu tư</span>
-                                </div>
-                                <div class="body-title1">
-                                    <div class="table-price">
-                                        <table>
-                                            <thead>
-                                                <tr class="header_table">
-                                                    <td style="padding-left: 20px;">STT</td>
-                                                    <td style="padding-left: 20px;">Tên dự án</td>
-                                                    <td style="padding-left: 20px;">Mã hợp phần dự án</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td style="padding-left: 20px;">1</td>
-                                                    <td style="padding-left: 20px;color: #be5e26;">Hợp phần kênh cấp I và GPMB
-                                                    </td>
-                                                    <td style="padding-left: 20px;">726</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                           </div>
-                          
+
                         </div>
                     </tab>
                     <tab heading="Báo cáo giám sát, đầu tư">
@@ -201,64 +230,66 @@
                             Lựa chọn dự án/ tiểu dự án báo cáo giám sát, đánh giá đầu tư
                         </div>
                         <div class="body-tieuduan">
-                           <div class="row">
-                            <div class="col-lg-6">
-                                <div class="header-title">
-                                    <span>Danh sách dự án</span>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="header-title">
+                                        <span>Danh sách dự án</span>
+                                    </div>
+                                    <div class="body-title1">
+                                        <div class="table-price">
+                                            <table>
+                                                <thead>
+                                                    <tr class="header_table">
+                                                        <td style="padding-left: 20px;">STT</td>
+                                                        <td style="padding-left: 20px;">Tên dự án</td>
+                                                        <td style="padding-left: 20px;">Mã dự án</td>
+                                                        <td style="padding-left: 20px;">Địa điểm thực hiện</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="padding-left: 20px;">1</td>
+                                                        <td style="padding-left: 20px;color: #be5e26;">Hợp phần kênh cấp
+                                                            I và GPMB
+                                                        </td>
+                                                        <td style="padding-left: 20px;">726</td>
+                                                        <td style="padding-left: 20px;">Bắc Ninh
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="body-title1">
-                                    <div class="table-price">
-                                        <table>
-                                            <thead>
-                                                <tr class="header_table">
-                                                    <td style="padding-left: 20px;">STT</td>
-                                                    <td style="padding-left: 20px;">Tên dự án</td>
-                                                    <td style="padding-left: 20px;">Mã dự án</td>
-                                                    <td style="padding-left: 20px;">Địa điểm thực hiện</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td style="padding-left: 20px;">1</td>
-                                                    <td style="padding-left: 20px;color: #be5e26;">Hợp phần kênh cấp I và GPMB
-                                                    </td>
-                                                    <td style="padding-left: 20px;">726</td>
-                                                    <td style="padding-left: 20px;">Bắc Ninh
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                <div class="col-lg-6">
+                                    <div class="header-title">
+                                        <span>Danh sách tiểu dự án, hợp phần đầu tư</span>
+                                    </div>
+                                    <div class="body-title1">
+                                        <div class="table-price">
+                                            <table>
+                                                <thead>
+                                                    <tr class="header_table">
+                                                        <td style="padding-left: 20px;">STT</td>
+                                                        <td style="padding-left: 20px;">Tên dự án</td>
+                                                        <td style="padding-left: 20px;">Mã hợp phần dự án</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="padding-left: 20px;">1</td>
+                                                        <td style="padding-left: 20px;color: #be5e26;">Hợp phần kênh cấp
+                                                            I và GPMB
+                                                        </td>
+                                                        <td style="padding-left: 20px;">726</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="header-title">
-                                    <span>Danh sách tiểu dự án, hợp phần đầu tư</span>
-                                </div>
-                                <div class="body-title1">
-                                    <div class="table-price">
-                                        <table>
-                                            <thead>
-                                                <tr class="header_table">
-                                                    <td style="padding-left: 20px;">STT</td>
-                                                    <td style="padding-left: 20px;">Tên dự án</td>
-                                                    <td style="padding-left: 20px;">Mã hợp phần dự án</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td style="padding-left: 20px;">1</td>
-                                                    <td style="padding-left: 20px;color: #be5e26;">Hợp phần kênh cấp I và GPMB
-                                                    </td>
-                                                    <td style="padding-left: 20px;">726</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                           </div>
-                          
+
                         </div>
                     </tab>
                     <tab heading="Hình ảnh, video">
@@ -266,64 +297,66 @@
                             Lựa chọn dự án/ tiểu dự án để xem hình ảnh/ video của chủ đầu tư
                         </div>
                         <div class="body-tieuduan">
-                           <div class="row">
-                            <div class="col-lg-6">
-                                <div class="header-title">
-                                    <span>Danh sách dự án</span>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="header-title">
+                                        <span>Danh sách dự án</span>
+                                    </div>
+                                    <div class="body-title1">
+                                        <div class="table-price">
+                                            <table>
+                                                <thead>
+                                                    <tr class="header_table">
+                                                        <td style="padding-left: 20px;">STT</td>
+                                                        <td style="padding-left: 20px;">Tên dự án</td>
+                                                        <td style="padding-left: 20px;">Mã dự án</td>
+                                                        <td style="padding-left: 20px;">Địa điểm thực hiện</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="padding-left: 20px;">1</td>
+                                                        <td style="padding-left: 20px;color: #be5e26;">Hợp phần kênh cấp
+                                                            I và GPMB
+                                                        </td>
+                                                        <td style="padding-left: 20px;">726</td>
+                                                        <td style="padding-left: 20px;">Bắc Ninh
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="body-title1">
-                                    <div class="table-price">
-                                        <table>
-                                            <thead>
-                                                <tr class="header_table">
-                                                    <td style="padding-left: 20px;">STT</td>
-                                                    <td style="padding-left: 20px;">Tên dự án</td>
-                                                    <td style="padding-left: 20px;">Mã dự án</td>
-                                                    <td style="padding-left: 20px;">Địa điểm thực hiện</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td style="padding-left: 20px;">1</td>
-                                                    <td style="padding-left: 20px;color: #be5e26;">Hợp phần kênh cấp I và GPMB
-                                                    </td>
-                                                    <td style="padding-left: 20px;">726</td>
-                                                    <td style="padding-left: 20px;">Bắc Ninh
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                <div class="col-lg-6">
+                                    <div class="header-title">
+                                        <span>Danh sách tiểu dự án, hợp phần đầu tư</span>
+                                    </div>
+                                    <div class="body-title1">
+                                        <div class="table-price">
+                                            <table>
+                                                <thead>
+                                                    <tr class="header_table">
+                                                        <td style="padding-left: 20px;">STT</td>
+                                                        <td style="padding-left: 20px;">Tên dự án</td>
+                                                        <td style="padding-left: 20px;">Mã hợp phần dự án</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="padding-left: 20px;">1</td>
+                                                        <td style="padding-left: 20px;color: #be5e26;">Hợp phần kênh cấp
+                                                            I và GPMB
+                                                        </td>
+                                                        <td style="padding-left: 20px;">726</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="header-title">
-                                    <span>Danh sách tiểu dự án, hợp phần đầu tư</span>
-                                </div>
-                                <div class="body-title1">
-                                    <div class="table-price">
-                                        <table>
-                                            <thead>
-                                                <tr class="header_table">
-                                                    <td style="padding-left: 20px;">STT</td>
-                                                    <td style="padding-left: 20px;">Tên dự án</td>
-                                                    <td style="padding-left: 20px;">Mã hợp phần dự án</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td style="padding-left: 20px;">1</td>
-                                                    <td style="padding-left: 20px;color: #be5e26;">Hợp phần kênh cấp I và GPMB
-                                                    </td>
-                                                    <td style="padding-left: 20px;">726</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                           </div>
-                          
+
                         </div>
                     </tab>
                 </tabset>

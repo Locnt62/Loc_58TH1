@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { TodoService } from '../app/to-do/services/todo.service'
 import { Router, ActivatedRoute, RoutesRecognized } from '@angular/router';
 import { AuthService } from './auth/auth.service';
+import { SearchHttpService } from './http/test-api';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,7 +21,9 @@ export class AppComponent implements OnInit {
   isShow: boolean;
   check_router: string;
   token_get: any;
-  constructor(public router: Router, private activeRoute: ActivatedRoute, private authService: AuthService) {
+  idUser: any;
+  id_user: any;
+  constructor(public router: Router, private activeRoute: ActivatedRoute, private authService: AuthService, private searchHttpService: SearchHttpService,) {
     this.router.events.subscribe(event => {
       if (event instanceof RoutesRecognized) {
         // console.log('navigated to:', event.url);
@@ -35,6 +38,11 @@ export class AppComponent implements OnInit {
     this.token_get = localStorage.getItem('currentUser')
     console.log('this.token_get');
     console.log(this.token_get);
+
+    this.idUser = this.authService.getId();
+    console.log('aa',this.idUser)
+    this.id_user = parseInt(this.idUser, 10);
+    console.log('int', this.id_user)
   }
   ngOnInit() {
     // this.activeRoute.url.subscribe(param => {
@@ -103,6 +111,10 @@ export class AppComponent implements OnInit {
 
   Logout() {
     this.authService.logout();
+    this.searchHttpService.Logout(this.id_user).subscribe(dt =>{
+      console.log('logout');
+      console.log(dt)
+    })
     this.router.navigateByUrl('/Landing')
   }
   GetToken() {
