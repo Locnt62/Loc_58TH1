@@ -316,6 +316,93 @@ export class SearchHttpService {
     }
 
 
+    //doi at khau
+    ChangePassword(UserName: string, PassWord: string, PassWordNew: string): Observable<any>{
+        const form = new FormData;
+        form.append("UserName", UserName)
+        form.append("PassWord", PassWord)
+        form.append("PassWordNew", PassWordNew)
+        return this.http.post<any>(this.obj + '/api/User/ChangPass', form, {headers: this.headers})
+    }
+
+    //get  giai đoan  von
+
+    Giadoanvon(): Observable<any>{
+        return this.http.get(this.obj + '/api/Von/GetGDVon');
+    }
+
+    //list  dự án
+    ListDuan(): Observable<any>{
+        return this.http.get(this.obj + '/api/DropDown/GetDuan')
+    }
+
+
+    //list tieu du an
+    ListTieuDuAn(): Observable<any>{
+        return this.http.get(this.obj + '/api/DropDown/GetTieuDuan')
+    }
+
+
+    //list von
+    Listvon(tenvon: string, idduan: any, idtieuda: any): Observable<any>{
+        const form = new FormData;
+        form.append("tenvon", tenvon)
+        form.append("idduan", idduan)
+        form.append("idtieuda", idtieuda)
+        return this.http.post<any>(this.obj + '/api/Von/SearchVon', form, {headers:this.headers})
+    }
+
+
+
+    //them von
+    Themvon(Mavon: string, Tenvon: string, Maduan: any, Matieuduan: any, Magiaidoan: any, Giatritien: any, Landieuchinh:any): Observable<any>{
+        const form = new FormData;
+        form.append("Mavon", Mavon)
+        form.append("Tenvon", Tenvon)
+        form.append("Maduan", Maduan)
+        form.append("Matieuduan", Matieuduan)
+        form.append("Magiaidoan", Magiaidoan)
+        form.append("Giatritien", Giatritien)
+        form.append("Landieuchinh", Landieuchinh)
+        return this.http.post<any>(this.obj + '/api/Von/AddVon', form, {headers:this.headers})
+
+    }
+
+
+    //sua von 
+
+    Suavon(ID: any,Mavon: string, Tenvon: string, Maduan: any, Matieuduan: any, Magiaidoan: any, Giatritien: any, Landieuchinh:any): Observable<any>{
+        const form = new FormData;
+        form.append("ID", ID)
+        form.append("Mavon", Mavon)
+        form.append("Tenvon", Tenvon)
+        form.append("Maduan", Maduan)
+        form.append("Matieuduan", Matieuduan)
+        form.append("Magiaidoan", Magiaidoan)
+        form.append("Giatritien", Giatritien)
+        form.append("Landieuchinh", Landieuchinh)
+        return this.http.post<any>(this.obj + '/api/Von/EditVon', form, {headers:this.headers})
+
+    }
+
+    //xoa von
+    XoaVon(idvon:any): Observable<any>{
+        const form = new FormData
+        form.append("idvon", idvon)
+        return this.http.post<any>(this.obj + '/api/Von/DeleteVon', form, {headers:this.headers})
+    }
+    //detail von
+
+
+    Chitietvon(idvon: any): Observable<any>{
+        const form = new FormData
+        form.append("idvon",idvon)
+        return this.http.post<any>(this.obj + '/api/Von/VonDetail', form, {headers:this.headers})
+    }
+
+
+
+
 
 
 

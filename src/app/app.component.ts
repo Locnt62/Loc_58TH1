@@ -121,5 +121,12 @@ export class AppComponent implements OnInit {
     console.log('get token')
     this.authService.getToken();
   }
+
+
+  Direct(){
+    this.router.navigate(['/DoiMatKhau'])
+    console.log('123')
+  }
+
 }
 

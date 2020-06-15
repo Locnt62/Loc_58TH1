@@ -81,7 +81,7 @@
         <div class="form-group">
           <label>Mật khẩu:</label>
           <input type="password" class="form-control" [(ngModel)]="form.soDienThoai" name="soDienThoai"
-            #soDienThoai="ngModel" pattern="[0-9]{3}" placeholder="Điền mật khẩu" required>
+            #soDienThoai="ngModel"  placeholder="Điền mật khẩu" required>
           <small class="text text-danger" *ngIf="soDienThoai.invalid && (soDienThoai.dirty || soDienThoai.touched)">Mật
             khẩu bắt buộc phải có 3 số</small>
           <!-- <div class="text-input">

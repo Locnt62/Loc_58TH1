@@ -57,6 +57,7 @@ import { ThemTongMucDauTuComponent } from './admin/quan-ly-von/them-tong-muc-dau
 import { QuanLyThucHienGiaiNganComponent } from './admin/quan-ly-giai-ngan/quan-ly-thuc-hien-giai-ngan/quan-ly-thuc-hien-giai-ngan.component';
 import { ThemQuanLyGiaiNganComponent } from './admin/quan-ly-giai-ngan/them-quan-ly-giai-ngan/them-quan-ly-giai-ngan.component';
 import { ListNguoiDungComponent } from './admin/quan-ly-nguoi-dung/list-nguoi-dung/list-nguoi-dung.component';
+import { DoiMatKhauComponent } from './admin/doi-mat-khau/doi-mat-khau/doi-mat-khau.component';
 
 
 @NgModule({
@@ -93,6 +94,7 @@ import { ListNguoiDungComponent } from './admin/quan-ly-nguoi-dung/list-nguoi-du
     QuanLyThucHienGiaiNganComponent,
     ThemQuanLyGiaiNganComponent,
     ListNguoiDungComponent,
+    DoiMatKhauComponent,
     
 
   ],

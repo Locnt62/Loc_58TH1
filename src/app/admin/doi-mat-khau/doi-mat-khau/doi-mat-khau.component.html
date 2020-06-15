@@ -1,0 +1,65 @@
+<div class="header-tongquan">
+    <span style="font-size: 17px;color: #25549d;font-weight: 600;">Đổi mật khẩu</span><br>
+    <span style="color:#acacac; font-size: 14px;">Trang chủ > <a>Đổi mật khẩu</a></span>
+    <!-- <div class="row optionselect">
+        <div class="col-lg-5">
+            <input class="search-text" name="keysearch" type="text" placeholder="Nhập tên người đùng.."
+                [(ngModel)]="SearchTen" (ngModelChange)="TextSearchTen()" style="width: calc(100% - 10px)">
+        </div>
+        <div class="col-lg-5">
+            <ng-select [items]="listtypeCDT" [(ngModel)]="TypeCDT" (ngModelChange)="SelectTypeCDT()" bindLabel="Value"
+                bindValue="Id" style="width: calc(100% - 30px)" placeholder="Nhóm người dùng">
+            </ng-select>
+        </div>
+         <div class="col-lg-2">
+            <button class="btn" style="background-color: #289b28;width: 100px;color: white;height: 38px;"
+                (click)="Themmoi()">Thêm mới
+            </button>
+        </div> -->
+
+</div>
+
+<div class="body-tongquan">
+    <div class="container doimk">
+        <div class="icon">
+            <span style="font-size: 70px;color: #25549d;"><i class="fa fa-user-circle"></i></span>
+        </div>
+        <form class="col-md-6 offset-2 col-xs-6" style="margin-top: 20px" name="form" #form="ngForm" (ngSubmit)="onSubmitForm(form)">
+            <div class="form-group" id="tenKhachHang">
+                <label for="">Tên tài khoản :</label>
+                <input type=" text" class="form-control" [(ngModel)]="form.tenKhachHang" name="name" #name="ngModel" required id="input-tenKhachHang">
+                <!-- <div class="text-input">
+                    <span>{{form.tenKhachHang}}</span>
+                </div> -->
+                <small class="text text-danger" *ngIf="name.invalid && (name.dirty || name.touched)">Username bắt buộc phải có</small>
+            </div>
+            <div class="form-group">
+                <label>Mật khẩu hiện tại:</label>
+                <input type="text" class="form-control" [(ngModel)]="form.soDienThoai" name="soDienThoai" #soDienThoai="ngModel"   required>
+                <small class="text text-danger" *ngIf="soDienThoai.invalid && (soDienThoai.dirty || soDienThoai.touched)">Mật khẩu bắt buộc</small>
+                <!-- <div class="text-input">
+                    <span>{{form.soDienThoai}}</span>
+                </div> -->
+            </div>
+            <div class="form-group">
+                <label>Mật khẩu mới:</label>
+                <input type="password" class="form-control" [(ngModel)]="form.email" name="email" #email="ngModel"  required >
+                <small class="text text-danger" *ngIf="email.invalid && ( email.dirty || email.touched )">Bắt buộc nhập</small>
+                <!-- <div class="text-input">
+                    <span>{{form.email}}</span>
+                </div> -->
+            </div>
+            <div class="form-group">
+                <label>Nhập lại mật khẩu:</label>
+                <input type="password" class="form-control" [(ngModel)]="form.diaChiKhachHang" name="diaChi" #address="ngModel" required >
+                <!-- <small class="text text-danger" *ngIf="address.invalid && (address.dirty || address.touched) && (!Check(form) === false)">Mật khẩu không chính xác</small> -->
+                <div *ngIf="!Check(form) === false">
+                    <small class="text text-danger">Mật khẩu nhập chưa chính xác!</small>
+                </div>
+            </div>
+            <button type="submit" class="btn" style="background-color: #25549d;color: white;margin-left: 115px;width: 100px;" [disabled]="form.invalid">Lưu</button>
+        <!-- <div *ngIf="!Check(form) === false">Không khướp</div> -->
+        </form>
+    </div>
+</div>
+<div class="footer"></div>

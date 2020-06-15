@@ -66,6 +66,10 @@ export class QuanLyChuDauTuComponent implements OnInit {
     this.router.navigate(['/QuanlyChuDauTu'], { queryParams: { name: item.Id } });
     this.DetailCDT(item.Id)
   }
+
+  direct(){
+    this.router.navigate(['/QuanlyChuDauTu'])
+  }
   Themmoi() {
     this.router.navigate(['/ChitietCDT'])
   }
