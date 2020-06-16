@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
     //   console.log(param);
     // })
     this.isShow = false;
-    // this.isCheckRouter();
+     this.isCheckRouter();
     this.GetToken();
   }
 
@@ -81,6 +81,12 @@ export class AppComponent implements OnInit {
       }
       const index2 = this.check_router.indexOf('/ListInvesterCustomer');
       if (index2 !== -1) {
+        this.isShow = !this.isShow
+        return false
+      }
+
+      const index3 = this.check_router.indexOf(' ')
+      if(index3 !== - 1){
         this.isShow = !this.isShow
         return false
       }
