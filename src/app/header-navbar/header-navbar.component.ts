@@ -77,7 +77,7 @@ export class HeaderNavbarComponent implements OnInit {
         this.router.navigateByUrl('/home');
         this.modalRef.close();
       } else {
-        this.check = false
+        this.check = true
         console.log('faile')
         alert("Tài khoản không hợp lệ")
         //this.toaster.pop('error', 'Thất bại');

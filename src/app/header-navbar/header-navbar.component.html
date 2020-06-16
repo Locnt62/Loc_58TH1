@@ -83,7 +83,7 @@
           <input type="password" class="form-control" [(ngModel)]="form.soDienThoai" name="soDienThoai"
             #soDienThoai="ngModel"  placeholder="Điền mật khẩu" required>
           <small class="text text-danger" *ngIf="soDienThoai.invalid && (soDienThoai.dirty || soDienThoai.touched)">Mật
-            khẩu bắt buộc phải có 3 số</small>
+            khẩu bắt buộc phải nhập</small>
           <!-- <div class="text-input">
             <span>{{form.soDienThoai}}</span>
           </div> -->
