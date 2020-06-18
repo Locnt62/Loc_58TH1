@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-lg-2" style=" position: relative;">
                     <ng-select [items]="dsTinh" [(ngModel)]="selectProvince" (ngModelChange)="SelectTinh()"
-                        bindLabel="TenTinh" bindValue="Id">
+                        bindLabel="TenTinh" bindValue="Id" placeholder="Tỉnh">
                     </ng-select>
                 </div>
             </div>
@@ -88,15 +88,17 @@
                                 <div class="name-company">
                                     <span> <i class="fa fa-briefcase"></i> {{item.Chudautu}}</span>
                                 </div>
-                                <!-- <div class="square">
-                                <i class="fa fa-vector-square"></i> {{item.square}}
-                            </div> -->
+                                <div class="square">
+                                    <div class="status">
+                                        <span>{{item.DateComplete}}</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="footer-item">
+                            <!-- <div class="footer-item">
                                 <div class="status">
                                     <span>{{item.DateComplete}}</span>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

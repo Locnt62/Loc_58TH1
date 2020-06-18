@@ -24,6 +24,8 @@ export class ThemVonComponent implements OnInit {
   suagiaidoan: any;
   id_von: any;
 
+  check = true
+
   constructor(private activeRoute: ActivatedRoute,private router: Router,private searchHttpService: SearchHttpService,) { }
 
   ngOnInit() {
@@ -93,12 +95,15 @@ export class ThemVonComponent implements OnInit {
   }
 
   Them(){
+    this.check = false
     this.searchHttpService.Themvon(this.suamavon,this.suatenvon,this.suada,this.suatda,this.suagiaidoan,this.suatien,this.suadieuchinh).subscribe(dt =>{
       console.log(dt);
       if (dt.Status === 1) {
+        this.check = true
         alert(dt.Messege)
         this.router.navigate(['/QuanlyVon'])
       } else if (dt.Status === 0) {
+        this.check = true
         alert(dt.Messege)
       }
     })

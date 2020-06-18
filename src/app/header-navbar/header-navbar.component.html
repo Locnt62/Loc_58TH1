@@ -71,7 +71,7 @@
         <div class="form-group" id="tenKhachHang">
           <label for="">Tên đăng nhập :</label>
           <input type=" text" class="form-control" [(ngModel)]="form.tenKhachHang" name="name" #name="ngModel" required
-            placeholder="Điền tên của bạn " id="input-tenKhachHang">
+            placeholder="Điền tên của bạn " id="input-tenKhachHang" maxlength="20">
           <!-- <div class="text-input">
             <span>{{form.tenKhachHang}}</span>
           </div> -->
@@ -81,9 +81,9 @@
         <div class="form-group">
           <label>Mật khẩu:</label>
           <input type="password" class="form-control" [(ngModel)]="form.soDienThoai" name="soDienThoai"
-            #soDienThoai="ngModel"  placeholder="Điền mật khẩu" required>
+            #soDienThoai="ngModel"  placeholder="Điền mật khẩu" required pattern="[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{8,20}">
           <small class="text text-danger" *ngIf="soDienThoai.invalid && (soDienThoai.dirty || soDienThoai.touched)">Mật
-            khẩu bắt buộc phải nhập</small>
+            khẩu nhập chưa hợp lệ!</small>
           <!-- <div class="text-input">
             <span>{{form.soDienThoai}}</span>
           </div> -->

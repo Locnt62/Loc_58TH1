@@ -6,12 +6,14 @@ import { TodoService } from '../app/to-do/services/todo.service'
 import { Router, ActivatedRoute, RoutesRecognized } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { SearchHttpService } from './http/test-api';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  modalRef: NgbModalRef;
   public enableDock: boolean = true;
   public width: string = '220px';
   public dockSize: string = '72px';
@@ -23,7 +25,7 @@ export class AppComponent implements OnInit {
   token_get: any;
   idUser: any;
   id_user: any;
-  constructor(public router: Router, private activeRoute: ActivatedRoute, private authService: AuthService, private searchHttpService: SearchHttpService,) {
+  constructor(public router: Router, private activeRoute: ActivatedRoute, private modalService: NgbModal, private authService: AuthService, private searchHttpService: SearchHttpService,) {
     this.router.events.subscribe(event => {
       if (event instanceof RoutesRecognized) {
         // console.log('navigated to:', event.url);
@@ -40,7 +42,7 @@ export class AppComponent implements OnInit {
     console.log(this.token_get);
 
     this.idUser = this.authService.getId();
-    console.log('aa',this.idUser)
+    console.log('aa', this.idUser)
     this.id_user = parseInt(this.idUser, 10);
     console.log('int', this.id_user)
   }
@@ -50,8 +52,21 @@ export class AppComponent implements OnInit {
     //   console.log(param);
     // })
     this.isShow = false;
-     this.isCheckRouter();
+    this.isCheckRouter();
     this.GetToken();
+  }
+
+  open(content) {
+    // if (this.authService.getRole() === '1') {
+    this.modalRef = this.modalService.open(content, {
+      windowClass: 'modal-content-request',
+      keyboard: false,
+      backdrop: 'static'
+    });
+  }
+
+  close() {
+    this.modalRef.close();
   }
 
 
@@ -67,7 +82,7 @@ export class AppComponent implements OnInit {
   }
 
   isCheckRouter() {
-    if(this.check_router){
+    if (this.check_router) {
       const index = this.check_router.indexOf('/Landing');
       if (index !== -1) {
         this.isShow = !this.isShow
@@ -86,38 +101,39 @@ export class AppComponent implements OnInit {
       }
 
       const index3 = this.check_router.indexOf(' ')
-      if(index3 !== - 1){
+      if (index3 !== - 1) {
         this.isShow = !this.isShow
         return false
       }
     }
 
 
-      // if (this.check_router === '/Landing') {
-      //   if (this.isShow) {
-      //     this.isShow = !this.isShow;
-      //   }
-      //   return false;
-      // }else if(this.check_router === '/ListProjectCustomer'){
-      //   if (this.isShow) {
-      //     this.isShow = !this.isShow;
-      //   }
-      //   return false;
-      // }
-      // else if(this.check_router === '/ListInvesterCustomer'){
-      //   if (this.isShow) {
-      //     this.isShow = !this.isShow;
-      //   }
-      //   return false;
-      // }
+    // if (this.check_router === '/Landing') {
+    //   if (this.isShow) {
+    //     this.isShow = !this.isShow;
+    //   }
+    //   return false;
+    // }else if(this.check_router === '/ListProjectCustomer'){
+    //   if (this.isShow) {
+    //     this.isShow = !this.isShow;
+    //   }
+    //   return false;
+    // }
+    // else if(this.check_router === '/ListInvesterCustomer'){
+    //   if (this.isShow) {
+    //     this.isShow = !this.isShow;
+    //   }
+    //   return false;
+    // }
 
-      return true;
+    return true;
 
   }
 
   Logout() {
+    this.close()
     this.authService.logout();
-    this.searchHttpService.Logout(this.id_user).subscribe(dt =>{
+    this.searchHttpService.Logout(this.id_user).subscribe(dt => {
       console.log('logout');
       console.log(dt)
     })
@@ -129,7 +145,7 @@ export class AppComponent implements OnInit {
   }
 
 
-  Direct(){
+  Direct() {
     this.router.navigate(['/DoiMatKhau'])
     console.log('123')
   }

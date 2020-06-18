@@ -192,7 +192,7 @@
                     Thông báo</button>
                 <button type="button" class="btn" (click)="Direct()" style="color: white;"><i class="fa fa-key"></i> Đổi
                     mật khẩu</button>
-                <button type="button" class="btn" (click)="Logout()" style="color: white;"><i class="fa fa-sign-out-alt"></i> Đăng xuất</button>
+                <button type="button" class="btn" (click)="open(xoa)" style="color: white;"><i class="fa fa-sign-out-alt"></i> Đăng xuất</button>
             </div>
 
             <!-- <div>
@@ -211,6 +211,29 @@
     <router-outlet></router-outlet>
     <app-footer-nav></app-footer-nav>
 </div>
+
+
+<ng-template #xoa>
+    <div class="header-popup">
+        <div>
+            <span style="font-weight: 500;">Đăng xuất</span>
+        </div>
+        <div>
+            <span (click)="close()" style="cursor: pointer;font-size: 19px;"><i class="fa fa-times"></i></span>
+        </div>
+    </div>
+    <div class="body-popup" style="padding: 30px;">
+        <div class="row">
+            <div class="col-lg-8">
+                <span>Bạn có  muốn đăng xuất ?</span>
+            </div>
+            <div class="col-lg-3">
+                <button class="btn" style="background-color: #25549d;color: white;width: 150px;"
+                    (click)="Logout()">Đăng xuất</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
 
 
 <!-- <div>

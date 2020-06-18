@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { SearchHttpService } from '../http/test-api';
 // import { ApexAxisChartSeries, ApexChart, ApexXAxis, ApexTitleSubtitle, ChartComponent } from 'ng-apexcharts';
 declare var ApexCharts: any;
@@ -8,7 +8,7 @@ declare var ApexCharts: any;
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 
   public chartOptions: any;
 
@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
       }
     };
     // this.route.fragment.subscribe(fragment => { this.fragment = fragment; });
-    this.Initchart()
+    // this.Initchart()
     this.Countda()
     this.CountTDA()
     this.CountUser()
@@ -208,6 +208,10 @@ export class HomeComponent implements OnInit {
     this.chart_1.render();
   }
 
+  ngAfterViewInit(){
+    this.Initchart()
+  }
+
   
   Countda(){
     this.searchHttpService.Count(1).subscribe(dt =>{
@@ -245,5 +249,7 @@ export class HomeComponent implements OnInit {
         document.querySelector('#' + this.fragment).scrollIntoView();
       }
     } catch (e) { }
+
+
   }
 }

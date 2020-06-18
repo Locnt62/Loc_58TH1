@@ -40,14 +40,21 @@
                         <td style="padding-left: 20px;">{{item.Email}}</td>
                         <td style="padding-left: 20px;">{{item.Phone}}</td>
                         <td style="padding-left: 20px;"><span style="cursor: pointer;">
-                                <div (click)="Delete(item)">
+                                <div (click)="open(xoa);ChonCDTXoa(item)">
                                     <i class="fa fa-trash"></i>
                                 </div>
                             </span>
                         </td>
                     </tr>
+                    <tr *ngIf="!listInvest || listInvest.length === 0">
+                        <td style="padding-left: 20px;">Không có dữ liệu ! </td>
+                    </tr>
                 </tbody>
             </table>
+            <div class="overlay" *ngIf="!check" id="overlay" style="text-align: center;">
+                <i class="fa fa-spinner fa-spin spin-big" style="font: 20px;"></i>
+                <span style="color: black; font-size: 30px">Loading</span>
+            </div>
             <div class="pagination">
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel="">
                 </pagination-controls>
@@ -152,6 +159,10 @@
                             <button class="btn" style="background-color: green;color: white;">Lưu</button>
                         </div>
                     </div> -->
+                    <div class="overlay" *ngIf="!check" id="overlay" style="text-align: center;">
+                        <i class="fa fa-spinner fa-spin spin-big" style="font: 20px;"></i>
+                        <span style="color: black; font-size: 30px">Loading</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -379,3 +390,26 @@
         </div>
     </div>
 </div>
+
+
+<ng-template #xoa>
+    <div class="header-popup">
+        <div>
+            <span style="font-weight: 500;">Xóa chủ đầu tư</span>
+        </div>
+        <div>
+            <span (click)="close()" style="cursor: pointer;font-size: 19px;"><i class="fa fa-times"></i></span>
+        </div>
+    </div>
+    <div class="body-popup">
+        <div class="row">
+            <div class="col-lg-8">
+                <span>Bạn có muốn xóa chủ đầu tư này ?</span>
+            </div>
+            <div class="col-lg-3">
+                <button class="btn" style="background-color: #25549d;color: white;width: 90px;"
+                    (click)="Delete()">Xóa</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

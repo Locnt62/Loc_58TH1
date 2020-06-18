@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SearchHttpService } from 'src/app/http/test-api';
+import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-quan-ly-von-dau-tu',
@@ -9,6 +10,7 @@ import { SearchHttpService } from 'src/app/http/test-api';
 })
 export class QuanLyVonDauTuComponent implements OnInit {
   listVon: any
+  modalRef: NgbModalRef;
   seg: any;
   list_giaidoanvon: any;
   list_tieuduan: any;
@@ -31,14 +33,15 @@ export class QuanLyVonDauTuComponent implements OnInit {
 
   variable: boolean
 
+check = true
+  idvon_xoa: any;
 
 
 
 
 
 
-
-  constructor(private activeRoute: ActivatedRoute, private router: Router, private searchHttpService: SearchHttpService,) { }
+  constructor(private activeRoute: ActivatedRoute, private router: Router, private searchHttpService: SearchHttpService,private modalService: NgbModal,) { }
 
   ngOnInit() {
     this.variable = true
@@ -55,6 +58,16 @@ export class QuanLyVonDauTuComponent implements OnInit {
     this.ListDA()
     this.ListTDA()
     this.ListVon('', '', '')
+  }
+  open(content) {
+    this.modalRef = this.modalService.open(content, {
+      windowClass: 'modal-content-request',
+      keyboard: false,
+      backdrop: 'static'
+    });
+  }
+  close() {
+    this.modalRef.close();
   }
 
   direct(item) {
@@ -95,10 +108,14 @@ export class QuanLyVonDauTuComponent implements OnInit {
   }
 
   ListVon(tenvon, idduan, idtieuda) {
+    this.check = false
     this.searchHttpService.Listvon(tenvon, idduan, idtieuda).subscribe(dt => {
+      if(dt){
+        this.check = true
       console.log('list von');
       console.log(dt)
       this.listVon = dt
+      }
     })
   }
 
@@ -118,7 +135,10 @@ export class QuanLyVonDauTuComponent implements OnInit {
 
 
   Chitietvon(idvon) {
+    this.check = false
     this.searchHttpService.Chitietvon(idvon).subscribe(dt => {
+      if(dt){
+        this.check = true
       console.log('chi tiết vốn');
       console.log(dt)
       this.suatenvon = dt.Tenvon;
@@ -131,6 +151,7 @@ export class QuanLyVonDauTuComponent implements OnInit {
       this.suangaytao = dt.Ngaytao
       this.suatien = dt.Giatritien;
       this.id_von = dt.ID;
+      }
     })
   }
 
@@ -165,26 +186,51 @@ export class QuanLyVonDauTuComponent implements OnInit {
   }
 
   Sua() {
+    this.check = false
     console.log('da bam')
     this.searchHttpService.Suavon(this.id_von, this.suamavon, this.suatenvon, this.suada, this.suatda, this.suagiaidoan, this.suatien, this.suadieuchinh).subscribe(dt => {
       console.log(dt);
       if (dt.Status === 1) {
+        this.check = true
         alert(dt.Messege)
         this.router.navigate(['/QuanlyVon'])
         this.ListVon('', '', '')
       } else if (dt.Status === 0) {
+        this.check = true
         alert(dt.Messege)
       }
     })
   }
-  Xoa(item){
-    this.searchHttpService.XoaVon(item.ID).subscribe(dt =>{
+  // Xoa(item){
+  //   this.searchHttpService.XoaVon(item.ID).subscribe(dt =>{
+  //     console.log(dt)
+  //     if (dt.Status === 1) {
+  //       alert(dt.Messege)
+  //       this.router.navigate(['/QuanlyVon'])
+  //       this.ListVon('', '', '')
+  //     } else if (dt.Status === 0) {
+  //       alert(dt.Messege)
+  //     }
+  //   })
+  // }
+
+  chonvonxoa(item){
+    console.log('aaaa',item.ID)
+    this.idvon_xoa = item.ID
+  }
+
+  Delete(){
+    this.check = false
+    this.searchHttpService.XoaVon(this.idvon_xoa).subscribe(dt =>{
       console.log(dt)
       if (dt.Status === 1) {
+        this.check = true
+        this.close()
         alert(dt.Messege)
         this.router.navigate(['/QuanlyVon'])
         this.ListVon('', '', '')
       } else if (dt.Status === 0) {
+        this.check = true
         alert(dt.Messege)
       }
     })

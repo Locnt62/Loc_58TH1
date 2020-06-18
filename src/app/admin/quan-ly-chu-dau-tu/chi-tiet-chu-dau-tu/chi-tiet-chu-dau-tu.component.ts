@@ -20,6 +20,7 @@ export class ChiTietChuDauTuComponent implements OnInit {
   listtypeCDT: any;
   MaCDT: any
   TypeCDT:any
+  check = true
 
   dynamicVariable: boolean
   constructor(private searchHttpService: SearchHttpService,private router: Router,) { }
@@ -74,12 +75,15 @@ export class ChiTietChuDauTuComponent implements OnInit {
     this.router.navigate(['/QuanlyChuDauTu']);
   }
   Save(){
+    this.check = false
     this.searchHttpService.ThemCDT(this.MaCDT, this.TenCDT,'',this.DiaChi, this.website, this.SDT, this.Fax, this.Email,'', this.TypeCDT).subscribe(dt =>{
       console.log(dt)
       if(dt.Status === 1){
+        this.check = true
         alert(dt.Messege)
         this.router.navigate(['/QuanlyChuDauTu'])
       }else if(dt.Status === 0){
+        this.check = true
         alert(dt.Messege)
       }
     })

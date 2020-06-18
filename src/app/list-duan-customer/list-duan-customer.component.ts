@@ -140,7 +140,7 @@ export class ListDuanCustomerComponent implements OnInit, AfterViewInit {
   }
   Addtext() {
     console.log(this.Inputext)
-    this.getAllduan('', '', this.Inputext, this.Inputext)
+    this.getAllduan('', '', this.Inputext, '')
   }
   getChudautu() {
     this.searchHttpService.queryChudautu().subscribe(dt => {

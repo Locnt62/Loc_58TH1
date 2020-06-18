@@ -77,31 +77,31 @@ export class SearchHttpService {
 
     //get tieu du an cua chu dau tu
     getTieeuduan(cdt: any): Observable<any> {
-        return this.http.get(this.obj + '/api/Duan/SreachTieuDuan?chudautu=' + cdt);
+        return this.http.get(this.obj + '/api/Duan/SreachTieuDuan?chudautu=' + cdt,{headers: this.headers});
     }
 
 
     //get tong von dau tu
     getTVDT(id: any, type: any): Observable<any> {
-        return this.http.get(this.obj + '/api/Duan/Gettongdautu/?id=' + id + '&type=' + type);
+        return this.http.get(this.obj + '/api/Duan/Gettongdautu/?id=' + id + '&type=' + type,{headers: this.headers});
     }
     //get list dự án trang admin
 
     getListDAadmin(key: string, tinh: any, chudatu: any, id: any): Observable<any> {
-        return this.http.get(this.obj + '/api/Duan/SearchDaAdmin?nameandkey=' + key + '&tinh=' + tinh + '&chudatu=' + chudatu + '&id=' + id);
+        return this.http.get(this.obj + '/api/Duan/SearchDaAdmin?nameandkey=' + key + '&tinh=' + tinh + '&chudatu=' + chudatu + '&id=' + id, {headers:this.headers});
     }
     //chi tiet du an
     getListDAadminDetail(id: any): Observable<any> {
-        return this.http.get(this.obj + '/api/Duan/SearchDaAdmin?id=' + id);
+        return this.http.get(this.obj + '/api/Duan/SearchDaAdmin?id=' + id, {headers:this.headers});
     }
     //get loai von
     Loaivon(): Observable<any> {
-        return this.http.get(this.obj + '/api/DropDown/GetallLoaivon');
+        return this.http.get(this.obj + '/api/DropDown/GetallLoaivon',{headers: this.headers});
     }
 
     //get hinh thuc quan ly
     Quanly(): Observable<any> {
-        return this.http.get(this.obj + '/api/DropDown/GetallHTQL');
+        return this.http.get(this.obj + '/api/DropDown/GetallHTQL',{headers: this.headers});
     }
 
 
@@ -139,8 +139,9 @@ export class SearchHttpService {
     }
 
     //sua du an
-    SuaDA(Maduan: string, Diadiemkhobac: string, IdChudautu: any, Tenduan: string, IdhinhthucQLDA: any, Idloainguonvon: any, Diadiemthuchien: string, QDduyetCTDT: string, Ngaypheduyet: any, Tongmucdautu: any, Motaduan: string, Thoigiankhoicong: any, Thoigianhoanthanh: any, Urlfile: string, idtinh: any): Observable<any> {
+    SuaDA(Id:any,Maduan: string, Diadiemkhobac: string, IdChudautu: any, Tenduan: string, IdhinhthucQLDA: any, Idloainguonvon: any, Diadiemthuchien: string, QDduyetCTDT: string, Ngaypheduyet: any, Tongmucdautu: any, Motaduan: string, Thoigiankhoicong: any, Thoigianhoanthanh: any, Urlfile: string, idtinh: any): Observable<any> {
         const form = new FormData;
+        form.append('Id', Id)
         form.append('Maduan', Maduan)
         form.append('Diadiemkhobac', Diadiemkhobac)
         form.append('IdChudautu', IdChudautu)
@@ -240,7 +241,7 @@ export class SearchHttpService {
 
     //loai chu dau tu
     LoaiCDT(): Observable<any>{
-        return this.http.get(this.obj + '/api/DropDown/GetloaiCDT');
+        return this.http.get(this.obj + '/api/DropDown/GetloaiCDT',{headers: this.headers});
     }
 
 
@@ -312,7 +313,7 @@ export class SearchHttpService {
     }
 
     Count(type:any): Observable<any>{
-        return this.http.get(this.obj + '/api/DropDown/GetOverview?type=' + type)
+        return this.http.get(this.obj + '/api/DropDown/GetOverview?type=' + type, {headers: this.headers})
     }
 
 
@@ -328,18 +329,18 @@ export class SearchHttpService {
     //get  giai đoan  von
 
     Giadoanvon(): Observable<any>{
-        return this.http.get(this.obj + '/api/Von/GetGDVon');
+        return this.http.get(this.obj + '/api/Von/GetGDVon',{headers: this.headers});
     }
 
     //list  dự án
     ListDuan(): Observable<any>{
-        return this.http.get(this.obj + '/api/DropDown/GetDuan')
+        return this.http.get(this.obj + '/api/DropDown/GetDuan', {headers: this.headers})
     }
 
 
     //list tieu du an
     ListTieuDuAn(): Observable<any>{
-        return this.http.get(this.obj + '/api/DropDown/GetTieuDuan')
+        return this.http.get(this.obj + '/api/DropDown/GetTieuDuan', {headers: this.headers})
     }
 
 

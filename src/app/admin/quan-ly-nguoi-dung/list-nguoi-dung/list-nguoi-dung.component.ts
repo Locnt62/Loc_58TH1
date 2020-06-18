@@ -34,9 +34,12 @@ export class ListNguoiDungComponent implements OnInit {
   SuaEmail: any;
   SuaMK: any;
   SearchTen: any;
+  id_xoa: any;
+
+  ConMK:any;
 
 
-
+  check = true
 
 
 
@@ -66,10 +69,15 @@ export class ListNguoiDungComponent implements OnInit {
   }
 
   Getlistuser(name) {
+    this.check = false
     this.searchHttpService.ListUser(name).subscribe(dt => {
+      if(dt){
+        this.check = true
+      this.check = true
       console.log('list user');
       this.listuser = dt;
       console.log(this.listuser)
+      }
     })
   }
   GetRole() {
@@ -95,7 +103,7 @@ export class ListNguoiDungComponent implements OnInit {
   close() {
     this.modalRef.close();
   }
-  TextSearchTen(){
+  TextSearchTen() {
     console.log(this.SearchTen)
     this.Getlistuser(this.SearchTen)
   }
@@ -123,15 +131,33 @@ export class ListNguoiDungComponent implements OnInit {
   TextThemMK() {
     console.log(this.ThemMK)
   }
+  TextConMK(){
+    console.log(this.ConMK);
+    this.Check();
+  }
+
+  Check(){
+    if (this.ConMK) {
+      if (this.ThemMK !== this.ConMK) {
+        return true
+      }
+      return false
+    }
+
+  }
+
 
   Them() {
+    this.check = false
     this.searchHttpService.Adduser(this.ThemQuyen, this.ThemCDT, this.ThemTK, this.ThemMK, this.ThemFName, this.ThemLName, this.ThemEmail).subscribe(dt => {
       console.log(dt);
       if (dt.Status === 1) {
+        this.check = true
         this.close()
         alert(dt.Messege)
         this.Getlistuser("")
       } else if (dt.Status === 0) {
+        this.check = true
         alert(dt.Messege)
       }
     })
@@ -162,27 +188,52 @@ export class ListNguoiDungComponent implements OnInit {
   }
 
   Sua(item) {
-
+    this.check = false
     this.searchHttpService.Detailuser(item.User_Id).subscribe(dt => {
-      console.log('chi tiet nguoi dung');
-      console.log(dt)
-      this.SuaFName = dt.Firstname;
-      this.SuaLName = dt.Lastname;
-      this.SuaTK = dt.Username;
-      this.SuaQuyen = dt.IdRole;
-      this.SuaCDT = dt.IdChudautu;
-      this.SuaEmail = dt.Mail;
+      if (dt) {
+        this.check = true
+        console.log('chi tiet nguoi dung');
+        console.log(dt)
+        this.SuaFName = dt.Firstname;
+        this.SuaLName = dt.Lastname;
+        this.SuaTK = dt.Username;
+        this.SuaQuyen = dt.IdRole;
+        this.SuaCDT = dt.IdChudautu;
+        this.SuaEmail = dt.Mail;
+      }
     })
 
   }
 
-  Xoa(item) {
-    this.searchHttpService.Xoauser(item.User_Id).subscribe(dt => {
+  chonnguoixoa(item) {
+    console.log(item.User_Id)
+    this.id_xoa = item.User_Id;
+  }
+
+  // Xoa(item) {
+  //   this.searchHttpService.Xoauser(item.User_Id).subscribe(dt => {
+  //     console.log(dt);
+  //     if (dt.Status === 1) {
+  //       alert(dt.Messege)
+  //       this.Getlistuser("")
+  //     } else if (dt.Status === 0) {
+  //       alert(dt.Messege)
+  //     }
+
+  //   })
+  // }
+
+  Delete() {
+    this.check = false
+    this.searchHttpService.Xoauser(this.id_xoa).subscribe(dt => {
       console.log(dt);
       if (dt.Status === 1) {
+        this.check = true
+        this.close()
         alert(dt.Messege)
         this.Getlistuser("")
       } else if (dt.Status === 0) {
+        this.check = true
         alert(dt.Messege)
       }
 

@@ -32,6 +32,9 @@ export class QuanLyChuDauTuComponent implements OnInit {
   dynamicVariable: boolean
   idcdt: any;
 
+  check = true
+  idcdt_xoa: any;
+
 
 
   constructor(private activeRoute: ActivatedRoute, private modalService: NgbModal, private router: Router, private searchHttpService: SearchHttpService,) {
@@ -62,12 +65,23 @@ export class QuanLyChuDauTuComponent implements OnInit {
     this.getListCDT('');
   }
 
+  open(content) {
+    this.modalRef = this.modalService.open(content, {
+      windowClass: 'modal-content-request',
+      keyboard: false,
+      backdrop: 'static'
+    });
+  }
+  close() {
+    this.modalRef.close();
+  }
+
   Redirect(item) {
     this.router.navigate(['/QuanlyChuDauTu'], { queryParams: { name: item.Id } });
     this.DetailCDT(item.Id)
   }
 
-  direct(){
+  direct() {
     this.router.navigate(['/QuanlyChuDauTu'])
   }
   Themmoi() {
@@ -108,10 +122,15 @@ export class QuanLyChuDauTuComponent implements OnInit {
   }
 
   getListCDT(name) {
+    this.check = false
     this.searchHttpService.queryListChudautu(name).subscribe(dt => {
-      console.log('ds chu dau tu');
-      console.log(dt)
-      this.listInvest = dt
+      if (dt) {
+
+        this.check = true
+        console.log('ds chu dau tu');
+        console.log(dt)
+        this.listInvest = dt
+      }
     })
   }
 
@@ -121,37 +140,62 @@ export class QuanLyChuDauTuComponent implements OnInit {
   }
 
   DetailCDT(id) {
+    this.check = false
     this.searchHttpService.getDetailCDT(id).subscribe(rest => {
-      console.log('chi tiet chu dau tu');
-      console.log(rest);
-      this.TenCDT = rest.Tenchudautu;
-      this.DiaChi = rest.Diachi;
-      this.website = rest.Website;
-      this.SDT = rest.Phone;
-      this.Fax = rest.Fax
-      this.Tennguoinhap = rest.Nguoitao;
-      this.EmailNN = rest.Emailnguoitao;
-      this.MaCDT = rest.MaCDT;
-      this.TypeCDT = rest.IdLoaiCDT;
-      this.Email = rest.Email
-      this.idcdt = rest.Id
+      if (rest) {
+        this.check = true
+        console.log('chi tiet chu dau tu');
+        console.log(rest);
+        this.TenCDT = rest.Tenchudautu;
+        this.DiaChi = rest.Diachi;
+        this.website = rest.Website;
+        this.SDT = rest.Phone;
+        this.Fax = rest.Fax
+        this.Tennguoinhap = rest.Nguoitao;
+        this.EmailNN = rest.Emailnguoitao;
+        this.MaCDT = rest.MaCDT;
+        this.TypeCDT = rest.IdLoaiCDT;
+        this.Email = rest.Email
+        this.idcdt = rest.Id
+      }
     })
   }
 
-  Delete(item) {
-    this.searchHttpService.XoaCDT(item.Id).subscribe(dt => {
+
+  ChonCDTXoa(item){
+    console.log('aaa', item.Id)
+    this.idcdt_xoa = item.Id
+  }
+  // Delete(item) {
+  //   this.searchHttpService.XoaCDT(item.Id).subscribe(dt => {
+  //     console.log(dt);
+  //     if (dt.Status === 1) {
+  //       alert(dt.Messege)
+  //       this.getListCDT('')
+  //     } else if (dt.Status === 0) {
+  //       alert(dt.Messege)
+  //     }
+  //   })
+  // }
+
+  Delete() {
+    this.check = false
+    this.searchHttpService.XoaCDT(this.idcdt_xoa).subscribe(dt => {
       console.log(dt);
       if (dt.Status === 1) {
+        this.check = true;
+        this.close()
         alert(dt.Messege)
         this.getListCDT('')
       } else if (dt.Status === 0) {
+        this.check = true
         alert(dt.Messege)
       }
     })
   }
 
-  Sua(){
-    this.searchHttpService.SuaCDT(this.idcdt,this.MaCDT,this.TenCDT,'',this.DiaChi,this.website, this.SDT, this.Fax, this.Email,'', this.TypeCDT).subscribe(dt =>{
+  Sua() {
+    this.searchHttpService.SuaCDT(this.idcdt, this.MaCDT, this.TenCDT, '', this.DiaChi, this.website, this.SDT, this.Fax, this.Email, '', this.TypeCDT).subscribe(dt => {
       console.log(dt);
       if (dt.Status === 1) {
         alert(dt.Messege)
