@@ -39,8 +39,12 @@
                 </div>
                 <div class="row" style="padding-bottom: 20px;">
                     <div class="col-lg-6" style="font-weight: 500;">Số điện thoại</div>
-                    <div class="col-lg-6"><input class="search-text" name="keysearch" type="text" [(ngModel)]="SDT"
-                            (ngModelChange)="TextSDT()" style="width: calc(100% - 60px)"></div>
+                    <div class="col-lg-6"><input class="search-text" name="keysearch" type="text" [(ngModel)]="SDT" #soDienThoai="ngModel" pattern="[0-9]{10}"
+                            (ngModelChange)="TextSDT()" style="width: calc(100% - 60px)"><br>
+                            <small class="text text-danger" *ngIf="soDienThoai.invalid ">Sô
+                                điện thoại bắt
+                                buộc phải có 10 số</small>
+                        </div>
                 </div>
                 <div class="row" style="padding-bottom: 20px;">
                     <div class="col-lg-6" style="font-weight: 500;">Fax</div>
@@ -49,8 +53,10 @@
                 </div>
                 <div class="row" style="padding-bottom: 20px;">
                     <div class="col-lg-6" style="font-weight: 500;">Email</div>
-                    <div class="col-lg-6"><input class="search-text" name="keysearch" type="text" [(ngModel)]="Email"
-                            (ngModelChange)="TextEmail()" style="width: calc(100% - 60px)"></div>
+                    <div class="col-lg-6"><input class="search-text" name="keysearch" type="text" [(ngModel)]="Email" #email="ngModel" email
+                            (ngModelChange)="TextEmail()" style="width: calc(100% - 60px)"><br>
+                            <small class="text text-danger" *ngIf="email.invalid ">Email không hợp lệ!</small>
+                        </div>
                 </div>
                 <!-- <div class="row" style="padding-bottom: 20px;">
                     <div class="col-lg-9"></div>

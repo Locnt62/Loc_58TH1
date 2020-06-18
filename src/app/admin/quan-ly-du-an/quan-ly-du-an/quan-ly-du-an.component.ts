@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { SearchHttpService } from 'src/app/http/test-api';
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-quan-ly-du-an',
@@ -64,7 +65,7 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
   check = true
   idduan_chonxoa: any;
   idtda_xoa: any;
-
+  model: NgbDateStruct;
 
 
 

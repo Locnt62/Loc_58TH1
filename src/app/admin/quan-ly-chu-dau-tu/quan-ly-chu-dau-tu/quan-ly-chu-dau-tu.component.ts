@@ -195,12 +195,16 @@ export class QuanLyChuDauTuComponent implements OnInit {
   }
 
   Sua() {
+    this.check = false
     this.searchHttpService.SuaCDT(this.idcdt, this.MaCDT, this.TenCDT, '', this.DiaChi, this.website, this.SDT, this.Fax, this.Email, '', this.TypeCDT).subscribe(dt => {
       console.log(dt);
       if (dt.Status === 1) {
+        this.check = true
         alert(dt.Messege)
+        this.getListCDT('')
         this.router.navigate(['/QuanlyChuDauTu'])
       } else if (dt.Status === 0) {
+        this.check = true
         alert(dt.Messege)
       }
     })

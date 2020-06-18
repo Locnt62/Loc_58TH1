@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SearchHttpService } from 'src/app/http/test-api';
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-chi-tiet-du-an',
@@ -43,7 +44,7 @@ export class ChiTietDuAnComponent implements OnInit {
   maduan:any;
 
   Tinh:any;
-
+  model: NgbDateStruct;
   constructor(private activeRoute: ActivatedRoute, private modalService: NgbModal, private router: Router, private searchHttpService: SearchHttpService,) { }
 
   ngOnInit() {
