@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SearchHttpService } from 'src/app/http/test-api';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TabsetComponent } from 'ngx-bootstrap/tabs';
 
 @Component({
   selector: 'app-quan-ly-von-dau-tu',
@@ -35,6 +36,7 @@ export class QuanLyVonDauTuComponent implements OnInit {
 
 check = true
   idvon_xoa: any;
+  ls_von: any;
 
 
 
@@ -42,8 +44,16 @@ check = true
 
 
   constructor(private activeRoute: ActivatedRoute, private router: Router, private searchHttpService: SearchHttpService,private modalService: NgbModal,) { }
+  @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
+  selectTab(tabId: number) {
+    this.staticTabs.tabs[tabId].active = true;
+  }
 
   ngOnInit() {
+    this.searchVon = '';
+    this.searchda = '';
+    this.searchtda = '';
+
     this.variable = true
     this.activeRoute.queryParams.subscribe(params => {
       console.log('params');
@@ -53,6 +63,7 @@ check = true
     })
     if (this.seg) {
       this.Chitietvon(this.seg)
+      this.LichsuVon(this.seg)
     }
     this.GiaidoanVon()
     this.ListDA()
@@ -73,6 +84,7 @@ check = true
   direct(item) {
     this.router.navigate(['/QuanlyVon'], { queryParams: { name: item.ID } });
     this.Chitietvon(item.ID)
+    this.LichsuVon(item.ID)
   }
 
   redirect() {
@@ -121,16 +133,19 @@ check = true
 
   SearchVon() {
     console.log(this.searchVon)
-    this.ListVon(this.searchVon, '', '')
+    // this.ListVon(this.searchVon, '', '')
+     this.ListVon(this.searchVon,this.searchda,this.searchtda)
   }
 
   Searchda() {
     console.log(this.searchda)
-    this.ListVon('', this.searchda, '')
+  //  this.ListVon('', this.searchda, '')
+    this.ListVon(this.searchVon,this.searchda,this.searchtda)
   }
   Searchtda() {
     console.log(this.searchtda)
-    this.ListVon('', '', this.searchtda)
+   // this.ListVon('', '', this.searchtda)
+   this.ListVon(this.searchVon,this.searchda,this.searchtda)
   }
 
 
@@ -233,6 +248,15 @@ check = true
         this.check = true
         alert(dt.Messege)
       }
+    })
+  }
+
+
+  LichsuVon(idvon){
+    this.searchHttpService.HistoryVon(idvon).subscribe(dt =>{
+      console.log('lich su von');
+      console.log(dt)
+      this.ls_von = dt
     })
   }
 

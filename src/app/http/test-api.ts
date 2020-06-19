@@ -402,6 +402,32 @@ export class SearchHttpService {
     }
 
 
+    //reset pass
+    Reset(id:any): Observable<any>{
+        const form = new FormData
+        form.append('id',id)
+        return this.http.post<any>(this.obj + '/api/User/ResetPass', form, {headers:this.headers})
+    }
+
+    //export excel
+    ExportExcell(): Observable<any>{
+        return this.http.get(this.obj + 'api/Duan/ReportDuan', {headers:this.headers})
+    }
+
+
+    //search tieu du an
+    SearchTDA(chudautu:any,idduan:any, name:String): Observable<any>{
+        return this.http.get(this.obj + '/api/Duan/SreachTieuDuan?chudautu=' + chudautu + '&idduan=' + idduan + '&name=' + name )
+    }
+
+    //history von
+
+    HistoryVon(idvon:any): Observable<any>{
+        const form  = new FormData;
+        form.append('idvon',idvon)
+        return this.http.post<any>(this.obj + '/api/Von/GetHistoryVon', form, {headers:this.headers})
+    }
+
 
 
 

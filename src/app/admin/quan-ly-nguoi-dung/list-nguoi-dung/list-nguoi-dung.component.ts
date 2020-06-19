@@ -36,10 +36,11 @@ export class ListNguoiDungComponent implements OnInit {
   SearchTen: any;
   id_xoa: any;
 
-  ConMK:any;
+  ConMK: any;
 
 
   check = true
+  id_user: any;
 
 
 
@@ -71,12 +72,12 @@ export class ListNguoiDungComponent implements OnInit {
   Getlistuser(name) {
     this.check = false
     this.searchHttpService.ListUser(name).subscribe(dt => {
-      if(dt){
+      if (dt) {
         this.check = true
-      this.check = true
-      console.log('list user');
-      this.listuser = dt;
-      console.log(this.listuser)
+        this.check = true
+        console.log('list user');
+        this.listuser = dt;
+        console.log(this.listuser)
       }
     })
   }
@@ -131,12 +132,12 @@ export class ListNguoiDungComponent implements OnInit {
   TextThemMK() {
     console.log(this.ThemMK)
   }
-  TextConMK(){
+  TextConMK() {
     console.log(this.ConMK);
     this.Check();
   }
 
-  Check(){
+  Check() {
     if (this.ConMK) {
       if (this.ThemMK !== this.ConMK) {
         return true
@@ -200,9 +201,25 @@ export class ListNguoiDungComponent implements OnInit {
         this.SuaQuyen = dt.IdRole;
         this.SuaCDT = dt.IdChudautu;
         this.SuaEmail = dt.Mail;
+        this.id_user = dt.User_Id
       }
     })
 
+  }
+
+  Edit() {
+    this.searchHttpService.Suauser(this.id_user, this.SuaQuyen, this.SuaCDT, this.SuaTK, '', this.SuaFName, this.SuaLName, this.SuaEmail).subscribe(dt => {
+      console.log(dt)
+      if (dt.Status === 1) {
+        this.check = true
+        this.close()
+        alert(dt.Messege)
+        this.Getlistuser("")
+      } else if (dt.Status === 0) {
+        this.check = true
+        alert(dt.Messege)
+      }
+    })
   }
 
   chonnguoixoa(item) {
@@ -237,6 +254,23 @@ export class ListNguoiDungComponent implements OnInit {
         alert(dt.Messege)
       }
 
+    })
+  }
+
+
+  ResetPass() {
+    this.check = false;
+    this.searchHttpService.Reset(this.id_xoa).subscribe(dt => {
+      console.log(dt);
+      if (dt.Status === 1) {
+        this.check = true
+        this.close()
+        alert(dt.Messege)
+        this.Getlistuser("")
+      } else if (dt.Status === 0) {
+        this.check = true
+        alert(dt.Messege)
+      }
     })
   }
 

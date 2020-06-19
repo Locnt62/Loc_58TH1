@@ -58,6 +58,15 @@ import { QuanLyThucHienGiaiNganComponent } from './admin/quan-ly-giai-ngan/quan-
 import { ThemQuanLyGiaiNganComponent } from './admin/quan-ly-giai-ngan/them-quan-ly-giai-ngan/them-quan-ly-giai-ngan.component';
 import { ListNguoiDungComponent } from './admin/quan-ly-nguoi-dung/list-nguoi-dung/list-nguoi-dung.component';
 import { DoiMatKhauComponent } from './admin/doi-mat-khau/doi-mat-khau/doi-mat-khau.component';
+// import {DpDatePickerModule} from 'ng2-date-picker';
+
+
+// import { DatePickerModule } from 'ng2-datepicker';
+
+import { NgDatepickerModule } from 'ng2-datepicker';
+
+ 
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -115,6 +124,9 @@ import { DoiMatKhauComponent } from './admin/doi-mat-khau/doi-mat-khau/doi-mat-k
      MatTabsModule,
      AuthModule,
      NgApexchartsModule,
+     NgDatepickerModule,
+    //  DpDatePickerModule,
+    ToastrModule,
     AgGridModule.withComponents([]),
     TabsModule.forRoot()
   ],

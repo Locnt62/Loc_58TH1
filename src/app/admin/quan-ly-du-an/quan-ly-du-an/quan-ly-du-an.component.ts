@@ -1,14 +1,54 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { SearchHttpService } from 'src/app/http/test-api';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter,NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+// import { DatePickerOptions } from 'ng2-datepicker';
+import { DatepickerOptions } from 'ng2-datepicker';
+import * as enLocale from 'date-fns/locale/en';
+import * as frLocale from 'date-fns/locale/fr';
+@Injectable()
+export class CustomDateAdapter {
+  fromModel(value: string): NgbDateStruct
+  {
+     if (!value)
+      return null
+     let parts=value.split('/');
+     return {year:+parts[0],month:+parts[1],day:+parts[2]} as NgbDateStruct
+  }
+
+  toModel(date: NgbDateStruct): string // from internal model -> your mode
+  {
+    return date?date.year+"/"+('0'+date.month).slice(-2)+"/"+('0'+date.day).slice(-2):null
+    
+  }
+
+}
+@Injectable()
+export class CustomDateParserFormatter {
+  parse(value: string): NgbDateStruct
+  {
+    if (!value)
+      return null
+     let parts=value.split('/');
+     return {year:+parts[0],month:+parts[1],day:+parts[2]} as NgbDateStruct
+
+  }
+  format(date: NgbDateStruct): string
+  {
+    return date?date.year+"/"+('0'+date.month).slice(-2)+"/"+('0'+date.day).slice(-2):null
+  }
+}
+
+
 
 @Component({
   selector: 'app-quan-ly-du-an',
   templateUrl: './quan-ly-du-an.component.html',
-  styleUrls: ['./quan-ly-du-an.component.css']
+  styleUrls: ['./quan-ly-du-an.component.css'],
+  providers: [{provide: NgbDateAdapter, useClass: CustomDateAdapter},
+    {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter}]
 })
 export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
   listProvine: any;
@@ -67,7 +107,13 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
   idtda_xoa: any;
   model: NgbDateStruct;
 
+  model2: string;
 
+  SearchCDT:any
+  searchTenTDA: any;
+  
+
+ 
 
   constructor(private activeRoute: ActivatedRoute, private modalService: NgbModal, private router: Router, private searchHttpService: SearchHttpService,) {
     this.config = {
@@ -75,7 +121,9 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
       currentPage: 1,
       totalItems: this.listDA
     };
+
   }
+  
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
   selectTab(tabId: number) {
     this.staticTabs.tabs[tabId].active = true;
@@ -83,6 +131,17 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
+
+    this.Addtext = '';
+    this.selectProvince = '';
+    this.selectChudautu = ''
+
+    this.SearchCDT = '';
+    this.SearchCDT = ''
+
+    this.searchTenTDA = ''
+    
+
     this.variable = true;
     this.activeRoute.queryParams.subscribe(params => {
       console.log('params');
@@ -98,7 +157,8 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
     this.Quanly()
 
     if (this.seg) {
-      this.ChitietDA(this.seg)
+      this.ChitietDA(this.seg)  
+      this.SearchTDA('',this.seg,'')
 
     }
 
@@ -121,10 +181,20 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
   direct(item) {
     this.router.navigate(['/QuanlyDuan'], { queryParams: { name: item.Id } });
     this.ChitietDA(item.Id)
+    this.SearchTDA('',item.Id,'')
 
   }
   redirect() {
     this.router.navigate(['/QuanlyDuan'])
+  }
+
+
+  SearchTDA(chudautu,idduan,name){
+    this.searchHttpService.SearchTDA(chudautu,idduan,name).subscribe(dt =>{
+      console.log('search tiểu dự án');
+      console.log(dt)
+      this.list_tieuduan = dt
+    })
   }
   open(content) {
     this.modalRef = this.modalService.open(content, {
@@ -144,6 +214,7 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
     //    this.seg = params.name;
     //   console.log(this.seg)
     // })
+
   }
 
   ThemDA() {
@@ -181,6 +252,7 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
         this.TMDT = this.detailDA.Tongdautu;
         this.Image = this.detailDA.Urlfile;
         this.TGTC = this.detailDA.Thoigianthicong;
+        this.model =  this.detailDA.Thoigianthicong;
         this.TGHT = this.detailDA.DateComplete;
         this.htql = this.detailDA.Idhinhthucquanli
         this.list_tieuduan = this.detailDA.listtieuduan
@@ -196,16 +268,24 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
 
   SearMADA() {
     console.log(this.Addtext)
-    this.GetListDA(this.Addtext, '', '', '')
+    // this.GetListDA(this.Addtext, '', '', '')
+    this.GetListDA(this.Addtext,this.selectProvince,this.selectChudautu,'')
   }
   SelectTinh() {
     console.log(this.selectProvince)
-    this.GetListDA('', this.selectProvince, '', '')
+    // this.GetListDA('', this.selectProvince, '', '')
+    this.GetListDA(this.Addtext,this.selectProvince,this.selectChudautu,'')
   }
   SelectCDT() {
     console.log(this.selectChudautu)
-    this.GetListDA('', '', this.selectChudautu, '')
+    // this.GetListDA('', '', this.selectChudautu, '')
+    this.GetListDA(this.Addtext,this.selectProvince,this.selectChudautu,'')
   }
+
+
+  // XuatFileExcel(){
+
+  // }
 
   ListTinh() {
     this.searchHttpService.queryProvince().subscribe(dt => {
@@ -356,6 +436,17 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
 
   // }
 
+  
+  onDateSelect(event) {
+    let year = event.year;
+    let month = event.month <= 9 ? '0' + event.month : event.month;;
+    let day = event.day <= 9 ? '0' + event.day : event.day;;
+    // let finalDate = year + "-" + month + "-" + day;
+    this.TGTC =  day+"/"+month+"/"+year;
+    console.log('aaaa',this.TGTC)
+   }
+
+
   ThemMoi() {
     this.check = false
     this.searchHttpService.SuaDA(this.idduan, this.maduan, this.Khobac, this.QDBD, this.tenduan, this.htql, this.loainguonvon, this.NNoithuchien, this.QDDT, this.Ngaypheduyet, this.TMDT, this.Mota, this.TGTC, this.TGHT, this.Image, this.Tinh).subscribe(dt => {
@@ -479,6 +570,31 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
         alert(dt.Messege)
       }
     })
+  }
+
+
+  XuatFile(){
+    this.searchHttpService.ExportExcell().subscribe(dt =>{
+      console.log(dt);
+      if (dt.Status === 1) {
+        this.check = true
+        this.close()
+        alert(dt.Messege)
+        this.ChitietDA(this.seg)
+      } else if (dt.Status === 0) {
+        this.check = true
+        alert(dt.Messege)
+      }
+    })
+  }
+
+  TextSearchCDT(){
+    console.log('a,', this.SearchCDT)
+    this.SearchTDA(this.SearchCDT,this.seg,this.searchTenTDA)
+  }
+  TextsearchTenTDA(){
+    console.log(this.searchTenTDA)
+    this.SearchTDA(this.SearchCDT,this.seg,this.searchTenTDA)
   }
 
 

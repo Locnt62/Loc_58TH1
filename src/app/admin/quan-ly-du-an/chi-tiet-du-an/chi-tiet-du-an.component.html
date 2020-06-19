@@ -42,8 +42,20 @@
                             Ngày phê duyệt
                         </div>
                         <div class="col-lg-8">
-                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="Ngaypheduyet"
-                                (ngModelChange)="TextNPD()" style="width: calc(100% - 60px)">
+                            <!-- <input class="search-text" name="keysearch" type="text" [(ngModel)]="Ngaypheduyet"
+                                (ngModelChange)="TextNPD()" style="width: calc(100% - 60px)"> -->
+                                <form class="form-inline" >
+                                    <div class="form-group">
+                                        <div class="input-group" style="width: 355px;">
+                                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" (dateSelect)="onDateSelect2($event)"
+                                                [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker" >
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()"
+                                                    type="button"><i class="fa fa-calendar-week"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                         </div>
                     </div>
                     <div class="row line-duan">
@@ -71,9 +83,8 @@
                         <div class="col-lg-8">
                             <!-- <input class="search-text" name="keysearch" type="text" [(ngModel)]="QDBD"
                                 (ngModelChange)="TextQDBD()" style="width: calc(100% - 60px)"> -->
-                                <ng-select [items]="list_chudautu" [(ngModel)]="QDBD"
-                                (ngModelChange)="TextQDBD()" bindLabel="Tenchudautu" bindValue="Id"
-                                style="width: calc(100% - 60px)">
+                            <ng-select [items]="list_chudautu" [(ngModel)]="QDBD" (ngModelChange)="TextQDBD()"
+                                bindLabel="Tenchudautu" bindValue="Id" style="width: calc(100% - 60px)">
                             </ng-select>
                         </div>
                     </div>
@@ -84,9 +95,8 @@
                         <div class="col-lg-8">
                             <!-- <input class="search-text" name="keysearch" type="text" [(ngModel)]="QDBD"
                                 (ngModelChange)="TextQDBD()" style="width: calc(100% - 60px)"> -->
-                                <ng-select [items]="listProvine" [(ngModel)]="Tinh"
-                                (ngModelChange)="SelectTinh()" bindLabel="TenTinh" bindValue="Id"
-                                style="width: calc(100% - 60px)">
+                            <ng-select [items]="listProvine" [(ngModel)]="Tinh" (ngModelChange)="SelectTinh()"
+                                bindLabel="TenTinh" bindValue="Id" style="width: calc(100% - 60px)">
                             </ng-select>
                         </div>
                     </div>
@@ -123,20 +133,21 @@
                             Thời gian thi công
                         </div>
                         <div class="col-lg-8">
-                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="TGTC"
-                                (ngModelChange)="TextTGTC()" style="width: calc(100% - 60px)">
-                                <!-- <form class="form-inline">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="TGTC" ngbDatepicker  (ngModelChange)="TextTGTC()"
-                                                #d="ngbDatepicker">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
-                                                    type="button"></button>
-                                            </div>
+                            <!-- <input class="search-text" name="keysearch" type="text" [(ngModel)]="TGTC"
+                                (ngModelChange)="TextTGTC()" style="width: calc(100% - 60px)"> -->
+                            <form class="form-inline" >
+                                <div class="form-group">
+                                    <div class="input-group" style="width: 355px;">
+                                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" (dateSelect)="onDateSelect($event)"
+                                            [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" >
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                                type="button"><i class="fa fa-calendar-week"></i></button>
                                         </div>
                                     </div>
-                                </form> -->
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                     <div class="row line-duan">
@@ -144,8 +155,21 @@
                             Thời gian hoàn thành
                         </div>
                         <div class="col-lg-8">
-                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="TGHT"
-                                (ngModelChange)="TextTGHT()" style="width: calc(100% - 60px)">
+                            <!-- <input class="search-text" name="keysearch" type="text" [(ngModel)]="TGHT"
+                                (ngModelChange)="TextTGHT()" style="width: calc(100% - 60px)"> -->
+                                <form class="form-inline" >
+                                    <div class="form-group">
+                                        <div class="input-group" style="width: 355px;">
+                                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" (dateSelect)="onDateSelect1($event)"
+                                                [(ngModel)]="model1" ngbDatepicker #d1="ngbDatepicker" >
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()"
+                                                    type="button"><i class="fa fa-calendar-week"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+    
                         </div>
                     </div>
                     <div class="row line-duan">
@@ -163,9 +187,8 @@
                             Loại nguồn vốn
                         </div>
                         <div class="col-lg-8">
-                            <ng-select [items]="list_loaivon" [(ngModel)]="loainguonvon"
-                                (ngModelChange)="SelectVon()" bindLabel="Value" bindValue="Id"
-                                style="width: calc(100% - 60px)">
+                            <ng-select [items]="list_loaivon" [(ngModel)]="loainguonvon" (ngModelChange)="SelectVon()"
+                                bindLabel="Value" bindValue="Id" style="width: calc(100% - 60px)">
                             </ng-select>
                         </div>
                     </div>
@@ -175,7 +198,7 @@
                         </div>
                         <div class="col-lg-8">
                             <textarea class="search-text" name="keysearch" type="text" [(ngModel)]="Mota"
-                            (ngModelChange)="AddMota()"
+                                (ngModelChange)="AddMota()"
                                 style="width: calc(100% - 60px);min-height: 100px;"></textarea>
                         </div>
                     </div>
@@ -263,7 +286,7 @@
                 </tab>
             </tabset>
         </div>
-    </div> --> 
+    </div> -->
 </div>
 <div class="footer">
     <div class="row" style="padding-top: 30px;padding-right: 15px;">
@@ -276,7 +299,8 @@
         <div class="col-lg-3" style="display: flex;justify-content: space-evenly;">
             <button class="btn" style="background-color: red;color: white;width: 90px;"
                 (click)="redirect()">Hủy</button>
-            <button class="btn" style="background-color: green;color: white;width: 90px;" (click)="ThemMoi()">Lưu</button>
+            <button class="btn" style="background-color: green;color: white;width: 90px;"
+                (click)="ThemMoi()">Lưu</button>
         </div>
     </div>
 </div>

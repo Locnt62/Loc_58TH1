@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchHttpService } from 'src/app/http/test-api';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-chi-tiet-chu-dau-tu',
@@ -23,7 +24,7 @@ export class ChiTietChuDauTuComponent implements OnInit {
   check = true
 
   dynamicVariable: boolean
-  constructor(private searchHttpService: SearchHttpService,private router: Router,) { }
+  constructor(private searchHttpService: SearchHttpService,private router: Router,private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.searchHttpService.LoaiCDT().subscribe(dt => {
@@ -81,6 +82,9 @@ export class ChiTietChuDauTuComponent implements OnInit {
       if(dt.Status === 1){
         this.check = true
         alert(dt.Messege)
+        // this.toastrService.success(dt.Messege,'', {
+        //   timeOut: 3000
+        // });
         this.router.navigate(['/QuanlyChuDauTu'])
       }else if(dt.Status === 0){
         this.check = true

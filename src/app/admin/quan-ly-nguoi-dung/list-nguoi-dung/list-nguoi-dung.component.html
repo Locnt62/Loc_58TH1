@@ -39,6 +39,7 @@
                     <!-- <td style="padding-left: 20px;">Số điện thoại</td> -->
                     <td style="padding-left: 20px;">Phân quyền</td>
                     <td style="padding-left: 20px;">Email</td>
+                    <td style="padding-left: 20px;">Reset password</td>
                     <td style="padding-left: 20px;">Sửa</td>
                     <td style="padding-left: 20px;">Xóa</td>
                 </tr>
@@ -53,6 +54,10 @@
                     <!-- <td style="padding-left: 20px;">{{item.Diachi}}</td> -->
                     <td style="padding-left: 20px;">{{item.RoleName}}</td>
                     <td style="padding-left: 20px;">{{item.Mail}}</td>
+                    <td style="padding-left: 20px;">
+                        <div (click)="open(reset);chonnguoixoa(item)" style="cursor: pointer;"><i class="fa fa-edit"></i>
+                        </div>
+                    </td>
                     <td style="padding-left: 20px;">
                         <div (click)="open(content1); Sua(item)" style="cursor: pointer;"><i class="fa fa-edit"></i>
                         </div>
@@ -91,110 +96,113 @@
         </div>
     </div>
     <div class="body-popup">
-        <div class="row" style="padding-bottom: 20px;">
-            <div class="col-lg-4" style="font-weight: 500;">
-                Firstname
+        <!-- <form   name="form" #form="ngForm" (ngSubmit)="onSubmitForm(form)"> -->
+            <div class="row" style="padding-bottom: 20px;">
+                <div class="col-lg-4" style="font-weight: 500;">
+                    Firstname
+                </div>
+                <div class="col-lg-8">
+                    <input class="search-text" name="keysearch" type="text" [(ngModel)]="ThemFName"
+                        (ngModelChange)="TextThemFName()" style="width: calc(100% - 40px)">
+                </div>
             </div>
-            <div class="col-lg-8">
-                <input class="search-text" name="keysearch" type="text" [(ngModel)]="ThemFName"
-                    (ngModelChange)="TextThemFName()" style="width: calc(100% - 40px)">
+            <div class="row" style="padding-bottom: 20px;">
+                <div class="col-lg-4" style="font-weight: 500;">
+                    Lastname
+                </div>
+                <div class="col-lg-8">
+                    <input class="search-text" name="keysearch" type="text" [(ngModel)]="ThemLName"
+                        (ngModelChange)="TextThemLName()" style="width: calc(100% - 40px)">
+                </div>
             </div>
-        </div>
-        <div class="row" style="padding-bottom: 20px;">
-            <div class="col-lg-4" style="font-weight: 500;">
-                Lastname
+            <div class="row" style="padding-bottom: 20px;">
+                <div class="col-lg-4" style="font-weight: 500;">
+                    Tên tài khoản
+                </div>
+                <div class="col-lg-8">
+                    <input class="search-text" name="keysearch" type="text" [(ngModel)]="ThemTK"
+                        (ngModelChange)="TextThemTK()" style="width: calc(100% - 40px)">
+                </div>
             </div>
-            <div class="col-lg-8">
-                <input class="search-text" name="keysearch" type="text" [(ngModel)]="ThemLName"
-                    (ngModelChange)="TextThemLName()" style="width: calc(100% - 40px)">
+            <div class="row" style="padding-bottom: 20px;">
+                <div class="col-lg-4" style="font-weight: 500;">
+                    Quyền hạn
+                </div>
+                <div class="col-lg-8">
+                    <ng-select [items]="listquyen" [(ngModel)]="ThemQuyen" (ngModelChange)="SelectThemQuyen()"
+                        bindLabel="Value" bindValue="Id" style="width: calc(100% - 40px)">
+                    </ng-select>
+                </div>
             </div>
-        </div>
-        <div class="row" style="padding-bottom: 20px;">
-            <div class="col-lg-4" style="font-weight: 500;">
-                Tên tài khoản
+            <div class="row" style="padding-bottom: 20px;">
+                <div class="col-lg-4" style="font-weight: 500;">
+                    Chủ đầu tư
+                </div>
+                <div class="col-lg-8">
+                    <ng-select [items]="listInvest" [(ngModel)]="ThemCDT" (ngModelChange)="SelectThemCDT()"
+                        bindLabel="Tenchudautu" bindValue="Id" style="width: calc(100% - 40px)">
+                    </ng-select>
+                </div>
             </div>
-            <div class="col-lg-8">
-                <input class="search-text" name="keysearch" type="text" [(ngModel)]="ThemTK"
-                    (ngModelChange)="TextThemTK()" style="width: calc(100% - 40px)">
-            </div>
-        </div>
-        <div class="row" style="padding-bottom: 20px;">
-            <div class="col-lg-4" style="font-weight: 500;">
-                Quyền hạn
-            </div>
-            <div class="col-lg-8">
-                <ng-select [items]="listquyen" [(ngModel)]="ThemQuyen" (ngModelChange)="SelectThemQuyen()"
-                    bindLabel="Value" bindValue="Id" style="width: calc(100% - 40px)">
-                </ng-select>
-            </div>
-        </div>
-        <div class="row" style="padding-bottom: 20px;">
-            <div class="col-lg-4" style="font-weight: 500;">
-                Chủ đầu tư
-            </div>
-            <div class="col-lg-8">
-                <ng-select [items]="listInvest" [(ngModel)]="ThemCDT" (ngModelChange)="SelectThemCDT()"
-                    bindLabel="Tenchudautu" bindValue="Id" style="width: calc(100% - 40px)">
-                </ng-select>
-            </div>
-        </div>
 
-        <div class="row" style="padding-bottom: 20px;">
-            <div class="col-lg-4" style="font-weight: 500;">
-                Email
+            <div class="row" style="padding-bottom: 20px;">
+                <div class="col-lg-4" style="font-weight: 500;">
+                    Email
+                </div>
+                <div class="col-lg-8">
+                    <input class="search-text" name="keysearch" type="text" [(ngModel)]="ThemEmail" #email="ngModel"
+                        email (ngModelChange)="TextThemEmail()" style="width: calc(100% - 40px)"><br>
+                    <small class="text text-danger" *ngIf="email.invalid ">Email không hợp lệ!</small>
+                </div>
             </div>
-            <div class="col-lg-8">
-                <input class="search-text" name="keysearch" type="text" [(ngModel)]="ThemEmail"
-                    (ngModelChange)="TextThemEmail()" style="width: calc(100% - 40px)">
+            <div class="row" style="padding-bottom: 20px;">
+                <div class="col-lg-4" style="font-weight: 500;">
+                    Mật khẩu
+                </div>
+                <div class="col-lg-8">
+                    <input class="search-text" name="keysearch" type="password" [(ngModel)]="ThemMK" #matkhau="ngModel"
+                        (ngModelChange)="TextThemMK()" style="width: calc(100% - 40px)"
+                        pattern="[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{8,20}"><br>
+                    <small class="text text-danger" *ngIf="matkhau.invalid && ( matkhau.dirty || matkhau.touched )">Mật
+                        khẩu
+                        nhập không hợp lệ!</small>
+                </div>
             </div>
-        </div>
-        <div class="row" style="padding-bottom: 20px;">
-            <div class="col-lg-4" style="font-weight: 500;">
-                Mật khẩu
-            </div>
-            <div class="col-lg-8">
-                <input class="search-text" name="keysearch" type="password" [(ngModel)]="ThemMK" #matkhau="ngModel"
-                    (ngModelChange)="TextThemMK()" style="width: calc(100% - 40px)"
-                    pattern="[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{8,20}"><br>
-                <small class="text text-danger" *ngIf="matkhau.invalid && ( matkhau.dirty || matkhau.touched )">Mật khẩu
-                    nhập không hợp lệ!</small>
-            </div>
-        </div>
-        <div class="row" style="padding-bottom: 20px;">
-            <div class="col-lg-4" style="font-weight: 500;">
-                Xác nhận Mật khẩu
-            </div>
-            <div class="col-lg-8">
-                <input class="search-text" name="keysearch" type="password" [(ngModel)]="ConMK" #matkhaunhaplai="ngModel"
-                    (ngModelChange)="TextConMK()" style="width: calc(100% - 40px)"
-                    pattern="[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{8,20}"><br>
-                <!-- <small class="text text-danger"
+            <div class="row" style="padding-bottom: 20px;">
+                <div class="col-lg-4" style="font-weight: 500;">
+                    Xác nhận Mật khẩu
+                </div>
+                <div class="col-lg-8">
+                    <input class="search-text" name="keysearch" type="password" [(ngModel)]="ConMK"
+                        #matkhaunhaplai="ngModel" (ngModelChange)="TextConMK()" style="width: calc(100% - 40px)"
+                        pattern="[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{8,20}"><br>
+                    <!-- <small class="text text-danger"
                     *ngIf="matkhaunhaplai.invalid && ( matkhaunhaplai.dirty || matkhaunhaplai.touched )">Mật khẩu nhập
                     không hợp lệ!</small> -->
-                <div *ngIf="!Check() === false">
-                    <small class="text text-danger">Mật khẩu nhập chưa khớp!</small>
-                </div>
-
-            </div>
-        </div>
-        <div class="row" style="padding-bottom: 20px;">
-            <div class="col-lg-5">
-
-            </div>
-            <div class="col-lg-6">
-                <div class="row">
-                    <div class="col-md-6">
-                        <button class="btn" style="background-color: red;color: white;width: 90px;"
-                            (click)="close()">Hủy</button>
+                    <div *ngIf="!Check() === false">
+                        <small class="text text-danger">Mật khẩu nhập chưa khớp!</small>
                     </div>
-                    <div class="col-md-6">
-                        <button class="btn" style="background-color: green;color: white;width: 90px;"
-                            (click)="Them()">Lưu</button>
-                    </div>
+
                 </div>
             </div>
-        </div>
+            <div class="row" style="padding-bottom: 20px;">
+                <div class="col-lg-5">
 
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn" style="background-color: red;color: white;width: 90px;"
+                                (click)="close()">Hủy</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn" style="background-color: green;color: white;width: 90px;" [disabled]="email.invalid" [disabled]="matkhau.invalid"
+                                (click)="Them()">Lưu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- </form> -->
     </div>
 </ng-template>
 
@@ -232,7 +240,7 @@
                 Tên tài khoản
             </div>
             <div class="col-lg-8">
-                <input class="search-text" name="keysearch" type="text" [(ngModel)]="SuaTK"
+                <input class="search-text" name="keysearch" type="text" [(ngModel)]="SuaTK" disabled
                     (ngModelChange)="TextSuaTK()" style="width: calc(100% - 40px)">
             </div>
         </div>
@@ -262,8 +270,9 @@
                 Email
             </div>
             <div class="col-lg-8">
-                <input class="search-text" name="keysearch" type="text" [(ngModel)]="SuaEmail"
-                    (ngModelChange)="TextSuaEmail()" style="width: calc(100% - 40px)">
+                <input class="search-text" name="keysearch" type="text" [(ngModel)]="SuaEmail" #email="ngModel" email
+                    (ngModelChange)="TextSuaEmail()" style="width: calc(100% - 40px)"><br>
+                <small class="text text-danger" *ngIf="email.invalid ">Email không hợp lệ!</small>
             </div>
         </div>
         <!-- <div class="row" style="padding-bottom: 20px;">
@@ -286,7 +295,7 @@
                             (click)="close()">Hủy</button>
                     </div>
                     <div class="col-md-6">
-                        <button class="btn" style="background-color: green;color: white;width: 90px;"
+                        <button class="btn" style="background-color: green;color: white;width: 90px;" [disabled]="email.invalid"
                             (click)="Edit()">Lưu</button>
                     </div>
                 </div>
@@ -314,6 +323,30 @@
             <div class="col-lg-3">
                 <button class="btn" style="background-color: #25549d;color: white;width: 90px;"
                     (click)="Delete()">Xóa</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+
+<ng-template #reset>
+    <div class="header-popup">
+        <div>
+            <span style="font-weight: 500;">Khôi phục người dùng</span>
+        </div>
+        <div>
+            <span (click)="close()" style="cursor: pointer;font-size: 19px;"><i class="fa fa-times"></i></span>
+        </div>
+    </div>
+    <div class="body-popup">
+        <div class="row">
+            <div class="col-lg-8">
+                <span>Bạn có muốn khôi phục mật khẩu của người dùng này ?</span>
+            </div>
+            <div class="col-lg-3">
+                <button class="btn" style="background-color: #25549d;color: white;width: 90px;"
+                    (click)="ResetPass()">Reset</button>
             </div>
         </div>
     </div>

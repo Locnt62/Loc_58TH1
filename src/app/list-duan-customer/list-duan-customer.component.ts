@@ -57,6 +57,9 @@ export class ListDuanCustomerComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.Inputext = ''
+    this.selectProvince = ''
+    this.selectChudautu = ''
     this.activeRoute.queryParams.subscribe(params => {
       console.log('params');
       // console.log(params.name);
@@ -130,17 +133,19 @@ export class ListDuanCustomerComponent implements OnInit, AfterViewInit {
   }
   SelectTinh() {
     console.log(this.selectProvince)
-    this.getAllduan(this.selectProvince, '', '', '')
-
+    // this.getAllduan(this.selectProvince, '', '', '')
+    this.getAllduan(this.selectProvince, this.selectChudautu, this.Inputext, '')
   }
 
   SelectCDT() {
     console.log(this.selectChudautu);
-    this.getAllduan('', this.selectChudautu, '', '')
+    // this.getAllduan('', this.selectChudautu, '', '')
+    this.getAllduan(this.selectProvince, this.selectChudautu, this.Inputext, '')
   }
   Addtext() {
     console.log(this.Inputext)
-    this.getAllduan('', '', this.Inputext, '')
+    // this.getAllduan('', '', this.Inputext, '')
+    this.getAllduan(this.selectProvince, this.selectChudautu, this.Inputext, '')
   }
   getChudautu() {
     this.searchHttpService.queryChudautu().subscribe(dt => {

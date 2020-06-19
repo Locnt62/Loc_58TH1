@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SearchHttpService } from 'src/app/http/test-api';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-chi-tiet-du-an',
@@ -41,10 +42,12 @@ export class ChiTietDuAnComponent implements OnInit {
   Mota: any;
   list_chudautu: any;
 
-  maduan:any;
+  maduan: any;
 
-  Tinh:any;
+  Tinh: any;
   model: NgbDateStruct;
+  model1: NgbDateStruct;
+  model2: NgbDateStruct;
   constructor(private activeRoute: ActivatedRoute, private modalService: NgbModal, private router: Router, private searchHttpService: SearchHttpService,) { }
 
   ngOnInit() {
@@ -53,6 +56,8 @@ export class ChiTietDuAnComponent implements OnInit {
     this.ListCDT()
     this.ListTinh()
   }
+
+
   redirect() {
     this.router.navigate(['/QuanlyDuan'])
   }
@@ -112,6 +117,7 @@ export class ChiTietDuAnComponent implements OnInit {
   }
   TextTGTC() {
     console.log(this.TGTC)
+
   }
   TextTGHT() {
     console.log(this.TGHT)
@@ -119,28 +125,56 @@ export class ChiTietDuAnComponent implements OnInit {
   TextImage() {
     console.log(this.Image)
   }
-  AddMota(){
+  AddMota() {
     console.log(this.Mota)
   }
-  TextmaDA(){
+  TextmaDA() {
     console.log(this.maduan)
   }
 
-  ThemMoi(){
-    const body ={
+
+  onDateSelect(event) {
+    let year = event.year;
+    let month = event.month <= 9 ? '0' + event.month : event.month;;
+    let day = event.day <= 9 ? '0' + event.day : event.day;;
+    // let finalDate = year + "-" + month + "-" + day;
+    this.TGTC =  day+"/"+month+"/"+year;
+    console.log('aaaa',this.TGTC)
+   }
+
+
+   onDateSelect1(event) {
+    let year = event.year;
+    let month = event.month <= 9 ? '0' + event.month : event.month;;
+    let day = event.day <= 9 ? '0' + event.day : event.day;;
+    // let finalDate = year + "-" + month + "-" + day;
+    this.TGHT =  day+"/"+month+"/"+year;
+    console.log('aaaa',this.TGHT)
+   }
+   onDateSelect2(event) {
+    let year = event.year;
+    let month = event.month <= 9 ? '0' + event.month : event.month;;
+    let day = event.day <= 9 ? '0' + event.day : event.day;;
+    // let finalDate = year + "-" + month + "-" + day;
+    this.Ngaypheduyet =  day+"/"+month+"/"+year;
+    console.log('aaaa',this.Ngaypheduyet)
+   }
+
+  ThemMoi() {
+    const body = {
       mada: this.maduan,
       tendua: this.tenduan
     }
-    console.log('aa',body)
-    this.searchHttpService.ThemDA(this.maduan,this.Khobac,this.QDBD,this.tenduan,this.htql,this.loainguonvon,this.NNoithuchien,this.QDDT,this.Ngaypheduyet,this.TMDT,this.Mota,this.TGTC,this.TGHT,this.Image,this.Tinh).subscribe(dt =>{
+    console.log('aa', body)
+    this.searchHttpService.ThemDA(this.maduan, this.Khobac, this.QDBD, this.tenduan, this.htql, this.loainguonvon, this.NNoithuchien, this.QDDT, this.Ngaypheduyet, this.TMDT, this.Mota, this.TGTC, this.TGHT, this.Image, this.Tinh).subscribe(dt => {
       console.log('ket qua sau khi them');
       console.log(dt)
       console.log(dt.Status)
       console.log(dt.Messege)
-      if(dt.Status === 1){
+      if (dt.Status === 1) {
         alert(dt.Messege)
         this.router.navigate(['/QuanlyDuan'])
-      }else if(dt.Status === 0){
+      } else if (dt.Status === 0) {
         alert(dt.Messege)
       }
     })
@@ -156,7 +190,7 @@ export class ChiTietDuAnComponent implements OnInit {
     })
   }
 
-  SelectTinh(){
+  SelectTinh() {
     console.log(this.Tinh)
   }
 

@@ -28,8 +28,8 @@
                         <li><button class="btn" style="background-color: #289b28;width: 100px;color: white;"
                                 (click)="ThemDA()">Thêm mới
                             </button></li>
-                        <li><button class="btn" style="background-color: red;width: 100px;color: white;">Xuất
-                                Excel</button>
+                        <li><button class="btn" style="background-color: red;width: 100px;color: white;" ><a href="http://www.btlqlda.somee.com/api/Duan/ReportDuan?nameandkey={{Addtext}}&tinh={{selectProvince}}&chudatu={{selectChudautu}}" target="_blank" style="text-decoration: none;color: white;">Xuất excel</a>
+                            </button>
                         </li>
                     </ul>
                 </div>
@@ -217,6 +217,20 @@
                             <div class="col-lg-8">
                                 <input class="search-text" name="keysearch" type="text" [(ngModel)]="TGTC"
                                     (ngModelChange)="TextTGTC()" style="width: calc(100% - 60px)">
+                                <!-- <form class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group" style="width: 355px;">
+                                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp"
+                                                (dateSelect)="onDateSelect($event)" [(ngModel)]="model2" ngbDatepicker
+                                                #d="ngbDatepicker">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                                    type="button"><i class="fa fa-calendar-week"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form> -->
+                                <!-- <ng-datepicker [(ngModel)]="date" [options]="options"></ng-datepicker> -->
                             </div>
                         </div>
                         <div class="row line-duan">
@@ -293,21 +307,23 @@
                                         Tiểu dự án
                                     </div>
                                     <div class="col-lg-3">
-                                        <ng-select placeholder="Nhập tên tiểu dự án">
-                                        </ng-select>
+                                        <input class="search-text" name="keysearch" type="text" [(ngModel)]="searchTenTDA"
+                                        (ngModelChange)="TextsearchTenTDA()" >
                                     </div>
                                     <div class="col-lg-1">
                                         Chủ đầu tư
                                     </div>
                                     <div class="col-lg-3">
-                                        <ng-select placeholder="Nhập tên chủ đầu tư">
-                                        </ng-select>
+                                        <ng-select [items]="chudautu" [(ngModel)]="SearchCDT" (ngModelChange)="TextSearchCDT()"
+                                        bindLabel="Tenchudautu" bindValue="Id" style="width: calc(100% - 60px)">
+                                    </ng-select>
                                     </div>
                                     <div class="col-lg-1">
 
                                     </div>
                                     <div class="col-lg-3" style="display: flex;justify-content: space-around;">
-                                        <button class="btn searchbtn">Tìm kiếm</button>
+                                        <button class="btn searchbtn"><a href="http://www.btlqlda.somee.com/api/Duan/ReportTieuDuan?chudautu={{SearchCDT}}&idduan={{seg}}&name={{searchTenTDA}}" target="_blank" style="text-decoration: none;">Xuất excel</a>
+                                            </button>
                                         <!-- </div>
                                     <div class="col-lg-2"> -->
                                         <button class="btn addbtn" (click)="open(content)">Thêm mới</button>

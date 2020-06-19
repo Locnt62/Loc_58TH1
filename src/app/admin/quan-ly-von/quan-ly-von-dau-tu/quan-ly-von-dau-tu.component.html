@@ -28,8 +28,9 @@
                         <li><button class="btn" style="background-color: #289b28;width: 100px;color: white;"
                                 (click)="ThemVon()">Thêm mới
                             </button></li>
-                        <li><button class="btn" style="background-color: red;width: 100px;color: white;">Xuất
-                                Excel</button>
+                        <li><button class="btn" style="background-color: red;width: 100px;color: white;">
+                            <a href="http://www.btlqlda.somee.com/api/Von/ReportVon?tenvon={{searchVon}}&idduan={{searchda}}&idtieuda={{searchtda}}" target="_blank" style="text-decoration: none;color: white;">Xuất Excel</a>
+                         </button>
                         </li>
                     </ul>
                 </div>
@@ -37,8 +38,7 @@
         </div>
     </div>
     <div class="body-tongquan">
-        <!-- <span>hello</span> -->
-        <div class="table-price">
+        <div class="table-price" >
             <table>
                 <thead>
                     <tr class="header_table">
@@ -57,7 +57,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of listVon | paginate: { itemsPerPage: 6, currentPage: p }; index as i">
+                    <tr
+                        *ngFor="let item of listVon | paginate: { itemsPerPage: 6, currentPage: p }; index as i">
                         <td style="padding-left: 20px;">{{i + 1}}</td>
                         <td style="padding-left: 20px;color: #25549d;">
                             <div (click)="direct(item)" style="cursor: pointer;">{{item.Tenvon}}</div>
@@ -93,6 +94,7 @@
                 </pagination-controls>
             </div><br>
         </div>
+       
     </div>
     <div class="footer"></div>
 </div>
@@ -102,137 +104,239 @@
         <span style="color:#acacac; font-size: 14px;">Trang chủ > <a>Vốn</a> > <a>Chi tiết vốn</a></span>
     </div>
     <div class="body-tongquan" style="padding-right: 70px;">
-        <div class="table-duan">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="row" style="padding-bottom: 20px;">
-                        <div class="col-lg-3">
-                            Tên vốn
-                        </div>
-                        <div class="col-lg-9">
-                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="suatenvon"
-                                (ngModelChange)="Suatenvon()" placeholder="Nhập tên dự án, mã dự án..."
-                                style="width: calc(100% - 120px)">
+        <div class="nav-link-tab">
+            <tabset #staticTabs>
+                <tab heading="Thông tin vốn">
+                    <div class="table-duan">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="row" style="padding-bottom: 20px;">
+                                    <div class="col-lg-3">
+                                        Tên vốn
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <input class="search-text" name="keysearch" type="text" [(ngModel)]="suatenvon"
+                                            (ngModelChange)="Suatenvon()" placeholder="Nhập tên dự án, mã dự án..."
+                                            style="width: calc(100% - 120px)">
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-bottom: 20px;">
+                                    <div class="col-lg-3">
+                                        Mã vốn
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <input class="search-text" name="keysearch" type="text" [(ngModel)]="suamavon"
+                                            (ngModelChange)="Suamavon()" [disabled]="variable"
+                                            placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-bottom: 20px;">
+                                    <div class="col-lg-3">
+                                        Tên dự án
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <ng-select [items]="list_duan" [(ngModel)]="suada" (ngModelChange)="Suada()" disabled
+                                            bindLabel="Value" bindValue="Id" placeholder="Dự án" style="width: calc(100% - 120px)">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-bottom: 20px;">
+                                    <div class="col-lg-3">
+                                        Tiểu dự án
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <ng-select [items]="list_tieuduan" [(ngModel)]="suatda" (ngModelChange)="Suatda()" disabled
+                                            bindLabel="Value" bindValue="Id" placeholder="Tiểu dự án"
+                                            style="width: calc(100% - 120px)">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-bottom: 20px;">
+                                    <div class="col-lg-3">
+                                        Giai đoạn vốn
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <ng-select [items]="list_giaidoanvon" [(ngModel)]="suagiaidoan"
+                                            (ngModelChange)="Suagiaidoan()" bindLabel="Value" bindValue="Id" placeholder="Giai đoạn"
+                                            style="width: calc(100% - 120px)">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-bottom: 20px;">
+                                    <div class="col-lg-3">
+                                        Gía trị tiền
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <input class="search-text" name="keysearch" type="text" [(ngModel)]="suatien"
+                                            (ngModelChange)="Suatien()" placeholder="Nhập tên dự án, mã dự án..."
+                                            style="width: calc(100% - 120px)">
+                                    </div>
+                                </div>
+                                <!-- <div class="row" style="padding-bottom: 20px;">
+                                    <div class="col-lg-3">
+                                        Loại vốn
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <input class="search-text" name="keysearch" type="text" [(ngModel)]="s" (ngModelChange)="Searchda()"
+                                            placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="row" style="padding-bottom: 20px;">
+                                    <div class="col-lg-3">
+                                        Lần điểu chỉnh
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <input class="search-text" name="keysearch" type="text" [(ngModel)]="suadieuchinh" disabled
+                                            (ngModelChange)="Suadieuchinh()" placeholder="Nhập tên dự án, mã dự án..."
+                                            style="width: calc(100% - 120px)">
+                                    </div>
+                                </div>
+                                <!-- <div class="row" style="padding-bottom: 20px;">
+                                    <div class="col-lg-3">
+                                        Trạng thái
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <input class="search-text" name="keysearch" type="text"
+                                            placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                                    </div>
+                                </div> -->
+                                <div class="row" style="padding-bottom: 20px;">
+                                    <div class="col-lg-3">
+                                        Người tạo
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <input class="search-text" name="keysearch" type="text" [(ngModel)]="suanguoitao"
+                                            (ngModelChange)="Suanguoitao()" [disabled]="variable"
+                                            placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-bottom: 20px;">
+                                    <div class="col-lg-3">
+                                        Ngày tạo
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <input class="search-text" name="keysearch" type="text" [(ngModel)]="suangaytao"
+                                            (ngModelChange)="Suangaytao()" [disabled]="variable"
+                                            placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                                    </div>
+                                </div>
+            
+                                <div class="overlay" *ngIf="!check" id="overlay" style="text-align: center;">
+                                    <i class="fa fa-spinner fa-spin spin-big" style="font: 20px;"></i>
+                                    <span style="color: black; font-size: 30px">Loading</span>
+                                </div>
+                                <!-- <div class="row" style="padding-bottom: 20px;">
+                                    <div class="col-lg-3">
+                                       Người sửa
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <input class="search-text" name="keysearch" type="text"
+                                            placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
+                                    </div>
+                                </div> -->
+                            </div>
                         </div>
                     </div>
-                    <div class="row" style="padding-bottom: 20px;">
-                        <div class="col-lg-3">
-                            Mã vốn
-                        </div>
-                        <div class="col-lg-9">
-                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="suamavon"
-                                (ngModelChange)="Suamavon()" [disabled]="variable"
-                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
-                        </div>
+                </tab>
+                <!-- <tab heading="Vốn giai đoạn">
+                    <div style="padding-top: 20px;text-align: right;">
+                        <button class="btn" style="background-color: #25549d;width: 100px;color: white;"
+                            (click)="open(vongiaidoan)">Thêm mới
+                        </button>
                     </div>
-                    <div class="row" style="padding-bottom: 20px;">
-                        <div class="col-lg-3">
-                            Tên dự án
-                        </div>
-                        <div class="col-lg-9">
-                            <ng-select [items]="list_duan" [(ngModel)]="suada" (ngModelChange)="Suada()"
-                                bindLabel="Value" bindValue="Id" placeholder="Dự án" style="width: calc(100% - 120px)">
-                            </ng-select>
-                        </div>
-                    </div>
-                    <div class="row" style="padding-bottom: 20px;">
-                        <div class="col-lg-3">
-                            Tiểu dự án
-                        </div>
-                        <div class="col-lg-9">
-                            <ng-select [items]="list_tieuduan" [(ngModel)]="suatda" (ngModelChange)="Suatda()"
-                                bindLabel="Value" bindValue="Id" placeholder="Tiểu dự án"
-                                style="width: calc(100% - 120px)">
-                            </ng-select>
-                        </div>
-                    </div>
-                    <div class="row" style="padding-bottom: 20px;">
-                        <div class="col-lg-3">
-                            Giai đoạn vốn
-                        </div>
-                        <div class="col-lg-9">
-                            <ng-select [items]="list_giaidoanvon" [(ngModel)]="suagiaidoan"
-                                (ngModelChange)="Suagiaidoan()" bindLabel="Value" bindValue="Id" placeholder="Giai đoạn"
-                                style="width: calc(100% - 120px)">
-                            </ng-select>
-                        </div>
-                    </div>
-                    <div class="row" style="padding-bottom: 20px;">
-                        <div class="col-lg-3">
-                            Gía trị tiền
-                        </div>
-                        <div class="col-lg-9">
-                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="suatien"
-                                (ngModelChange)="Suatien()" placeholder="Nhập tên dự án, mã dự án..."
-                                style="width: calc(100% - 120px)">
-                        </div>
-                    </div>
-                    <!-- <div class="row" style="padding-bottom: 20px;">
-                        <div class="col-lg-3">
-                            Loại vốn
-                        </div>
-                        <div class="col-lg-9">
-                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="s" (ngModelChange)="Searchda()"
-                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
-                        </div>
-                    </div> -->
-                </div>
-                <div class="col-lg-6">
-                    <div class="row" style="padding-bottom: 20px;">
-                        <div class="col-lg-3">
-                            Lần điểu chỉnh
-                        </div>
-                        <div class="col-lg-9">
-                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="suadieuchinh"
-                                (ngModelChange)="Suadieuchinh()" placeholder="Nhập tên dự án, mã dự án..."
-                                style="width: calc(100% - 120px)">
-                        </div>
-                    </div>
-                    <!-- <div class="row" style="padding-bottom: 20px;">
-                        <div class="col-lg-3">
-                            Trạng thái
-                        </div>
-                        <div class="col-lg-9">
-                            <input class="search-text" name="keysearch" type="text"
-                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
-                        </div>
-                    </div> -->
-                    <div class="row" style="padding-bottom: 20px;">
-                        <div class="col-lg-3">
-                            Người tạo
-                        </div>
-                        <div class="col-lg-9">
-                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="suanguoitao"
-                                (ngModelChange)="Suanguoitao()" [disabled]="variable"
-                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
-                        </div>
-                    </div>
-                    <div class="row" style="padding-bottom: 20px;">
-                        <div class="col-lg-3">
-                            Ngày tạo
-                        </div>
-                        <div class="col-lg-9">
-                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="suangaytao"
-                                (ngModelChange)="Suangaytao()" [disabled]="variable"
-                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
-                        </div>
-                    </div>
+                    <div class="table-price" style="padding-top: 30px;">
+                        <table>
+                            <thead>
+                                <tr class="header_table">
+                                    <td style="padding-left: 20px;">STT</td>
+                                    <td style="padding-left: 20px;">Tên gia đoạn</td>
+                                    <td style="padding-left: 20px;">Loại</td>
+                                    <td style="padding-left: 20px;">Trạng thái</td>
+                                    <td style="padding-left: 20px;">Người tạo</td>
+                                    <td style="padding-left: 20px;">Ngày tạo</td>
+                                    <td style="padding-left: 20px;">Xóa</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let item of listVon | paginate: { itemsPerPage: 6, currentPage: p }; index as i">
+                                    <td style="padding-left: 20px;">{{i + 1}}</td>
+                                    <td style="padding-left: 20px;color: #25549d;">
+                                        <div (click)="direct(item)" style="cursor: pointer;">{{item.Tenvon}}</div>
+                                    </td>
+                                    <td style="padding-left: 20px;">
+                                        <div>{{item.Tenduan}}</div>
+                                    </td>
+                                    <td style="padding-left: 20px;">{{item.Tentieuduan}}</td>
+                                    <td style="padding-left: 20px;">{{item.Giatritien}}</td>
+                                    <td style="padding-left: 20px;">{{item.Landieuchinh}}</td>
+                                    <td style="padding-left: 20px;">
+                                        <div (click)="open(xoa_vongiaidoan); chonvonxoa(item)">
+                                            <span style="cursor: pointer;"><i class="fa fa-trash"></i></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="!listVon || listVon.length === 0">
+                                    <td style="padding-left: 20px;">Không có dữ liệu!</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                    <div class="overlay" *ngIf="!check" id="overlay" style="text-align: center;">
-                        <i class="fa fa-spinner fa-spin spin-big" style="font: 20px;"></i>
-                        <span style="color: black; font-size: 30px">Loading</span>
+                        <div class="overlay" *ngIf="!check" id="overlay" style="text-align: center;">
+                            <i class="fa fa-spinner fa-spin spin-big" style="font: 20px;"></i>
+                            <span style="color: black; font-size: 30px">Loading</span>
+                        </div>
+                        <div class="pagination">
+                            <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel="">
+                            </pagination-controls>
+                        </div><br>
                     </div>
-                    <!-- <div class="row" style="padding-bottom: 20px;">
-                        <div class="col-lg-3">
-                           Người sửa
+                </tab> -->
+                <tab heading="Lịch sử vốn">
+                    <div class="history" style="padding-top: 30px;">
+                        <div class="table-price" style="padding-top: 30px;">
+                            <table>
+                                <thead>
+                                    <tr class="header_table">
+                                        <td style="padding-left: 20px;">STT</td>
+                                        <td style="padding-left: 20px;">Lần điều chỉnh</td>
+                                        <td style="padding-left: 20px;">Gía trị tiền</td>
+                                        <td style="padding-left: 20px;">Người tạo</td>
+                                        <td style="padding-left: 20px;">Ngày tạo</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="let item of ls_von | paginate: { itemsPerPage: 6, currentPage: p }; index as i">
+                                        <td style="padding-left: 20px;">{{i + 1}}</td>
+                                        <td style="padding-left: 20px;">{{item.Landieuchinh}}
+                                        </td>
+                                        <td style="padding-left: 20px;">{{item.Giatritien}}</td>
+                                        <td style="padding-left: 20px;">{{item.Nguoitao}}</td>
+                                        <td style="padding-left: 20px;">{{item.Ngaytao}}</td>
+    
+                                    </tr>
+                                    <tr *ngIf="!ls_von || ls_von.length === 0">
+                                        <td style="padding-left: 20px;">Không có dữ liệu!</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+    
+                            <div class="overlay" *ngIf="!check" id="overlay" style="text-align: center;">
+                                <i class="fa fa-spinner fa-spin spin-big" style="font: 20px;"></i>
+                                <span style="color: black; font-size: 30px">Loading</span>
+                            </div>
+                            <div class="pagination">
+                                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel="">
+                                </pagination-controls>
+                            </div><br>
                         </div>
-                        <div class="col-lg-9">
-                            <input class="search-text" name="keysearch" type="text"
-                                placeholder="Nhập tên dự án, mã dự án..." style="width: calc(100% - 120px)">
-                        </div>
-                    </div> -->
-                </div>
-            </div>
+                    </div>
+                </tab>
+
+            </tabset>
         </div>
 
     </div>
@@ -271,6 +375,73 @@
             <div class="col-lg-3">
                 <button class="btn" style="background-color: #25549d;color: white;width: 90px;"
                     (click)="Delete()">Xóa</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #vongiaidoan>
+    <div class="header-popup">
+        <div>
+            <span style="font-weight: 500;">Thêm vốn giai đoạn</span>
+        </div>
+        <div>
+            <span (click)="close()" style="cursor: pointer;font-size: 19px;"><i class="fa fa-times"></i></span>
+        </div>
+    </div>
+    <div class="body-popup">
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4">
+                <span>Tên giai đoạn</span>
+            </div>
+            <div class="col-lg-8">
+                <input class="search-text" name="keysearch" type="text" placeholder="Nhập tên vốn.."
+                    [(ngModel)]="searchVon" (ngModelChange)="SearchVon()" style="width: calc(100% - 30px)">
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4">
+                <span>Loại</span>
+            </div>
+            <div class="col-lg-8">
+                <input class="search-text" name="keysearch" type="text" placeholder="Nhập tên vốn.."
+                    [(ngModel)]="searchVon" (ngModelChange)="SearchVon()" style="width: calc(100% - 30px)">
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-5">
+
+            </div>
+            <div class="col-lg-3">
+                <button class="btn" style="background-color: red;color: white;width: 90px;"
+                    (click)="close()">Hủy</button>
+            </div>
+            <div class="col-lg-3">
+                <button class="btn" style="background-color: green;color: white;width: 90px;">Lưu</button>
+            </div>
+
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #xoa_vongiaidoan>
+    <div class="header-popup">
+        <div>
+            <span style="font-weight: 500;">Xóa vốn giai đoạn</span>
+        </div>
+        <div>
+            <span (click)="close()" style="cursor: pointer;font-size: 19px;"><i class="fa fa-times"></i></span>
+        </div>
+    </div>
+    <div class="body-popup">
+        <div class="row">
+            <div class="col-lg-8">
+                <span>Bạn có muốn xóa vốn giai đoạn này ?</span>
+            </div>
+            <div class="col-lg-3">
+                <button class="btn" style="background-color: #25549d;color: white;width: 90px;"
+                   >Xóa</button>
             </div>
         </div>
     </div>
