@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchHttpService } from 'src/app/http/test-api';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-chi-tiet-chu-dau-tu',
@@ -24,7 +24,7 @@ export class ChiTietChuDauTuComponent implements OnInit {
   check = true
 
   dynamicVariable: boolean
-  constructor(private searchHttpService: SearchHttpService,private router: Router,private toastrService: ToastrService) { }
+  constructor(private searchHttpService: SearchHttpService,private router: Router) { }
 
   ngOnInit() {
     this.searchHttpService.LoaiCDT().subscribe(dt => {
