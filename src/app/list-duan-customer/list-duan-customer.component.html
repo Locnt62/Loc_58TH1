@@ -77,7 +77,7 @@
                     <div class="row">
                         <div class="col-6 col-md-12 col-lg-4 col-12 "
                             *ngFor="let item of listItem  | paginate: { itemsPerPage: 6, currentPage: p }">
-                            <div class="item-content transform">
+                            <div class="item-content transform" >
                                 <div class="header-image">
                                     <!-- <a><img src="../../assets/images/duan1.jpg" width="100%" height="100%"></a> -->
                                     <a><img src="{{item.UrlImage}}" width="100%" height="100%"></a>
@@ -91,13 +91,17 @@
                             </div>
                         </div>
                     </div><br><br>
-                    <div *ngIf="!listItem || listItem.length === 0" style="text-align: center;">
+                    <!-- <div *ngIf="!listItem || listItem.length === 0" style="text-align: center;">
                         <span style="font-size: 20px;font-weight: 500;">Không có dữ liệu</span>
-                    </div>
+                    </div> -->
                     <div class="pagination">
                         <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel="">
                         </pagination-controls>
                     </div><br>
+                </div>
+                <div class="overlay" *ngIf="!check" id="overlay" style="text-align: center;">
+                    <i class="fa fa-spinner fa-spin spin-big" style="font: 20px;"></i>
+                    <span style="color: black; font-size: 30px">Loading</span>
                 </div>
             </div>
         </div>
@@ -183,7 +187,7 @@
                                     Danh sách các tiểu dự án
                                 </div>
                                 <div class="body-tieuduan">
-                                    <div class="button-select">
+                                    <!-- <div class="button-select">
                                         <div class="row">
                                             <div class="col-lg-2">
                                                 Tiểu dự án
@@ -201,17 +205,17 @@
                                                     (ngModelChange)="AddCDT()" placeholder="Nhập tên chủ đầu tư..."
                                                     style="width: calc(100% - 50px)">
                                             </div>
-                                            <!-- <div class="col-lg-1">
+                                            <div class="col-lg-1">
 
                                             </div> -->
-                                            <div class="col-lg-2" style="display: flex;justify-content: space-around;">
-                                                <button class="btn searchbtn" style="height: 37px;">Tìm kiếm</button>
+                                            <!-- <div class="col-lg-2" style="display: flex;justify-content: space-around;">
+                                                <button class="btn searchbtn" style="height: 37px;">Tìm kiếm</button> -->
                                                 <!-- </div>
                                             <div class="col-lg-2"> -->
                                                 <!-- <button class="btn addbtn" (click)="open(content)">Thêm mới</button> -->
-                                            </div>
+                                            <!-- </div>
                                         </div>
-                                    </div>
+                                    </div>  -->
                                     <!-- <div class="body-tieuduan"> -->
                                     <div class="table-price">
                                         <table>
@@ -241,8 +245,8 @@
                                 </div>
                             </tab>
                             <tab heading="Quản lý vốn">
-                                <div class="row" style="padding:15px;">
-                                    <div class="col-lg-4">
+                                <div  style="padding:15px;">
+                                    <!-- <div class="col-lg-4">
                                         <div class="thongtinnguonvon" style="border: 1px solid #c2c2c2;">
                                             <div class="header-nguonvon"
                                                 style="background-color: #25549d;color: white;padding: 5px;">
@@ -272,8 +276,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-8">
+                                    </div> -->
+                                    <div >
                                         <div class="dsnguonvon" style="border: 1px solid #c2c2c2;">
                                             <div class="header-nguonvon"
                                                 style="background-color: #25549d;color: white;padding: 5px;">

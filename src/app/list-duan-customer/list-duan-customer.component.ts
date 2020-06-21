@@ -42,7 +42,7 @@ export class ListDuanCustomerComponent implements OnInit, AfterViewInit {
   input_cdt: any;
   listTVDT_duan: any;
   listTVDT_tieuduan: any;
-
+check:boolean
   constructor(private activeRoute: ActivatedRoute, private router: Router, private searchHttpService: SearchHttpService, ) {
     this.config = {
       itemsPerPage: 6,
@@ -163,10 +163,14 @@ export class ListDuanCustomerComponent implements OnInit, AfterViewInit {
   }
 
   getAllduan(idtinh, idcdt, tenda, mada) {
+    this.check = false
     this.searchHttpService.getAllDuan(idtinh, idcdt, tenda, mada).subscribe(rest => {
+      if(rest){
+        this.check = true
       console.log('item tra ve');
       this.listItem = rest;
       console.log(this.listItem)
+      }
     })
   }
 

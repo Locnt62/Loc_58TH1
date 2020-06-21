@@ -19,12 +19,13 @@ export class LandingPageComponent implements OnInit {
   listSearch: any;
   optionlabelindex: any;
   dsTinh: any;
+  check: boolean;
   constructor(public router: Router, private modalService: NgbModal, private searchHttpService: SearchHttpService, private authService: AuthService) { }
 
 
   ngOnInit() {
     console.log(this.router.url);
-    this.selectProvince = "Toàn quốc"
+    // this.selectProvince = "Toàn quốc"
     this.listProvine = [
       { text: 'Toàn quốc', name: 'All' },
       { text: 'Hà Nội', name: 'Hanoi' },
@@ -54,14 +55,18 @@ export class LandingPageComponent implements OnInit {
   SelectTinh() {
     console.log('this.selectProvince');
     console.log(this.selectProvince);
-   this.GetDuannoibat(this.selectProvince)
+    this.GetDuannoibat(this.selectProvince)
   }
 
-  GetDuannoibat(index){
-    this.searchHttpService.queryDuanNoibat(index).subscribe(data =>{
-      console.log('listItem')
-      this.listItem = data
-      console.log(this.listItem)
+  GetDuannoibat(index) {
+    this.check = false;
+    this.searchHttpService.queryDuanNoibat(index).subscribe(data => {
+      if (data) {
+        this.check = true
+        console.log('listItem')
+        this.listItem = data
+        console.log(this.listItem)
+      }
     })
   }
   getOptionLabel(index) {
@@ -73,8 +78,8 @@ export class LandingPageComponent implements OnInit {
     // this.router.navigateByUrl('/ListProjectCustomer/' + item.TenDa);
   }
 
-  getProvince(){
-    this.searchHttpService.queryProvince().subscribe(dt =>{
+  getProvince() {
+    this.searchHttpService.queryProvince().subscribe(dt => {
       console.log('list tinh')
       // console.log(dt);
       this.dsTinh = dt;

@@ -111,9 +111,10 @@
   }
 
   .body-custom{
-    padding: 32px 140px;  
-    padding-top: 70px;
-    padding-bottom: 100px;
+    padding: 100px;
+    /* padding: 32px 140px;   */
+    /* padding-top: 70px;
+    padding-bottom: 100px; */
   }
 
   .title{

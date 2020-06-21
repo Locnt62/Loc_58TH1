@@ -339,8 +339,8 @@ export class SearchHttpService {
 
 
     //list tieu du an
-    ListTieuDuAn(): Observable<any>{
-        return this.http.get(this.obj + '/api/DropDown/GetTieuDuan', {headers: this.headers})
+    ListTieuDuAn(idduan:any): Observable<any>{
+        return this.http.get(this.obj + '/api/DropDown/GetTieuDuan?idduan=' + idduan, {headers: this.headers})
     }
 
 
@@ -428,6 +428,16 @@ export class SearchHttpService {
         return this.http.post<any>(this.obj + '/api/Von/GetHistoryVon', form, {headers:this.headers})
     }
 
+
+    //search von cua du an
+    SearchVon(magd:any,name:string,idtieuda:any,idduan:any): Observable<any>{
+        const form = new FormData;
+        form.append("magd",magd)
+        form.append("name",name)
+        form.append("idtieuda",idtieuda)
+        form.append("idduan",idduan)
+        return this.http.post<any>(this.obj + '/api/Von/SearchVonByDa', form, {headers:this.headers})
+    }
 
 
 

@@ -63,10 +63,10 @@ import { DoiMatKhauComponent } from './admin/doi-mat-khau/doi-mat-khau/doi-mat-k
 
 // import { DatePickerModule } from 'ng2-datepicker';
 
-import { NgDatepickerModule } from 'ng2-datepicker';
+// import { NgDatepickerModule } from 'ng2-datepicker';
 
  
-import { ToastrModule } from 'ngx-toastr';
+// import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -124,9 +124,9 @@ import { ToastrModule } from 'ngx-toastr';
      MatTabsModule,
      AuthModule,
      NgApexchartsModule,
-     NgDatepickerModule,
+    //  NgDatepickerModule,
     //  DpDatePickerModule,
-    ToastrModule,
+    // ToastrModule,
     AgGridModule.withComponents([]),
     TabsModule.forRoot()
   ],

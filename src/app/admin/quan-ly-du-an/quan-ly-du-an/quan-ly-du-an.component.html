@@ -372,8 +372,8 @@
                         </div>
                     </tab>
                     <tab heading="Quản lý vốn">
-                        <div class="row" style="padding:15px;">
-                            <div class="col-lg-4">
+                        <div style="padding:15px;">
+                            <!-- <div class="col-lg-4">
                                 <div class="thongtinnguonvon" style="border: 1px solid #c2c2c2;">
                                     <div class="header-nguonvon"
                                         style="background-color: #25549d;color: white;padding: 5px;">
@@ -403,8 +403,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-8">
+                            </div> -->
+                            <div >
                                 <div class="dsnguonvon" style="border: 1px solid #c2c2c2;">
                                     <div class="header-nguonvon"
                                         style="background-color: #25549d;color: white;padding: 5px;">
@@ -415,11 +415,11 @@
                                             <div class="col-lg-6">
                                                 <div class="row" style="padding-bottom: 10px;">
                                                     <div class="col-lg-3">
-                                                        Loại vốn
+                                                        Tên vốn
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <ng-select style="width: calc(100% - 60px)">
-                                                        </ng-select>
+                                                        <input class="search-text" name="keysearch" type="text" [(ngModel)]="timTenVon"
+                                                        (ngModelChange)="TexttimTenVon()" style="width: calc(100% - 60px)">
                                                     </div>
                                                 </div>
                                                 <div class="row" style="padding-bottom:10px ;">
@@ -427,7 +427,8 @@
                                                         Giai đoạn
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <ng-select style="width: calc(100% - 60px)">
+                                                        <ng-select style="width: calc(100% - 60px)" [(ngModel)]="timGiaDoan" [items]="list_giaidoanvon"  bindLabel="Value" bindValue="Id"
+                                                        (ngModelChange)="TexttimGiaDoan()">
                                                         </ng-select>
                                                     </div>
                                                 </div>
@@ -438,19 +439,20 @@
                                                         Tiểu dự án
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <ng-select style="width: calc(100% - 60px)">
+                                                        <ng-select style="width: calc(100% - 60px)" [(ngModel)]="timtieuduan" [items]="list_tieuduan"  bindLabel="Tentieuda" bindValue="Id"
+                                                        (ngModelChange)="Texttimtieuduan()">
                                                         </ng-select>
                                                     </div>
                                                 </div>
-                                                <div class="row" style="padding-bottom:10px ;">
-                                                    <div class="col-lg-6">
+                                                <!-- <div class="row" style="padding-bottom:10px ;">
+                                                    <div class="col-lg-7">
                                                     </div>
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-3">
                                                         <button class="btn"
                                                             style="background-color: white;border: 1px solid #25549d;color: #25549d;">Tìm
                                                             kiếm</button>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                         <div class="table-price" style="margin-top: 20p;">
@@ -458,42 +460,35 @@
                                                 <thead>
                                                     <tr class="header_table">
                                                         <td style="padding-left: 12px;">STT</td>
+                                                        <td style="padding-left: 12px;">Tên vốn</td>
                                                         <td style="padding-left: 12px;">Tên tiểu dự án</td>
-                                                        <td style="padding-left: 12px;">Loại vốn</td>
                                                         <td style="padding-left: 12px;">Thời đoạn</td>
                                                         <td style="padding-left: 12px;">Lần điều chỉnh</td>
                                                         <td style="padding-left: 12px;">Gía trị(triệu đồng)</td>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td style="padding-left: 12px;">1</td>
-                                                        <td style="color: #be5e26;padding-left: 12px;">Hợp phần kênh cấp
-                                                            I và GPMB
+                                                    <tr *ngFor="let item of von_duan; index as i">
+                                                        <td style="padding-left: 12px;">{{i + 1 }}</td>
+                                                        <td style="color: #be5e26;padding-left: 12px;">{{item.Tenvon}}
                                                         </td>
-                                                        <td style="padding-left: 12px;">Vốn năm</td>
-                                                        <td style="padding-left: 12px;">2000
+                                                        <td style="padding-left: 12px;">{{item.Tentieuduan}}</td>
+                                                        <td style="padding-left: 12px;">{{item.Tengiaidoan}}
                                                         </td>
-                                                        <td style="padding-left: 12px;">1
+                                                        <td style="padding-left: 12px;">{{item.Landieuchinh}}
                                                         </td>
-                                                        <td style="padding-left: 12px;">250.000.000
+                                                        <td style="padding-left: 12px;">{{item.Giatritien}}
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td style="padding-left: 12px;">1</td>
-                                                        <td style="color: #be5e26;padding-left: 12px;">Hợp phần kênh cấp
-                                                            I và GPMB
-                                                        </td>
-                                                        <td style="padding-left: 12px;">Vốn năm</td>
-                                                        <td style="padding-left: 12px;">2000
-                                                        </td>
-                                                        <td style="padding-left: 12px;">1
-                                                        </td>
-                                                        <td style="padding-left: 12px;">250.000.000
-                                                        </td>
+                                                    <tr *ngIf="!von_duan || von_duan.length === 0">
+                                                        <td style="padding-left: 12px;">Không có dữ liệu!</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
+                                            <div class="overlay" *ngIf="!check" id="overlay" style="text-align: center;">
+                                                <i class="fa fa-spinner fa-spin spin-big" style="font: 20px;"></i>
+                                                <span style="color: black; font-size: 30px">Loading</span>
+                                            </div>
                                         </div>
 
                                     </div>

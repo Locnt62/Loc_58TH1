@@ -37,7 +37,7 @@ export class QuanLyVonDauTuComponent implements OnInit {
 check = true
   idvon_xoa: any;
   ls_von: any;
-
+id_duan:any
 
 
 
@@ -50,6 +50,7 @@ check = true
   }
 
   ngOnInit() {
+    this.id_duan = -1
     this.searchVon = '';
     this.searchda = '';
     this.searchtda = '';
@@ -112,7 +113,7 @@ check = true
     })
   }
   ListTDA() {
-    this.searchHttpService.ListTieuDuAn().subscribe(rest => {
+    this.searchHttpService.ListTieuDuAn(this.suada).subscribe(rest => {
       console.log('ds tieu du an');
       console.log(rest)
       this.list_tieuduan = rest

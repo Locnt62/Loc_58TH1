@@ -11,7 +11,7 @@ export class ThemVonComponent implements OnInit {
   list_giaidoanvon: any;
   list_duan: any;
   list_tieuduan: any;
-
+id_da:any
 
   suatenvon:any;
   suamavon:any;
@@ -32,6 +32,7 @@ export class ThemVonComponent implements OnInit {
     this.GiaidoanVon();
     this.ListDA();
     this.ListTDA()
+    this.id_da = -1
   }
 
   redirect(){
@@ -57,11 +58,16 @@ export class ThemVonComponent implements OnInit {
     })
   }
    ListTDA(){
-     this.searchHttpService.ListTieuDuAn().subscribe(rest =>{
-       console.log('ds tieu du an');
-       console.log(rest)
-       this.list_tieuduan = rest
-     })
+     this.GetTieuda(-1)
+   }
+
+
+   GetTieuda(id){
+    this.searchHttpService.ListTieuDuAn(id).subscribe(rest =>{
+      console.log('ds tieu du an');
+      console.log(rest)
+      this.list_tieuduan = rest
+    })
    }
 
 
@@ -74,6 +80,7 @@ export class ThemVonComponent implements OnInit {
   }
   Suada(){
     console.log(this.suada)
+    this.GetTieuda(this.suada)
   }
   Suatda(){
     console.log(this.suatda)

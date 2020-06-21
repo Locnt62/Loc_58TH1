@@ -23,7 +23,8 @@ export class ListChudautuCustomerComponent implements OnInit, AfterViewInit {
   Website: any;
   listDA: any;
   listTDA: any;
-  constructor(private activeRoute: ActivatedRoute, private router: Router, private searchHttpService: SearchHttpService, ) {
+  check: boolean
+  constructor(private activeRoute: ActivatedRoute, private router: Router, private searchHttpService: SearchHttpService,) {
     this.config = {
       itemsPerPage: 6,
       currentPage: 1,
@@ -74,10 +75,14 @@ export class ListChudautuCustomerComponent implements OnInit, AfterViewInit {
   }
 
   getListCDT(name) {
+    this.check = false
     this.searchHttpService.queryListChudautu(name).subscribe(dt => {
-      console.log('ds chu dau tu');
-      console.log(dt)
-      this.listInvest = dt
+      if (dt) {
+        this.check = true
+        console.log('ds chu dau tu');
+        console.log(dt)
+        this.listInvest = dt
+      }
 
     })
   }
