@@ -313,7 +313,7 @@ export class SearchHttpService {
     }
 
     Count(type:any): Observable<any>{
-        return this.http.get(this.obj + '/api/DropDown/GetOverview?type=' + type, {headers: this.headers})
+        return this.http.get(this.obj + '/api/DropDown/GetOverview?type=' + type)
     }
 
 
