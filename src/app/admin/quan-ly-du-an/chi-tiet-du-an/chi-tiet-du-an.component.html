@@ -15,8 +15,9 @@
                             Tên dự án
                         </div>
                         <div class="col-lg-8">
-                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="tenduan"
-                                (ngModelChange)="TextTenDA()" style="width: calc(100% - 60px)">
+                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="tenduan" #tenda="ngModel"
+                                (ngModelChange)="TextTenDA()" style="width: calc(100% - 60px)" required> <span style="color: red;" required>*</span>
+                                <small class="text text-danger" *ngIf="tenda.invalid && (tenda.dirty || tenda.touched)">Tên dự án bắt buộc phải có!</small>
                         </div>
                     </div>
                     <div class="row line-duan">
@@ -24,8 +25,9 @@
                             Mã dự án
                         </div>
                         <div class="col-lg-8">
-                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="maduan"
-                                (ngModelChange)="TextmaDA()" style="width: calc(100% - 60px)">
+                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="maduan" #mada="ngModel"
+                                (ngModelChange)="TextmaDA()" style="width: calc(100% - 60px)"> <span style="color: red;">*</span>
+                                <small class="text text-danger" *ngIf="mada.invalid && (mada.dirty || mada.touched)">Mã dự án bắt buộc phải có!</small>
                         </div>
                     </div>
                     <div class="row line-duan">
@@ -83,9 +85,10 @@
                         <div class="col-lg-8">
                             <!-- <input class="search-text" name="keysearch" type="text" [(ngModel)]="QDBD"
                                 (ngModelChange)="TextQDBD()" style="width: calc(100% - 60px)"> -->
-                            <ng-select [items]="list_chudautu" [(ngModel)]="QDBD" (ngModelChange)="TextQDBD()"
+                            <ng-select [items]="list_chudautu" [(ngModel)]="QDBD" (ngModelChange)="TextQDBD()" #cdt="ngModel"
                                 bindLabel="Tenchudautu" bindValue="Id" style="width: calc(100% - 60px)">
-                            </ng-select>
+                            </ng-select> <span style="color: red;">*</span>
+                            <small class="text text-danger" *ngIf="!QDBD">Chủ đầu tư bắt buộc phải có!</small>
                         </div>
                     </div>
                     <div class="row line-duan">
@@ -187,9 +190,10 @@
                             Loại nguồn vốn
                         </div>
                         <div class="col-lg-8">
-                            <ng-select [items]="list_loaivon" [(ngModel)]="loainguonvon" (ngModelChange)="SelectVon()"
+                            <ng-select [items]="list_loaivon" [(ngModel)]="loainguonvon" (ngModelChange)="SelectVon()"  #von="ngModel"
                                 bindLabel="Value" bindValue="Id" style="width: calc(100% - 60px)">
-                            </ng-select>
+                            </ng-select><span style="color: red;">*</span>
+                            <small class="text text-danger" *ngIf="!loainguonvon">Vốn bắt buộc phải có!</small>
                         </div>
                     </div>
                     <div class="row line-duan">
@@ -300,7 +304,7 @@
             <button class="btn" style="background-color: red;color: white;width: 90px;"
                 (click)="redirect()">Hủy</button>
             <button class="btn" style="background-color: green;color: white;width: 90px;"
-                (click)="ThemMoi()">Lưu</button>
+                (click)="ThemMoi()" [disabled]="tenda.invalid" [disabled]="mada.invalid" [disabled]="!QDBD" [disabled]="!loainguonvon">Lưu</button>
         </div>
     </div>
 </div>

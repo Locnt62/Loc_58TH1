@@ -41,7 +41,7 @@
                         <td style="padding-left: 20px;">{{item.Phone}}</td>
                         <td style="padding-left: 20px;"><span style="cursor: pointer;">
                                 <div (click)="open(xoa);ChonCDTXoa(item)">
-                                    <i class="fa fa-trash"></i>
+                                    <i class="fa fa-trash" style="color: red;"></i>
                                 </div>
                             </span>
                         </td>
@@ -78,14 +78,15 @@
                 <div class="body-title" style="line-height: 30px;">
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-lg-6" style="font-weight: 500;">Tên chủ đầu tư</div>
-                        <div class="col-lg-6"><input class="search-text" name="keysearch" type="text"
-                                [(ngModel)]="TenCDT" (ngModelChange)="TextTenCDT()" style="width: calc(100% - 60px)">
+                        <div class="col-lg-6"><input class="search-text" name="keysearch" type="text" #tencdt="ngModel"
+                                [(ngModel)]="TenCDT" (ngModelChange)="TextTenCDT()" style="width: calc(100% - 60px)" required><span style="color: red;">*</span><br>
+                                <small class="text text-danger" *ngIf="tencdt.invalid && (tencdt.dirty || tencdt.touched)">Tên chủ đầu tư bắt buộc phải có!</small>
                         </div>
                     </div>
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-lg-6" style="font-weight: 500;">Mã chủ đầu tư</div>
                         <div class="col-lg-6" ><input class="search-text" name="keysearch" type="text" [(ngModel)]="MaCDT"  [disabled]="dynamicVariable"
-                            (ngModelChange)="TextMaCDT()" style="width: calc(100% - 60px)"></div>
+                            (ngModelChange)="TextMaCDT()" style="width: calc(100% - 60px)"><span style="color: red;">*</span></div>
                     </div>
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-lg-6" style="font-weight: 500;">Loại chủ đầu tư</div>
@@ -95,8 +96,9 @@
                     </div>
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-lg-6" style="font-weight: 500;">Địa chỉ</div>
-                        <div class="col-lg-6"><input class="search-text" name="keysearch" type="text"
-                                [(ngModel)]="DiaChi" (ngModelChange)="TextDiaChi()" style="width: calc(100% - 60px)">
+                        <div class="col-lg-6"><input class="search-text" name="keysearch" type="text"  #diachi="ngModel"
+                                [(ngModel)]="DiaChi" (ngModelChange)="TextDiaChi()" style="width: calc(100% - 60px)" required><span style="color: red;">*</span><br>
+                                <small class="text text-danger" *ngIf="diachi.invalid && (diachi.dirty || diachi.touched)">Địa chỉ bắt buộc phải có!</small>
                         </div>
                     </div>
                     <div class="row" style="padding-bottom: 20px;">
@@ -108,8 +110,8 @@
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-lg-6" style="font-weight: 500;">Số điện thoại</div>
                         <div class="col-lg-6"><input class="search-text" name="keysearch" type="text" [(ngModel)]="SDT" #soDienThoai="ngModel" pattern="[0-9]{10}"
-                                (ngModelChange)="TextSDT()" style="width: calc(100% - 60px)"><br>
-                                <small class="text text-danger" *ngIf="soDienThoai.invalid ">Sô
+                                (ngModelChange)="TextSDT()" style="width: calc(100% - 60px)" required><span style="color: red;">*</span><br>
+                                <small class="text text-danger" *ngIf="soDienThoai.invalid && (soDienThoai.dirty || soDienThoai.touched) ">Sô
                                     điện thoại bắt
                                     buộc phải có 10 số</small>
                             </div>
@@ -129,7 +131,7 @@
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-lg-9"></div>
                         <div class="col-lg-2">
-                            <button class="btn" style="background-color: green;color: white;width: 80px;" (click)="Sua()"  [disabled]="email.invalid" [disabled]="soDienThoai.invalid" >Lưu</button>
+                            <button class="btn" style="background-color: green;color: white;width: 80px;" (click)="Sua()" [disabled]="tencdt.invalid" [disabled]="diachi.invalid"  [disabled]="email.invalid" [disabled]="soDienThoai.invalid" >Lưu</button>
                         </div>
                     </div>
                 </div>

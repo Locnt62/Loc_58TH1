@@ -11,13 +11,17 @@
             <div class="body-title" style="line-height: 30px;">
                 <div class="row" style="padding-bottom: 20px;">
                     <div class="col-lg-6" style="font-weight: 500;">Tên chủ đầu tư</div>
-                    <div class="col-lg-6"><input class="search-text" name="keysearch" type="text" [(ngModel)]="TenCDT"
-                            (ngModelChange)="TextTenCDT()" style="width: calc(100% - 60px)"></div>
+                    <div class="col-lg-6"><input class="search-text" name="keysearch" type="text" [(ngModel)]="TenCDT"  #tencdt="ngModel"
+                            (ngModelChange)="TextTenCDT()" style="width: calc(100% - 60px)" required><span style="color: red;">*</span><br>
+                            <small class="text text-danger" *ngIf="tencdt.invalid && (tencdt.dirty || tencdt.touched)">Tên chủ đầu tư bắt buộc phải có!</small>
+                        </div>
                 </div>
                 <div class="row" style="padding-bottom: 20px;">
                     <div class="col-lg-6" style="font-weight: 500;">Mã chủ đầu tư</div>
-                    <div class="col-lg-6"><input class="search-text" name="keysearch" type="text" [(ngModel)]="MaCDT"
-                            (ngModelChange)="TextMaCDT()" style="width: calc(100% - 60px)"></div>
+                    <div class="col-lg-6"><input class="search-text" name="keysearch" type="text" [(ngModel)]="MaCDT" #macdt="ngModel"
+                            (ngModelChange)="TextMaCDT()" style="width: calc(100% - 60px)" required><span style="color: red;">*</span><br>
+                            <small class="text text-danger" *ngIf="macdt.invalid && (macdt.dirty || macdt.touched)">Tên chủ đầu tư bắt buộc phải có!</small>
+                        </div>
                 </div>
                 <div class="row" style="padding-bottom: 20px;">
                     <div class="col-lg-6" style="font-weight: 500;">Loại chủ đầu tư</div>
@@ -29,8 +33,10 @@
                 </div>
                 <div class="row" style="padding-bottom: 20px;">
                     <div class="col-lg-6" style="font-weight: 500;">Địa chỉ</div>
-                    <div class="col-lg-6"><input class="search-text" name="keysearch" type="text" [(ngModel)]="DiaChi"
-                            (ngModelChange)="TextDiaChi()" style="width: calc(100% - 60px)"></div>
+                    <div class="col-lg-6"><input class="search-text" name="keysearch" type="text" [(ngModel)]="DiaChi" #diachi="ngModel"
+                            (ngModelChange)="TextDiaChi()" style="width: calc(100% - 60px)" required><span style="color: red;">*</span><br>
+                            <small class="text text-danger" *ngIf="diachi.invalid && (diachi.dirty || diachi.touched)">Đại chỉ bắt buộc phải có</small>
+                        </div>
                 </div>
                 <div class="row" style="padding-bottom: 20px;">
                     <div class="col-lg-6" style="font-weight: 500;">Website</div>
@@ -40,8 +46,8 @@
                 <div class="row" style="padding-bottom: 20px;">
                     <div class="col-lg-6" style="font-weight: 500;">Số điện thoại</div>
                     <div class="col-lg-6"><input class="search-text" name="keysearch" type="text" [(ngModel)]="SDT" #soDienThoai="ngModel" pattern="[0-9]{10}"
-                            (ngModelChange)="TextSDT()" style="width: calc(100% - 60px)"><br>
-                            <small class="text text-danger" *ngIf="soDienThoai.invalid ">Sô
+                            (ngModelChange)="TextSDT()" style="width: calc(100% - 60px)" required><span style="color: red;">*</span><br>
+                            <small class="text text-danger" *ngIf="soDienThoai.invalid && (soDienThoai.dirty || soDienThoai.touched)">Sô
                                 điện thoại bắt
                                 buộc phải có 10 số</small>
                         </div>
@@ -317,7 +323,7 @@
         <div class="col-lg-3" style="display: flex;justify-content: space-evenly;">
             <button class="btn" style="background-color: red;color: white;width: 90px;"
                 (click)="redirect()">Hủy</button>
-            <button class="btn" style="background-color: green;color: white;width: 90px;" (click)="Save()"  [disabled]="email.invalid" [disabled]="soDienThoai.invalid" >Lưu</button>
+            <button class="btn" style="background-color: green;color: white;width: 90px;" (click)="Save()" [disabled]="diachi.invalid" [disabled]="tencdt.invalid"  [disabled]="email.invalid" [disabled]="soDienThoai.invalid" >Lưu</button>
         </div>
     </div>
 </div>

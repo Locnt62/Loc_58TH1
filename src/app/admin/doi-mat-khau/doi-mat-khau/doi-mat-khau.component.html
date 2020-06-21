@@ -26,7 +26,7 @@
         </div>
         <form class="col-md-6 offset-2 col-xs-6" style="margin-top: 20px" name="form" #form="ngForm" (ngSubmit)="onSubmitForm(form)">
             <div class="form-group" id="tenKhachHang">
-                <label for="">Tên tài khoản :</label>
+                <label for="">Tên tài khoản </label> <span style="color: red;">*</span>
                 <input type=" text" class="form-control" [(ngModel)]="form.tenKhachHang" name="name" #name="ngModel" required id="input-tenKhachHang">
                 <!-- <div class="text-input">
                     <span>{{form.tenKhachHang}}</span>
@@ -34,7 +34,7 @@
                 <small class="text text-danger" *ngIf="name.invalid && (name.dirty || name.touched)">Username bắt buộc phải có</small>
             </div>
             <div class="form-group">
-                <label>Mật khẩu hiện tại:</label>
+                <label>Mật khẩu hiện tại</label> <span style="color: red;">*</span>
                 <input type="text" class="form-control" [(ngModel)]="form.soDienThoai" name="soDienThoai" #soDienThoai="ngModel"   required>
                 <small class="text text-danger" *ngIf="soDienThoai.invalid && (soDienThoai.dirty || soDienThoai.touched)">Mật khẩu bắt buộc</small>
                 <!-- <div class="text-input">
@@ -42,7 +42,7 @@
                 </div> -->
             </div>
             <div class="form-group">
-                <label>Mật khẩu mới:</label>
+                <label>Mật khẩu mới</label> <span style="color: red;">*</span>
                 <input type="password" class="form-control" [(ngModel)]="form.email" name="email" #email="ngModel"  required pattern="[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{8,20}">
                 <small class="text text-danger" *ngIf="email.invalid && ( email.dirty || email.touched )">Mật khẩu nhập không hợp lệ!</small>
                 <!-- <div class="text-input">
@@ -50,11 +50,11 @@
                 </div> -->
             </div>
             <div class="form-group">
-                <label>Xác nhận mật khẩu:</label>
+                <label>Xác nhận mật khẩu</label> <span style="color: red;">*</span>
                 <input type="password" class="form-control" [(ngModel)]="form.diaChiKhachHang" name="diaChi" #address="ngModel" required >
                 <!-- <small class="text text-danger" *ngIf="address.invalid && (address.dirty || address.touched) && (!Check(form) === false)">Mật khẩu không chính xác</small> -->
                 <div *ngIf="!Check(form) === false">
-                    <small class="text text-danger">Mật khẩu nhập chưa khớp!</small>
+                    <small class="text text-danger" >Mật khẩu nhập chưa khớp!</small>
                 </div>
             </div>
             <button type="submit" class="btn" style="background-color: #25549d;color: white;margin-left: 115px;width: 100px;" [disabled]="form.invalid">Lưu</button>

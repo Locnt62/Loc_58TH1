@@ -3,18 +3,24 @@
         <span style="font-size: 17px;color: #25549d;font-weight: 600;">Quản lý dự án</span><br>
         <span style="color:#acacac; font-size: 14px;">Trang chủ > <a>Quản lý dự án</a></span>
         <div class="row optionselect">
-            <div class="col-lg-5">
+            <div class="col-lg-4">
                 <input class="search-text" name="keysearch" type="text" placeholder="Nhập tên dự án.."
                     [(ngModel)]="Addtext" (ngModelChange)="SearMADA()" style="width: calc(100% - 120px)">
             </div>
+            <div class="col-lg-1">
+                <span>Tỉnh</span>
+            </div>
             <div class="col-lg-3">
                 <ng-select [items]="listProvine" [(ngModel)]="selectProvince" (ngModelChange)="SelectTinh()"
-                    bindLabel="TenTinh" bindValue="Id" placeholder="Tỉnh">
+                    bindLabel="TenTinh" bindValue="Id" >
                 </ng-select>
+            </div>
+            <div class="col-lg-1">
+                <span>Chủ đầu tư</span>
             </div>
             <div class="col-lg-3">
                 <ng-select [items]="chudautu" [(ngModel)]="selectChudautu" (ngModelChange)="SelectCDT()"
-                    bindLabel="Tenchudautu" bindValue="Id" placeholder="Chủ đầu tư" style="width: calc(100% - 49px)">
+                    bindLabel="Tenchudautu" bindValue="Id"  style="width: calc(100% - 49px)">
                 </ng-select>
             </div>
         </div>
@@ -69,7 +75,7 @@
                         <td style="padding-left: 20px;">{{item.Tongdautu}}</td>
                         <td style="padding-left: 20px;"><span style="cursor: pointer;">
                                 <div (click)=" open(xoa);ChonDAxoa(item)">
-                                    <i class="fa fa-trash"></i>
+                                    <i class="fa fa-trash" style="color: red;"></i>
                                 </div>
                             </span>
                         </td>
@@ -110,8 +116,9 @@
                                 Tên dự án
                             </div>
                             <div class="col-lg-8">
-                                <input class="search-text" name="keysearch" type="text" [(ngModel)]="tenduan"
-                                    (ngModelChange)="TextTenDA()" style="width: calc(100% - 60px)">
+                                <input class="search-text" name="keysearch" type="text" [(ngModel)]="tenduan" #tendaa="ngModel"
+                                    (ngModelChange)="TextTenDA()" style="width: calc(100% - 60px)" required><span style="color: red;" >*</span>
+                                    <small class="text text-danger" *ngIf="tendaa.invalid && (tendaa.dirty || tendaa.touched)">Tên dự án bắt buộc phải có!</small> 
                             </div>
                         </div>
                         <div class="row line-duan">
@@ -121,7 +128,7 @@
                             <div class="col-lg-8">
                                 <input class="search-text" name="keysearch" type="text" [(ngModel)]="maduan"
                                     [disabled]="dynamicVariable" (ngModelChange)="TextmaDA()"
-                                    style="width: calc(100% - 60px)">
+                                    style="width: calc(100% - 60px)"><span style="color: red;">*</span>
                             </div>
                         </div>
                         <div class="row line-duan">
@@ -167,9 +174,10 @@
                             <div class="col-lg-8">
                                 <!-- <input class="search-text" name="keysearch" type="text" [(ngModel)]="QDBD"
                                 (ngModelChange)="TextQDBD()" style="width: calc(100% - 60px)"> -->
-                                <ng-select [items]="chudautu" [(ngModel)]="QDBD" (ngModelChange)="TextQDBD()"
-                                    bindLabel="Tenchudautu" bindValue="Id" style="width: calc(100% - 60px)">
-                                </ng-select>
+                                <ng-select [items]="chudautu" [(ngModel)]="QDBD" (ngModelChange)="TextQDBD()" #cdt="ngModel"
+                                    bindLabel="Tenchudautu" bindValue="Id" style="width: calc(100% - 60px)" required>
+                                </ng-select><span style="color: red;">*</span>
+                                <small class="text text-danger" *ngIf="!QDBD">Chủ đầu tư bắt buộc phải có!</small> 
                             </div>
                         </div>
                         <div class="row line-duan">
@@ -262,7 +270,8 @@
                                 <ng-select [items]="list_loaivon" [(ngModel)]="loainguonvon"
                                     (ngModelChange)="SelectVon()" bindLabel="Value" bindValue="Id"
                                     style="width: calc(100% - 60px)">
-                                </ng-select>
+                                </ng-select><span style="color: red;">*</span>
+                                <small class="text text-danger" *ngIf="!loainguonvon">Loại nguồn vốn bắt buộc phải có!</small> 
                             </div>
                         </div>
                         <div class="row line-duan">
@@ -283,7 +292,7 @@
                             <div class="col-lg-1"></div>
                             <div class="col-lg-1">
                                 <button class="btn" style="background-color: green;width: 80px;color: white;"
-                                    (click)="ThemMoi()">Lưu</button>
+                                    (click)="ThemMoi()" [disabled]="tendaa.invalid" [disabled]="!loainguonvon" [disabled]="!QDBD">Lưu</button>
                             </div>
                         </div>
                     </div>
@@ -357,14 +366,14 @@
                                             </td>
                                             <td style="padding-left: 20px;">
                                                 <div (click)="open(content1); Sua(item)" style="cursor: pointer;"><i
-                                                        class="fa fa-edit"></i></div>
+                                                        class="fa fa-edit" style="color: green;"></i></div>
 
                                                 <!-- <div (click)="variable == true ? open(content1) : " style="cursor: pointer;"><i
                                                         class="fa fa-edit"></i></div> -->
                                             </td>
                                             <td style="padding-left: 20px;">
                                                 <div (click)="open(xoatda);ChonTDAxoa(item)">
-                                                    <span style="cursor: pointer;"><i class="fa fa-trash"></i></span>
+                                                    <span style="cursor: pointer;" style="color: red;"><i class="fa fa-trash"></i></span>
                                                 </div>
                                             </td>
                                         </tr>
