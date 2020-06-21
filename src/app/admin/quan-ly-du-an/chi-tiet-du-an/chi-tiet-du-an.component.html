@@ -16,7 +16,7 @@
                         </div>
                         <div class="col-lg-8">
                             <input class="search-text" name="keysearch" type="text" [(ngModel)]="tenduan" #tenda="ngModel"
-                                (ngModelChange)="TextTenDA()" style="width: calc(100% - 60px)" required> <span style="color: red;" required>*</span>
+                                (ngModelChange)="TextTenDA()" style="width: calc(100% - 60px)" required> <span style="color: red;" required>*</span><br>
                                 <small class="text text-danger" *ngIf="tenda.invalid && (tenda.dirty || tenda.touched)">Tên dự án bắt buộc phải có!</small>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                         </div>
                         <div class="col-lg-8">
                             <input class="search-text" name="keysearch" type="text" [(ngModel)]="maduan" #mada="ngModel"
-                                (ngModelChange)="TextmaDA()" style="width: calc(100% - 60px)"> <span style="color: red;">*</span>
+                                (ngModelChange)="TextmaDA()" style="width: calc(100% - 60px)" required> <span style="color: red;">*</span><br>
                                 <small class="text text-danger" *ngIf="mada.invalid && (mada.dirty || mada.touched)">Mã dự án bắt buộc phải có!</small>
                         </div>
                     </div>
