@@ -115,6 +115,8 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
   timGiaDoan: any;
   timtieuduan: any;
   von_duan: any;
+  listTVDT_duan: any;
+  listTVDT_tieuduan: any;
 
 
 
@@ -169,6 +171,8 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
       this.ChitietDA(this.seg)
       this.SearchTDA('', this.seg, '')
       this.SearchVonDA(this.timGiaDoan, this.timTenVon, this.timtieuduan, this.seg)
+      this.getTVDT(this.seg,2)
+    this.getTVDT_tda(this.seg,1)
     }
 
     this.listDA = [
@@ -192,6 +196,8 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
     this.ChitietDA(item.Id)
     this.SearchTDA('', item.Id, '')
     this.SearchVonDA(this.timGiaDoan, this.timTenVon, this.timtieuduan, item.Id)
+    this.getTVDT(item.Id,2)
+    this.getTVDT_tda(item.Id,1)
 
   }
   redirect() {
@@ -226,6 +232,26 @@ export class QuanLyDuAnComponent implements OnInit, AfterViewInit {
     // })
 
   }
+
+  //lay tong von dau tu
+  getTVDT(id,type){
+    this.searchHttpService.getTVDT(id,type).subscribe(rest =>{
+      console.log('lay tong von dau tu cua du an');
+      // console.log(rest);
+      this.listTVDT_duan = rest
+      console.log(this.listTVDT_duan)
+    })
+  }
+  //tong von dau tu tieu du an
+  getTVDT_tda(id,type){
+    this.searchHttpService.getTVDT(id,type).subscribe(rest =>{
+      console.log('lay tong von dau tu cua tieu du an');
+      // console.log(rest)
+      this.listTVDT_tieuduan = rest
+      console.log(this.listTVDT_tieuduan)
+    })
+  }
+
 
   ThemDA() {
     this.router.navigate(['/Themmoiduan'])

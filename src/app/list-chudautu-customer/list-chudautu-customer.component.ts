@@ -66,10 +66,10 @@ export class ListChudautuCustomerComponent implements OnInit, AfterViewInit {
     this.getDetailCDT(item.Id)
   }
   ngAfterViewInit() {
-    this.activeRoute.url.subscribe(param => {
-      console.log('router');
-      console.log(param);
-    })
+    // this.activeRoute.url.subscribe(param => {
+    //   console.log('router');
+    //   console.log(param);
+    // })
 
 
   }

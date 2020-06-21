@@ -205,16 +205,16 @@
                                             <thead>
                                                 <tr class="header_table">
                                                     <td style="padding-left: 20px;">STT</td>
-                                                    <td style="padding-left: 20px;">Dự án</td>
-                                                    <td style="padding-left: 20px;">Tên hợp phần dự án</td>
-                                                    <td style="padding-left: 20px;">Mã hợp phần dự án</td>
+                                                    <td style="padding-left: 20px;">Tiểu dự án</td>
+                                                    <td style="padding-left: 20px;">TMô tả</td>
+                                                    <td style="padding-left: 20px;">Địa điểm thực hiện</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let item of listTDA; index as i">
-                                                    <td style="padding-left: 20px;color: #be5e26;">{{i}}</td>
-                                                    <td style="padding-left: 20px;">{{item.Tentieuda}}</td>
-                                                    <td style="padding-left: 20px;">{{item.Maduan}}</td>
+                                                    <td style="padding-left: 20px;">{{i}}</td>
+                                                    <td style="padding-left: 20px;color: #be5e26;">{{item.Tentieuda}}</td>
+                                                    <td style="padding-left: 20px;">{{item.Mota}}</td>
                                                     <td style="padding-left: 20px;">{{item.Diadiem}}</td>
                                                 </tr>
                                                 <tr *ngIf="!listTDA || listTDA.length === 0">

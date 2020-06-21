@@ -30,8 +30,8 @@ export class AppComponent implements OnInit {
       if (event instanceof RoutesRecognized) {
         // console.log('navigated to:', event.url);
         this.check_router = event.url;
-        console.log('this.check_router');
-        console.log(this.check_router);
+        // console.log('this.check_router');
+        // console.log(this.check_router);
         // console.log('route state', event.state);
         // console.log('');
       }

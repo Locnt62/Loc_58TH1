@@ -28,7 +28,9 @@
                         <li><button class="btn" style="background-color: #289b28;width: 100px;color: white;"
                                 (click)="ThemDA()">Thêm mới
                             </button></li>
-                        <li><button class="btn" style="background-color: red;width: 100px;color: white;" ><a href="http://www.btlqlda.somee.com/api/Duan/ReportDuan?nameandkey={{Addtext}}&tinh={{selectProvince}}&chudatu={{selectChudautu}}" target="_blank" style="text-decoration: none;color: white;">Xuất excel</a>
+                        <li><button class="btn" style="background-color: red;width: 100px;color: white;"><a
+                                    href="http://www.btlqlda.somee.com/api/Duan/ReportDuan?nameandkey={{Addtext}}&tinh={{selectProvince}}&chudatu={{selectChudautu}}"
+                                    target="_blank" style="text-decoration: none;color: white;">Xuất excel</a>
                             </button>
                         </li>
                     </ul>
@@ -307,23 +309,26 @@
                                         Tiểu dự án
                                     </div>
                                     <div class="col-lg-3">
-                                        <input class="search-text" name="keysearch" type="text" [(ngModel)]="searchTenTDA"
-                                        (ngModelChange)="TextsearchTenTDA()" >
+                                        <input class="search-text" name="keysearch" type="text"
+                                            [(ngModel)]="searchTenTDA" (ngModelChange)="TextsearchTenTDA()">
                                     </div>
                                     <div class="col-lg-1">
                                         Chủ đầu tư
                                     </div>
                                     <div class="col-lg-3">
-                                        <ng-select [items]="chudautu" [(ngModel)]="SearchCDT" (ngModelChange)="TextSearchCDT()"
-                                        bindLabel="Tenchudautu" bindValue="Id" style="width: calc(100% - 60px)">
-                                    </ng-select>
+                                        <ng-select [items]="chudautu" [(ngModel)]="SearchCDT"
+                                            (ngModelChange)="TextSearchCDT()" bindLabel="Tenchudautu" bindValue="Id"
+                                            style="width: calc(100% - 60px)">
+                                        </ng-select>
                                     </div>
                                     <div class="col-lg-1">
 
                                     </div>
                                     <div class="col-lg-3" style="display: flex;justify-content: space-around;">
-                                        <button class="btn searchbtn"><a href="http://www.btlqlda.somee.com/api/Duan/ReportTieuDuan?chudautu={{SearchCDT}}&idduan={{seg}}&name={{searchTenTDA}}" target="_blank" style="text-decoration: none;">Xuất excel</a>
-                                            </button>
+                                        <button class="btn searchbtn"><a
+                                                href="http://www.btlqlda.somee.com/api/Duan/ReportTieuDuan?chudautu={{SearchCDT}}&idduan={{seg}}&name={{searchTenTDA}}"
+                                                target="_blank" style="text-decoration: none;">Xuất excel</a>
+                                        </button>
                                         <!-- </div>
                                     <div class="col-lg-2"> -->
                                         <button class="btn addbtn" (click)="open(content)">Thêm mới</button>
@@ -404,7 +409,7 @@
                                     </div>
                                 </div>
                             </div> -->
-                            <div >
+                            <div>
                                 <div class="dsnguonvon" style="border: 1px solid #c2c2c2;">
                                     <div class="header-nguonvon"
                                         style="background-color: #25549d;color: white;padding: 5px;">
@@ -418,8 +423,9 @@
                                                         Tên vốn
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <input class="search-text" name="keysearch" type="text" [(ngModel)]="timTenVon"
-                                                        (ngModelChange)="TexttimTenVon()" style="width: calc(100% - 60px)">
+                                                        <input class="search-text" name="keysearch" type="text"
+                                                            [(ngModel)]="timTenVon" (ngModelChange)="TexttimTenVon()"
+                                                            style="width: calc(100% - 60px)">
                                                     </div>
                                                 </div>
                                                 <div class="row" style="padding-bottom:10px ;">
@@ -427,8 +433,10 @@
                                                         Giai đoạn
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <ng-select style="width: calc(100% - 60px)" [(ngModel)]="timGiaDoan" [items]="list_giaidoanvon"  bindLabel="Value" bindValue="Id"
-                                                        (ngModelChange)="TexttimGiaDoan()">
+                                                        <ng-select style="width: calc(100% - 60px)"
+                                                            [(ngModel)]="timGiaDoan" [items]="list_giaidoanvon"
+                                                            bindLabel="Value" bindValue="Id"
+                                                            (ngModelChange)="TexttimGiaDoan()">
                                                         </ng-select>
                                                     </div>
                                                 </div>
@@ -439,8 +447,10 @@
                                                         Tiểu dự án
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <ng-select style="width: calc(100% - 60px)" [(ngModel)]="timtieuduan" [items]="list_tieuduan"  bindLabel="Tentieuda" bindValue="Id"
-                                                        (ngModelChange)="Texttimtieuduan()">
+                                                        <ng-select style="width: calc(100% - 60px)"
+                                                            [(ngModel)]="timtieuduan" [items]="list_tieuduan"
+                                                            bindLabel="Tentieuda" bindValue="Id"
+                                                            (ngModelChange)="Texttimtieuduan()">
                                                         </ng-select>
                                                     </div>
                                                 </div>
@@ -485,7 +495,8 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <div class="overlay" *ngIf="!check" id="overlay" style="text-align: center;">
+                                            <div class="overlay" *ngIf="!check" id="overlay"
+                                                style="text-align: center;">
                                                 <i class="fa fa-spinner fa-spin spin-big" style="font: 20px;"></i>
                                                 <span style="color: black; font-size: 30px">Loading</span>
                                             </div>
@@ -522,20 +533,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td style="padding-left: 20px;">1</td>
-                                            <td style="padding-left: 20px;">Hồ Bản Lải</td>
-                                            <td style="padding-left: 20px;">TPCP</td>
-                                            <td style="padding-left: 20px;">Tổng mức đầu tư gốc</td>
-                                            <td style="padding-left: 20px;">2.999.867</td>
-                                            <td style="padding-left: 20px;">1.948.345</td>
-                                            <td style="padding-left: 20px;">166.765</td>
-                                            <td style="padding-left: 20px;">120.559</td>
-                                            <td style="padding-left: 20px;">125.292</td>
-                                            <td style="padding-left: 20px;">0 </td>
-                                            <td style="padding-left: 20px;">810.000</td>
-                                            <td style="padding-left: 20px;">280.392t</td>
-                                            <td style="padding-left: 20px;">Chi tiết</td>
+                                        <tr *ngFor="let item of listTVDT_duan; index as i">
+                                            <td style="padding-left: 20px;">{{i + 1}}</td>
+                                            <td style="padding-left: 20px;">{{item.Tenduan}}</td>
+                                            <td style="padding-left: 20px;">{{item.Nguonvon}}</td>
+                                            <td style="padding-left: 20px;">{{item.Landieuchinh}}</td>
+                                            <td style="padding-left: 20px;">{{item.Tongcong}}</td>
+                                            <td style="padding-left: 20px;">{{item.Xaylap}}</td>
+                                            <td style="padding-left: 20px;">{{item.Thietbi}}</td>
+                                            <td style="padding-left: 20px;">{{item.Tuvan}}</td>
+                                            <td style="padding-left: 20px;">{{item.Quanliduan}}</td>
+                                            <td style="padding-left: 20px;">{{item.Khac}}</td>
+                                            <td style="padding-left: 20px;">{{item.Duphong}}</td>
+                                            <td style="padding-left: 20px;">{{item.GPMB}}</td>
+                                            <td style="padding-left: 20px;">{{item.Chitiet}}</td>
+                                        </tr>
+                                        <tr *ngIf="!listTVDT_duan || listTVDT_duan.length === 0">
+                                            <td>Không có dữ liệu!</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -551,7 +565,7 @@
                                     <thead>
                                         <tr class="header_table">
                                             <td style="padding-left: 20px;">STT</td>
-                                            <td style="padding-left: 20px;">Dự án</td>
+                                            <td style="padding-left: 20px;">Tiểu dự án</td>
                                             <td style="padding-left: 20px;">Nguồn vốn</td>
                                             <td style="padding-left: 20px;">Lần điều chỉnh</td>
                                             <td style="padding-left: 20px;">Tổng cộng</td>
@@ -567,20 +581,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td style="padding-left: 20px;">1</td>
-                                            <td style="padding-left: 20px;">Hồ Bản Lải</td>
-                                            <td style="padding-left: 20px;">TPCP</td>
-                                            <td style="padding-left: 20px;">Tổng mức đầu tư gốc</td>
-                                            <td style="padding-left: 20px;">2.999.867</td>
-                                            <td style="padding-left: 20px;">1.948.345</td>
-                                            <td style="padding-left: 20px;">166.765</td>
-                                            <td style="padding-left: 20px;">120.559</td>
-                                            <td style="padding-left: 20px;">125.292</td>
-                                            <td style="padding-left: 20px;">0 </td>
-                                            <td style="padding-left: 20px;">810.000</td>
-                                            <td style="padding-left: 20px;">280.392t</td>
-                                            <td style="padding-left: 20px;">Chi tiết</td>
+                                        <tr *ngFor="let item of listTVDT_tieuduan; index as i">
+                                            <td style="padding-left: 20px;">{{i + 1}}</td>
+                                            <td style="padding-left: 20px;">{{item.Tenduan}}</td>
+                                            <td style="padding-left: 20px;">{{item.Nguonvon}}</td>
+                                            <td style="padding-left: 20px;">{{item.Landieuchinh}}</td>
+                                            <td style="padding-left: 20px;">{{item.Tongcong}}</td>
+                                            <td style="padding-left: 20px;">{{item.Xaylap}}</td>
+                                            <td style="padding-left: 20px;">{{item.Thietbi}}</td>
+                                            <td style="padding-left: 20px;">{{item.Tuvan}}</td>
+                                            <td style="padding-left: 20px;">{{item.Quanliduan}}</td>
+                                            <td style="padding-left: 20px;">{{item.Khac}}</td>
+                                            <td style="padding-left: 20px;">{{item.Duphong}}</td>
+                                            <td style="padding-left: 20px;">{{item.GPMB}}</td>
+                                            <td style="padding-left: 20px;">{{item.Chitiet}}</td>
+                                        </tr>
+                                        <tr *ngIf="!listTVDT_tieuduan || listTVDT_tieuduan.length === 0">
+                                            <td>Không có dữ liệu !</td>
                                         </tr>
                                     </tbody>
                                 </table>

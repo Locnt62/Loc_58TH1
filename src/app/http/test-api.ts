@@ -77,13 +77,13 @@ export class SearchHttpService {
 
     //get tieu du an cua chu dau tu
     getTieeuduan(cdt: any): Observable<any> {
-        return this.http.get(this.obj + '/api/Duan/SreachTieuDuan?chudautu=' + cdt,{headers: this.headers});
+        return this.http.get(this.obj + '/api/Duan/SreachTieuDuan?chudautu=' + cdt);
     }
 
 
     //get tong von dau tu
     getTVDT(id: any, type: any): Observable<any> {
-        return this.http.get(this.obj + '/api/Duan/Gettongdautu/?id=' + id + '&type=' + type,{headers: this.headers});
+        return this.http.get(this.obj + '/api/Duan/Gettongdautu/?id=' + id + '&type=' + type);
     }
     //get list dự án trang admin
 
@@ -92,7 +92,7 @@ export class SearchHttpService {
     }
     //chi tiet du an
     getListDAadminDetail(id: any): Observable<any> {
-        return this.http.get(this.obj + '/api/Duan/SearchDaAdmin?id=' + id, {headers:this.headers});
+        return this.http.get(this.obj + '/api/Duan/SearchDaAdmin?id=' + id);
     }
     //get loai von
     Loaivon(): Observable<any> {
@@ -329,7 +329,7 @@ export class SearchHttpService {
     //get  giai đoan  von
 
     Giadoanvon(): Observable<any>{
-        return this.http.get(this.obj + '/api/Von/GetGDVon',{headers: this.headers});
+        return this.http.get(this.obj + '/api/Von/GetGDVon');
     }
 
     //list  dự án
@@ -436,7 +436,7 @@ export class SearchHttpService {
         form.append("name",name)
         form.append("idtieuda",idtieuda)
         form.append("idduan",idduan)
-        return this.http.post<any>(this.obj + '/api/Von/SearchVonByDa', form, {headers:this.headers})
+        return this.http.post<any>(this.obj + '/api/Von/SearchVonByDa', form)
     }
 
 

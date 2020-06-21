@@ -77,7 +77,7 @@
                     <div class="row">
                         <div class="col-6 col-md-12 col-lg-4 col-12 "
                             *ngFor="let item of listItem  | paginate: { itemsPerPage: 6, currentPage: p }">
-                            <div class="item-content transform" >
+                            <div class="item-content transform">
                                 <div class="header-image">
                                     <!-- <a><img src="../../assets/images/duan1.jpg" width="100%" height="100%"></a> -->
                                     <a><img src="{{item.UrlImage}}" width="100%" height="100%"></a>
@@ -187,36 +187,28 @@
                                     Danh sách các tiểu dự án
                                 </div>
                                 <div class="body-tieuduan">
-                                    <!-- <div class="button-select">
+                                    <div class="button-select">
                                         <div class="row">
                                             <div class="col-lg-2">
                                                 Tiểu dự án
                                             </div>
                                             <div class="col-lg-3">
-                                                <input name="keysearch" type="text" [(ngModel)]="input_tda"
-                                                    (ngModelChange)="AddTDA()" placeholder="Nhập tên tiểu dự án"
-                                                    style="width: calc(100% - 50px)">
+                                                <input  name="keysearch" type="text"
+                                                    [(ngModel)]="searchTenTDA" (ngModelChange)="TextsearchTenTDA()">
                                             </div>
                                             <div class="col-lg-2">
                                                 Chủ đầu tư
                                             </div>
                                             <div class="col-lg-3">
-                                                <input name="keysearch" type="text" [(ngModel)]="input_cdt"
-                                                    (ngModelChange)="AddCDT()" placeholder="Nhập tên chủ đầu tư..."
-                                                    style="width: calc(100% - 50px)">
+                                                <ng-select [items]="listCDT" [(ngModel)]="SearchCDT"
+                                                    (ngModelChange)="TextSearchCDT()" bindLabel="Tenchudautu" bindValue="Id"
+                                                    style="width: calc(100% - 60px)">
+                                                </ng-select>
                                             </div>
-                                            <div class="col-lg-1">
-
-                                            </div> -->
-                                            <!-- <div class="col-lg-2" style="display: flex;justify-content: space-around;">
-                                                <button class="btn searchbtn" style="height: 37px;">Tìm kiếm</button> -->
-                                                <!-- </div>
-                                            <div class="col-lg-2"> -->
-                                                <!-- <button class="btn addbtn" (click)="open(content)">Thêm mới</button> -->
-                                            <!-- </div>
+                                            
                                         </div>
-                                    </div>  -->
-                                    <!-- <div class="body-tieuduan"> -->
+                                    </div>
+                                    <!-- <div class="body-tieuduan">  -->
                                     <div class="table-price">
                                         <table>
                                             <thead>
@@ -230,7 +222,8 @@
                                             <tbody>
                                                 <tr *ngFor="let item of listtieuduan;index as i">
                                                     <td style="padding-left: 20px;">{{i}}</td>
-                                                    <td style="padding-left: 20px;color: #be5e26;">{{item.Tentieuda}}
+                                                    <td style="padding-left: 20px;color: #be5e26;">
+                                                        {{item.Tentieuda}}
                                                     </td>
                                                     <td style="padding-left: 20px;">{{item.Chudautu}}</td>
                                                     <td style="padding-left: 20px;">{{item.Mota}}
@@ -245,7 +238,7 @@
                                 </div>
                             </tab>
                             <tab heading="Quản lý vốn">
-                                <div  style="padding:15px;">
+                                <div style="padding:15px;">
                                     <!-- <div class="col-lg-4">
                                         <div class="thongtinnguonvon" style="border: 1px solid #c2c2c2;">
                                             <div class="header-nguonvon"
@@ -277,100 +270,96 @@
                                             </div>
                                         </div>
                                     </div> -->
-                                    <div >
+                                    <div>
                                         <div class="dsnguonvon" style="border: 1px solid #c2c2c2;">
                                             <div class="header-nguonvon"
                                                 style="background-color: #25549d;color: white;padding: 5px;">
                                                 Danh sách nguồn vốn dự án
                                             </div>
-                                            <div class="body-nguonvon" style="padding: 10px;">
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <div class="row" style="padding-bottom: 10px;">
-                                                            <div class="col-lg-4">
-                                                                Loại vốn
-                                                            </div>
-                                                            <div class="col-lg-8">
-                                                                <ng-select style="width: calc(100% - 60px)">
-                                                                </ng-select>
-                                                            </div>
+                                            <div class="row" style="padding: 20px;">
+                                                <div class="col-lg-6">
+                                                    <div class="row" style="padding-bottom: 10px;">
+                                                        <div class="col-lg-3">
+                                                            Tên vốn
                                                         </div>
-                                                        <div class="row" style="padding-bottom:10px ;">
-                                                            <div class="col-lg-4">
-                                                                Giai đoạn
-                                                            </div>
-                                                            <div class="col-lg-8">
-                                                                <ng-select style="width: calc(100% - 60px)">
-                                                                </ng-select>
-                                                            </div>
+                                                        <div class="col-lg-8">
+                                                            <input  name="keysearch" type="text"
+                                                                [(ngModel)]="timTenVon" (ngModelChange)="TexttimTenVon()"
+                                                                style="width: calc(100% - 60px)">
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="row" style="padding-bottom: 10px;">
-                                                            <div class="col-lg-4">
-                                                                Tiểu dự án
-                                                            </div>
-                                                            <div class="col-lg-8">
-                                                                <ng-select style="width: calc(100% - 60px)">
-                                                                </ng-select>
-                                                            </div>
+                                                    <div class="row" style="padding-bottom:10px ;">
+                                                        <div class="col-lg-3">
+                                                            Giai đoạn
                                                         </div>
-                                                        <!-- <div class="row" style="padding-bottom:10px ;">
-                                                            <div class="col-lg-6">
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <button class="btn"
-                                                                    style="background-color: white;border: 1px solid #25549d;color: #25549d;">Tìm
-                                                                    kiếm</button>
-                                                            </div>
-                                                        </div> -->
+                                                        <div class="col-lg-8">
+                                                            <ng-select style="width: calc(100% - 60px)"
+                                                                [(ngModel)]="timGiaDoan" [items]="list_giaidoanvon"
+                                                                bindLabel="Value" bindValue="Id"
+                                                                (ngModelChange)="TexttimGiaDoan()">
+                                                            </ng-select>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="table-price" style="margin-top: 20p;">
-                                                    <table>
-                                                        <thead>
-                                                            <tr class="header_table">
-                                                                <td style="padding-left: 12px;">STT</td>
-                                                                <td style="padding-left: 12px;">Tên tiểu dự án</td>
-                                                                <td style="padding-left: 12px;">Loại vốn</td>
-                                                                <td style="padding-left: 12px;">Thời đoạn</td>
-                                                                <td style="padding-left: 12px;">Lần điều chỉnh</td>
-                                                                <td style="padding-left: 12px;">Gía trị(triệu đồng)</td>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td style="padding-left: 12px;">1</td>
-                                                                <td style="color: #be5e26;padding-left: 12px;">Hợp phần
-                                                                    kênh cấp
-                                                                    I và GPMB
-                                                                </td>
-                                                                <td style="padding-left: 12px;">Vốn năm</td>
-                                                                <td style="padding-left: 12px;">2000
-                                                                </td>
-                                                                <td style="padding-left: 12px;"> 1
-                                                                </td>
-                                                                <td style="padding-left: 12px;">250.000.000
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="padding-left: 12px;">1</td>
-                                                                <td style="color: #be5e26;padding-left: 12px;">Hợp phần
-                                                                    kênh cấp
-                                                                    I và GPMB
-                                                                </td>
-                                                                <td style="padding-left: 12px;">Vốn năm</td>
-                                                                <td style="padding-left: 12px;">2000
-                                                                </td>
-                                                                <td style="padding-left: 12px;">1
-                                                                </td>
-                                                                <td style="padding-left: 12px;">250.000.000
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                <div class="col-lg-6">
+                                                    <div class="row" style="padding-bottom: 10px;">
+                                                        <div class="col-lg-3">
+                                                            Tiểu dự án
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <ng-select style="width: calc(100% - 60px)"
+                                                                [(ngModel)]="timtieuduan" [items]="listtieuduan"
+                                                                bindLabel="Tentieuda" bindValue="Id"
+                                                                (ngModelChange)="Texttimtieuduan()">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="row" style="padding-bottom:10px ;">
+                                                        <div class="col-lg-7">
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <button class="btn"
+                                                                style="background-color: white;border: 1px solid #25549d;color: #25549d;">Tìm
+                                                                kiếm</button>
+                                                        </div>
+                                                    </div> -->
                                                 </div>
-
+                                            </div>
+                                            <div class="table-price" style="margin-top: 20p;">
+                                                <table>
+                                                    <thead>
+                                                        <tr class="header_table">
+                                                            <td style="padding-left: 12px;">STT</td>
+                                                            <td style="padding-left: 12px;">Tên vốn</td>
+                                                            <td style="padding-left: 12px;">Tên tiểu dự án</td>
+                                                            <td style="padding-left: 12px;">Thời đoạn</td>
+                                                            <td style="padding-left: 12px;">Lần điều chỉnh</td>
+                                                            <td style="padding-left: 12px;">Gía trị(triệu đồng)</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of von_duan; index as i">
+                                                            <td style="padding-left: 12px;">{{i + 1 }}</td>
+                                                            <td style="color: #be5e26;padding-left: 12px;">{{item.Tenvon}}
+                                                            </td>
+                                                            <td style="padding-left: 12px;">{{item.Tentieuduan}}</td>
+                                                            <td style="padding-left: 12px;">{{item.Tengiaidoan}}
+                                                            </td>
+                                                            <td style="padding-left: 12px;">{{item.Landieuchinh}}
+                                                            </td>
+                                                            <td style="padding-left: 12px;">{{item.Giatritien}}
+                                                            </td>
+                                                        </tr>
+                                                        <tr *ngIf="!von_duan || von_duan.length === 0">
+                                                            <td style="padding-left: 12px;">Không có dữ liệu!</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="overlay" *ngIf="!check" id="overlay"
+                                                    style="text-align: center;">
+                                                    <i class="fa fa-spinner fa-spin spin-big" style="font: 20px;"></i>
+                                                    <span style="color: black; font-size: 30px">Loading</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

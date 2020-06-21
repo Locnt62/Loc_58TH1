@@ -42,7 +42,16 @@ export class ListDuanCustomerComponent implements OnInit, AfterViewInit {
   input_cdt: any;
   listTVDT_duan: any;
   listTVDT_tieuduan: any;
+  SearchCDT:any
+
+
+  searchTenTDA:any
 check:boolean
+  list_giaidoanvon: any;
+  von_duan: any;
+  timTenVon: any;
+  timGiaDoan: any;
+  timtieuduan: any;
   constructor(private activeRoute: ActivatedRoute, private router: Router, private searchHttpService: SearchHttpService, ) {
     this.config = {
       itemsPerPage: 6,
@@ -57,9 +66,15 @@ check:boolean
   }
 
   ngOnInit() {
+    this.SearchCDT = ''
+    this.searchTenTDA = ''
+
     this.Inputext = ''
     this.selectProvince = ''
     this.selectChudautu = ''
+    this.timGiaDoan = ''
+    this.timTenVon = ''
+    this.timtieuduan = ''
     this.activeRoute.queryParams.subscribe(params => {
       console.log('params');
       // console.log(params.name);
@@ -67,51 +82,20 @@ check:boolean
       console.log(this.seg)
       this.idduan = parseInt(this.seg)
       console.log('aaa', this.idduan)
-      this.getChitiet(this.idduan)
-      this.getTVDT(this.seg,2)
-      this.getTVDT_tda(this.seg,1)
+     
 
     })
-    this.listProject = [
-      { name: 'Vinhomes Smart City', address: 'Đường Đại Mỗ, Phường Đại Mỗ, Quận Nam Từ Liêm, Hà Nội' },
-      { name: 'Vinhomes Smart City', address: 'Đường Đại Mỗ, Phường Đại Mỗ, Quận Nam Từ Liêm, Hà Nội' },
-      { name: 'Vinhomes Smart City', address: 'Đường Đại Mỗ, Phường Đại Mỗ, Quận Nam Từ Liêm, Hà Nội' },
-      { name: 'Vinhomes Smart City', address: 'Đường Đại Mỗ, Phường Đại Mỗ, Quận Nam Từ Liêm, Hà Nội' },
-      { name: 'Vinhomes Smart City', address: 'Đường Đại Mỗ, Phường Đại Mỗ, Quận Nam Từ Liêm, Hà Nội' },
-      { name: 'Vinhomes Smart City', address: 'Đường Đại Mỗ, Phường Đại Mỗ, Quận Nam Từ Liêm, Hà Nội' },
-      { name: 'Vinhomes Smart City', address: 'Đường Đại Mỗ, Phường Đại Mỗ, Quận Nam Từ Liêm, Hà Nội' },
-      { name: 'Vinhomes Smart City', address: 'Đường Đại Mỗ, Phường Đại Mỗ, Quận Nam Từ Liêm, Hà Nội' },
-      { name: 'Vinhomes Smart City', address: 'Đường Đại Mỗ, Phường Đại Mỗ, Quận Nam Từ Liêm, Hà Nội' },
-      { name: 'Vinhomes Smart City', address: 'Đường Đại Mỗ, Phường Đại Mỗ, Quận Nam Từ Liêm, Hà Nội' },
-      // { name:'Vinhomes Smart City', address:'Đường Đại Mỗ, Phường Đại Mỗ, Quận Nam Từ Liêm, Hà Nội'},
-      // { name:'Vinhomes Smart City', address:'Đường Đại Mỗ, Phường Đại Mỗ, Quận Nam Từ Liêm, Hà Nội'},
-    ]
-    this.list_select = [
-      { name: 'Thông tin tiểu dự án' },
-      { name: 'Quản lý vốn' }
-    ]
-    this.listProvine = [
-      { text: 'Toàn quốc', name: 'All' },
-      { text: 'Hà Nội', name: 'Hanoi' },
-      { text: 'TP. Hồ Chí Minh', name: 'Hochiminh' },
-      { text: 'Đà Nẵng', name: 'Danang' },
-      { text: 'Hải phòng', name: 'Haiphong' },
-    ]
-
-    this.chudautu = [
-      { name: 'Sở NN&PTNT Bắc Ninh', address: '	Số 8 Đường Lý Thái Tổ - Tp Bắc Ninh - Tỉnh Bắc Ninh', email: '	snnptnt@bacninh.gov.vn', sdt: '0222 3855 737' },
-      { name: 'Sở NN&PTNT Bắc Ninh', address: '	Số 8 Đường Lý Thái Tổ - Tp Bắc Ninh - Tỉnh Bắc Ninh', email: '	snnptnt@bacninh.gov.vn', sdt: '0222 3855 737' },
-      { name: 'Sở NN&PTNT Bắc Ninh', address: '	Số 8 Đường Lý Thái Tổ - Tp Bắc Ninh - Tỉnh Bắc Ninh', email: '	snnptnt@bacninh.gov.vn', sdt: '0222 3855 737' },
-      { name: 'Sở NN&PTNT Bắc Ninh', address: '	Số 8 Đường Lý Thái Tổ - Tp Bắc Ninh - Tỉnh Bắc Ninh', email: '	snnptnt@bacninh.gov.vn', sdt: '0222 3855 737' },
-      { name: 'Sở NN&PTNT Bắc Ninh', address: '	Số 8 Đường Lý Thái Tổ - Tp Bắc Ninh - Tỉnh Bắc Ninh', email: '	snnptnt@bacninh.gov.vn', sdt: '0222 3855 737' },
-      { name: 'Sở NN&PTNT Bắc Ninh', address: '	Số 8 Đường Lý Thái Tổ - Tp Bắc Ninh - Tỉnh Bắc Ninh', email: '	snnptnt@bacninh.gov.vn', sdt: '0222 3855 737' },
-      { name: 'Sở NN&PTNT Bắc Ninh', address: '	Số 8 Đường Lý Thái Tổ - Tp Bắc Ninh - Tỉnh Bắc Ninh', email: '	snnptnt@bacninh.gov.vn', sdt: '0222 3855 737' },
-      { name: 'Sở NN&PTNT Bắc Ninh', address: '	Số 8 Đường Lý Thái Tổ - Tp Bắc Ninh - Tỉnh Bắc Ninh', email: '	snnptnt@bacninh.gov.vn', sdt: '0222 3855 737' },
-    ]
+    this.getChitiet(this.seg)
+    this.getTVDT(this.seg,2)
+    this.getTVDT_tda(this.seg,1)
+    
 
     this.getChudautu()
     this.getProvince()
     this.getAllduan('', '', '', '')
+    
+    this.SearchTDA('', this.seg, '')
+    this.SearchVonDA(this.timGiaDoan, this.timTenVon, this.timtieuduan, this.seg)
   }
   Redirect(item) {
     console.log('an')
@@ -120,9 +104,15 @@ check:boolean
     this.tenduan = item.TenDa;
     console.log(this.tenduan)
 
-    // this.idduan = parseInt(this.seg)
-    // console.log('aaa', this.idduan)
-    // this.getChitiet(item.Id)
+    this.getChitiet(item.Id)
+
+    this.getTVDT(item.Id,2)
+    this.getTVDT_tda(item.Id,1)
+
+    this.SearchTDA('', item.Id, '')
+    this.GiaidoanVon()
+
+    this.SearchVonDA(this.timGiaDoan, this.timTenVon, this.timtieuduan, item.Id)
 
   }
   ngAfterViewInit() {
@@ -174,6 +164,14 @@ check:boolean
     })
   }
 
+  GiaidoanVon() {
+    this.searchHttpService.Giadoanvon().subscribe(dt => {
+      console.log('giai doan von')
+      console.log(dt)
+      this.list_giaidoanvon = dt
+    })
+  }
+
   getChitiet(id) {
     // this.searchHttpService.detDuanDetail(id).subscribe(ite => {
     //   console.log(' this.chitietduan');
@@ -194,7 +192,7 @@ check:boolean
     //     this.TenDa = this.chitietduan.TenDa;
     //     this.Thoigianthicong = this.chitietduan.Thoigianthicong;
     //     this.Tongdautu = this.chitietduan.Tongdautu;
-    //     this.UrlImage = this.chitietduan.UrlImage;
+    //     this.UrlImage = this.chitietduan.Urlfile;
     //     this.listtieuduan = this.chitietduan.listtieuduan;
     //     console.log('this.listtieuduan')
     //     console.log(this.listtieuduan)
@@ -203,7 +201,6 @@ check:boolean
 
     this.searchHttpService.getListDAadminDetail(id).subscribe(ite =>  {
       console.log(' this.chitietduan');
-      // console.log(ite)
       this.chitietduan = ite[0]
       console.log(this.chitietduan)
       //lay du lieu
@@ -255,6 +252,52 @@ check:boolean
       // console.log(rest)
       this.listTVDT_tieuduan = rest
       console.log(this.listTVDT_tieuduan)
+    })
+  }
+  TextSearchCDT() {
+    console.log('a,', this.SearchCDT)
+    this.SearchTDA(this.SearchCDT, this.seg, this.searchTenTDA)
+  }
+  TextsearchTenTDA() {
+    console.log(this.searchTenTDA)
+    this.SearchTDA(this.SearchCDT, this.seg, this.searchTenTDA)
+  }
+
+  SearchTDA(chudautu, idduan, name) {
+    this.searchHttpService.SearchTDA(chudautu, idduan, name).subscribe(dt => {
+      console.log('search tiểu dự án');
+      console.log(dt)
+      this.listtieuduan = dt
+    })
+  }
+
+
+
+  TexttimTenVon() {
+    console.log(this.timTenVon)
+    this.SearchVonDA(this.timGiaDoan, this.timTenVon, this.timtieuduan, this.seg)
+  }
+
+  TexttimGiaDoan() {
+    console.log(this.timGiaDoan)
+    this.SearchVonDA(this.timGiaDoan, this.timTenVon, this.timtieuduan, this.seg)
+  }
+
+  Texttimtieuduan() {
+    console.log(this.timtieuduan)
+    this.SearchVonDA(this.timGiaDoan, this.timTenVon, this.timtieuduan, this.seg)
+  }
+
+
+  SearchVonDA(magd, name, idtieuda, idduan) {
+    this.check = false
+    this.searchHttpService.SearchVon(magd, name, idtieuda, idduan).subscribe(dt => {
+      if (dt) {
+        this.check = true
+        console.log('ds von du an');
+        console.log(dt)
+        this.von_duan = dt
+      }
     })
   }
 
