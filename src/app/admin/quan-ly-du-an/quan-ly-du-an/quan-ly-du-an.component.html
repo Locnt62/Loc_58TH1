@@ -26,11 +26,11 @@
         </div>
         <div class="button-option">
             <div class="row">
-                <div class="col-lg-7"></div>
+                <div class="col-lg-8"></div>
                 <div class="col-lg-4" style="text-align: end;">
                     <ul>
-                        <li><button class="btn" style="background-color: #25549d;width: 100px;color: white;">Tìm
-                                kiếm</button></li>
+                        <!-- <li><button class="btn" style="background-color: #25549d;width: 100px;color: white;">Tìm
+                                kiếm</button></li> -->
                         <li><button class="btn" style="background-color: #289b28;width: 100px;color: white;"
                                 (click)="ThemDA()">Thêm mới
                             </button></li>
@@ -62,7 +62,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of list_da | paginate: { itemsPerPage: 6, currentPage: p }; index as i">
+                    <tr *ngFor="let item of list_da | paginate: { itemsPerPage: 10, currentPage: p }; index as i">
                         <td style="padding-left: 20px;">{{i + 1}}</td>
                         <td style="padding-left: 20px;">{{item.Maduan}}</td>
                         <td style="padding-left: 20px;color: #25549d;">
@@ -136,8 +136,9 @@
                                 QD duyệt chủ trương đầu tư
                             </div>
                             <div class="col-lg-8">
-                                <input class="search-text" name="keysearch" type="text" [(ngModel)]="QDDT"
-                                    (ngModelChange)="TextQDDT()" style="width: calc(100% - 60px)">
+                                <input class="search-text" name="keysearch" type="text" [(ngModel)]="QDDT" #qdct="ngModel"
+                                    (ngModelChange)="TextQDDT()" style="width: calc(100% - 60px)" required><span style="color: red;">*</span>
+                                    <small class="text text-danger" *ngIf="qdct.invalid && (qdct.dirty || qdct.touched)">Quyết định đầu tư bắt buộc phải có!</small> 
                             </div>
                         </div>
                         <div class="row line-duan">
@@ -163,8 +164,9 @@
                                 Địa điểm thực hiện
                             </div>
                             <div class="col-lg-8">
-                                <input class="search-text" name="keysearch" type="text" [(ngModel)]="NNoithuchien"
-                                    (ngModelChange)="TextNTH()" style="width: calc(100% - 60px)">
+                                <input class="search-text" name="keysearch" type="text" [(ngModel)]="NNoithuchien"  #diadiem="ngModel"
+                                    (ngModelChange)="TextNTH()" style="width: calc(100% - 60px)" required> <span style="color: red;">*</span><br>
+                                    <small class="text text-danger" *ngIf="diadiem.invalid && (diadiem.dirty || diadiem.touched)">Địa điểm thực hiện bắt buộc phải có!</small> 
                             </div>
                         </div>
                         <div class="row line-duan">
@@ -189,7 +191,8 @@
                                     (ngModelChange)="TextQDBD()" style="width: calc(100% - 60px)"> -->
                                 <ng-select [items]="listProvine" [(ngModel)]="Tinh" (ngModelChange)="ChonTinh()"
                                     bindLabel="TenTinh" bindValue="Id" style="width: calc(100% - 60px)">
-                                </ng-select>
+                                </ng-select><span style="color: red;">*</span>
+                                <small class="text text-danger" *ngIf="!Tinh">Tỉnh bắt buộc bắt buộc phải có!</small> 
                             </div>
                         </div>
                         <!-- <div class="row line-duan">
@@ -259,7 +262,8 @@
                             <div class="col-lg-8">
                                 <ng-select [items]="list_quanly" [(ngModel)]="htql" (ngModelChange)="SelectQuanly()"
                                     bindLabel="Value" bindValue="Id" style="width: calc(100% - 60px)">
-                                </ng-select>
+                                </ng-select><span style="color: red;">*</span>
+                                <small class="text text-danger" *ngIf="!htql">Hình thức quản lý bắt buộc phải có!</small> 
                             </div>
                         </div>
                         <div class="row line-duan">

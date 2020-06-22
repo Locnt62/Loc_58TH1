@@ -35,8 +35,9 @@
                             QD duyệt chủ trương đầu tư
                         </div>
                         <div class="col-lg-8">
-                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="QDDT"
-                                (ngModelChange)="TextQDDT()" style="width: calc(100% - 60px)">
+                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="QDDT"   #qdct="ngModel"
+                                (ngModelChange)="TextQDDT()" style="width: calc(100% - 60px)" required> <span style="color: red;">*</span><br>
+                                <small class="text text-danger" *ngIf="qdct.invalid && (qdct.dirty || qdct.touched)">Quyết định đầu tư bắt buộc phải có!</small>
                         </div>
                     </div>
                     <div class="row line-duan">
@@ -53,7 +54,7 @@
                                                 [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker" >
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()"
-                                                    type="button"><i class="fa fa-calendar-week"></i></button>
+                                                    type="button"><img src="./../assets/images/calendar-alt-solid.svg" width="28px" height="18px"></button>
                                             </div>
                                         </div>
                                     </div>
@@ -74,8 +75,9 @@
                             Địa điểm thực hiện
                         </div>
                         <div class="col-lg-8">
-                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="NNoithuchien"
-                                (ngModelChange)="TextNTH()" style="width: calc(100% - 60px)">
+                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="NNoithuchien" #noithuchien="ngModel"
+                                (ngModelChange)="TextNTH()" style="width: calc(100% - 60px)" required> <span style="color: red;">*</span><br>
+                                <small class="text text-danger" *ngIf="noithuchien.invalid && (noithuchien.dirty || noithuchien.touched)">Nơi thực hiện bắt buộc phải có!</small>
                         </div>
                     </div>
                     <div class="row line-duan">
@@ -98,9 +100,11 @@
                         <div class="col-lg-8">
                             <!-- <input class="search-text" name="keysearch" type="text" [(ngModel)]="QDBD"
                                 (ngModelChange)="TextQDBD()" style="width: calc(100% - 60px)"> -->
-                            <ng-select [items]="listProvine" [(ngModel)]="Tinh" (ngModelChange)="SelectTinh()"
-                                bindLabel="TenTinh" bindValue="Id" style="width: calc(100% - 60px)">
+                            <ng-select [items]="listProvine" [(ngModel)]="Tinh" (ngModelChange)="SelectTinh()" #tinh="ngModel"
+                                bindLabel="TenTinh" bindValue="Id" style="width: calc(100% - 60px)" required> 
                             </ng-select>
+                            <span style="color: red;">*</span>
+                            <small class="text text-danger" *ngIf="!Tinh">Tỉnh bắt buộc phải có!</small>
                         </div>
                     </div>
                     <!-- <div class="row line-duan">
@@ -145,7 +149,7 @@
                                             [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" >
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
-                                                type="button"><i class="fa fa-calendar-week"></i></button>
+                                                type="button"><img src="./../assets/images/calendar-alt-solid.svg" width="28px" height="18px"></button>
                                         </div>
                                     </div>
                                 </div>
@@ -167,7 +171,7 @@
                                                 [(ngModel)]="model1" ngbDatepicker #d1="ngbDatepicker" >
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()"
-                                                    type="button"><i class="fa fa-calendar-week"></i></button>
+                                                    type="button"><img src="./../assets/images/calendar-alt-solid.svg" width="28px" height="18px"></button>
                                             </div>
                                         </div>
                                     </div>
@@ -180,9 +184,11 @@
                             Hình thức quản lý dự án
                         </div>
                         <div class="col-lg-8">
-                            <ng-select [items]="list_quanly" [(ngModel)]="htql" (ngModelChange)="SelectQuanly()"
-                                bindLabel="Value" bindValue="Id" style="width: calc(100% - 60px)">
+                            <ng-select [items]="list_quanly" [(ngModel)]="htql" (ngModelChange)="SelectQuanly()"  #von="ngModel"
+                                bindLabel="Value" bindValue="Id" style="width: calc(100% - 60px)" > 
                             </ng-select>
+                            <span style="color: red;">*</span>
+                            <small class="text text-danger" *ngIf="!htql">Hình thức quản lý bắt buộc phải có!</small>
                         </div>
                     </div>
                     <div class="row line-duan">

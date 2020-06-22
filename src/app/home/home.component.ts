@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { SearchHttpService } from '../http/test-api';
+import { Router } from '@angular/router';
 // import { ApexAxisChartSeries, ApexChart, ApexXAxis, ApexTitleSubtitle, ChartComponent } from 'ng-apexcharts';
 declare var ApexCharts: any;
 
@@ -23,7 +24,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   countcdt: any;
   counttda: any;
   countuser: any;
-  constructor( private searchHttpService: SearchHttpService, ) { }
+  constructor(private searchHttpService: SearchHttpService,public router: Router,) { }
 
   ngOnInit() {
     this.chartOptions = {
@@ -49,13 +50,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.Countda()
     this.CountTDA()
     this.CountUser()
- this.CountCDT()
+    this.CountCDT()
   }
 
 
   Initchart() {
     this.chart4 = {
-      series: [ 60, 40],
+      series: [60, 40],
       labels: ['Đã hoàn thành', 'Chưa hoàn thành'],
       colors: ['#62b58f', '#f2726f'],
       chart: {
@@ -119,10 +120,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.chart1 = {
       series: [{
         name: 'Dự án',
-        data: [10,25,56,110,75]
+        data: [10, 25, 56, 110, 75]
       }, {
         name: 'Tiểu dự án ',
-        data: [25,40,65,50,45]
+        data: [25, 40, 65, 50, 45]
       }],
       chart: {
         height: 350,
@@ -187,7 +188,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
       },
       xaxis: {
-        categories: ['Q1/2019','Q2/2019','Q3/2019','Q4/2019','Q1/2020'],
+        categories: ['Q1/2019', 'Q2/2019', 'Q3/2019', 'Q4/2019', 'Q1/2020'],
       },
       yaxis: [{
         title: {
@@ -208,35 +209,35 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.chart_1.render();
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.Initchart()
   }
 
-  
-  Countda(){
-    this.searchHttpService.Count(1).subscribe(dt =>{
+
+  Countda() {
+    this.searchHttpService.Count(1).subscribe(dt => {
       console.log('count dự án');
       this.countda = dt
       console.log(this.countda)
     })
   }
 
-  CountCDT(){
-    this.searchHttpService.Count(2).subscribe(dt =>{
+  CountCDT() {
+    this.searchHttpService.Count(2).subscribe(dt => {
       console.log('count chu dau tu');
       this.countcdt = dt
       console.log(this.countcdt)
     })
   }
-  CountTDA(){
-    this.searchHttpService.Count(3).subscribe(dt =>{
+  CountTDA() {
+    this.searchHttpService.Count(3).subscribe(dt => {
       console.log('count tieu du an');
       this.counttda = dt
       console.log(this.counttda)
     })
   }
-  CountUser(){
-    this.searchHttpService.Count(4).subscribe(dt =>{
+  CountUser() {
+    this.searchHttpService.Count(4).subscribe(dt => {
       console.log('count user');
       this.countuser = dt
       console.log(this.countuser)
@@ -251,5 +252,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
     } catch (e) { }
 
 
+  }
+
+
+  DirectDA() {
+    this.router.navigate(['/QuanlyDuan'])
+  }
+  DirectCDT(){
+    this.router.navigate(['/QuanlyChuDauTu'])
+  }
+
+  DirectTK(){
+    this.router.navigate(['/QuanLyNguoiDung'])
   }
 }
