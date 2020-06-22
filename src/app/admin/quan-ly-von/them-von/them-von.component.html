@@ -119,9 +119,9 @@
                             Gía trị tiền
                         </div>
                         <div class="col-lg-9">
-                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="suatien" (ngModelChange)="Suatien()" #tien="ngModel"  
+                            <input class="search-text" name="keysearch" type="text" [(ngModel)]="suatien" (ngModelChange)="Suatien()" #tien="ngModel"  pattern="[0-9]{1,20}"
                                 style="width: calc(100% - 120px)" required><span style="color: red;">*</span><br>
-                                <small class="text text-danger" *ngIf="tien.invalid && (tien.dirty || tien.touched)">Gía trị tiền bắt buộc phải có!</small>
+                                <small class="text text-danger" *ngIf="tien.invalid && (tien.dirty || tien.touched)">Gía trị tiền không quá 20 ký tự</small>
                         </div>
                     </div>
                 
