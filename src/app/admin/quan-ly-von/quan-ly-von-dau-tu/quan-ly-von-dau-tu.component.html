@@ -60,7 +60,7 @@
                 </thead>
                 <tbody>
                     <tr
-                        *ngFor="let item of listVon | paginate: { itemsPerPage: 6, currentPage: p }; index as i">
+                        *ngFor="let item of listVon | paginate: { itemsPerPage: 10, currentPage: p }; index as i">
                         <td style="padding-left: 20px;">{{i + 1}}</td>
                         <td style="padding-left: 20px;color: #25549d;">
                             <div (click)="direct(item)" style="cursor: pointer;">{{item.Tenvon}}</div>
