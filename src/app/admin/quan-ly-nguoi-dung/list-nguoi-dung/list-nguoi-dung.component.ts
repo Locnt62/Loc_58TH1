@@ -74,7 +74,6 @@ export class ListNguoiDungComponent implements OnInit {
     this.searchHttpService.ListUser(name).subscribe(dt => {
       if (dt) {
         this.check = true
-        this.check = true
         console.log('list user');
         this.listuser = dt;
         console.log(this.listuser)
